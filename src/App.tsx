@@ -1,34 +1,31 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import 'normalize.css/normalize.css';
+import './App.css';
+
+import { Header } from './ui/components/header/Header';
+import { Card } from './ui/components/card/Card';
+import { useCallback, useState } from 'react';
+import { AuthModal } from './ui/components/modal/AuthModal';
+import { useEscapeKeyPress } from './hooks/useEscapeKeyPress';
+
+const cardProps = {
+  title: 'Persona 5 Royal',
+  img: '',
+  platform: 'Nintendo Switch'
+};
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+  useEscapeKeyPress(useCallback(() => setModalOpen(false), []));
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <>
+      <div className="container">
+        <Header setModalOpen={setModalOpen}/>
+        <Card {...cardProps} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount(count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+      <AuthModal isOpen={modalOpen} />
+    </>
+  );
 }
 
-export default App
+export default App;
