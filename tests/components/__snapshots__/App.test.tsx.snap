@@ -1,0 +1,46 @@
+// Vitest Snapshot v1
+
+exports[`App Component > snapshot 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <header
+      class="ba-header"
+    >
+      <a
+        href="src/ui/components#"
+      >
+        Backlog App
+      </a>
+      <p
+        class="ba-header__user"
+      >
+        NeiruBugz
+      </p>
+    </header>
+    <div
+      class="ba-card"
+    >
+      <div
+        class="ba-card__image"
+        style="background-image: url(https://assets1.ignimgs.com/2020/02/14/persona-5-royal---button-fin-1581716582492.jpg);"
+      />
+      <div
+        class="ba-card__info"
+      >
+        <p
+          class="ba-card__title"
+        >
+          Persona 5 Royal
+        </p>
+        <span
+          class="ba-card__platform ba-card__platform--nintendo"
+        >
+          Nintendo Switch
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,4 +1,39 @@
 .ba-card {
-    width: 320px;
-    height: 480px;
+  position: relative;
+  width: 320px;
+  height: 480px;
+  border-radius: 4px;
+}
+
+.ba-card__info {
+  box-sizing: border-box;
+  width: 320px;
+  height: 120px;
+  border-radius: 4px;
+  bottom: 0;
+  position: absolute;
+  background-color: rgba(47, 47, 47, 0.41);
+  padding-left: 12px;
+}
+
+.ba-card__title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.ba-card__image {
+  width: 320px;
+  height: 480px;
+  background-size: cover;
+  border-radius: 4px;
+}
+
+.ba-card__platform {
+  background-color: black;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+.ba-card__platform--nintendo {
+  background-color: var(--ba-color-nintendo);
 }

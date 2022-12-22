@@ -1,16 +1,16 @@
 .ba-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .ba-header__buttons {
-    display: flex;
-    width: 160px;
-    justify-content: space-between;
+  display: flex;
+  width: 160px;
+  justify-content: space-between;
 }
 
 .ba-header__user {
-    width: 160px;
-    color: #242424;
+  width: 160px;
+  color: #242424;
 }

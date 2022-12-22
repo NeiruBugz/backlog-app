@@ -10,7 +10,7 @@ const Portal = ({ children }: { children: ReactNode }) => {
   };
 
   const overlay: Element = document.getElementById('overlay')
-    ? document.getElementById('overlay') as Element
+    ? (document.getElementById('overlay') as Element)
     : createOverlay();
 
   return ReactDOM.createPortal(children, overlay);

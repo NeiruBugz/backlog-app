@@ -1,17 +1,10 @@
 import 'normalize.css/normalize.css';
 import './App.css';
-
-import { Header } from './ui/components/header/Header';
-import { Card } from './ui/components/card/Card';
 import { useCallback, useState } from 'react';
-import { AuthModal } from './ui/components/modal/AuthModal';
-import { useEscapeKeyPress } from './hooks/useEscapeKeyPress';
 
-const cardProps = {
-  title: 'Persona 5 Royal',
-  img: '',
-  platform: 'Nintendo Switch'
-};
+import { Header, Card, AuthModal } from '@components';
+import { useEscapeKeyPress } from './hooks/useEscapeKeyPress';
+import { cardProps } from './mocks/data/card.mock';
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -20,7 +13,7 @@ function App() {
   return (
     <>
       <div className="container">
-        <Header setModalOpen={setModalOpen}/>
+        <Header setModalOpen={setModalOpen} />
         <Card {...cardProps} />
       </div>
       <AuthModal isOpen={modalOpen} />

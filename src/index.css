@@ -10,9 +10,11 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   --ba-modal-index: 1000;
+  --ba-color-nintendo: #e60012;
 }
 
-a, button {
+a,
+button {
   cursor: pointer;
 }
 
@@ -26,7 +28,7 @@ a, button {
   background: transparent;
   text-align: center;
   padding: 4px 8px;
-  transition: all .6ms ease-in-out;
+  transition: all 0.6ms ease-in-out;
 }
 
 .ba-button--primary {

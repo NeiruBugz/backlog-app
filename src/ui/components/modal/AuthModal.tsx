@@ -1,5 +1,7 @@
 import { Portal } from './Portal';
 import './auth-modal.css';
+import { login } from '@store';
+import { Button } from '@components';
 
 const AuthModal = ({ isOpen }: { isOpen: boolean }): JSX.Element | null => {
   return isOpen ? (
@@ -11,14 +13,24 @@ const AuthModal = ({ isOpen }: { isOpen: boolean }): JSX.Element | null => {
             <form action="submit" className="ba-auth-form">
               <label htmlFor="login" className="ba-label ba-auth-form-label">
                 Login
-                <input type="text" name="login" id="login" className="ba-input ba-auth-form-input" />
+                <input
+                  type="text"
+                  name="login"
+                  id="login"
+                  className="ba-input ba-auth-form-input"
+                />
               </label>
               <label htmlFor="password" className="ba-label ba-auth-form-label">
                 Password
-                <input type="password" name="password" id="password" className="ba-input ba-auth-form-input" />
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  className="ba-input ba-auth-form-input"
+                />
               </label>
               <div className="ba-auth-form-buttons">
-                <button className="ba-button ba-button--primary">Sign in</button>
+                <Button mode="primary" onClick={login} text='Sign in' />
                 <button className="ba-button ba-button--secondary">Cancel</button>
               </div>
             </form>

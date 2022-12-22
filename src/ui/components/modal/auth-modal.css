@@ -1,23 +1,23 @@
 .ba-auth-form {
-    display: flex;
-    flex-direction: column;
-    font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
 }
 
 .ba-auth-form-label {
-    margin: 8px 0;
+  margin: 8px 0;
 }
 
 .ba-auth-form-input {
-    margin-top: 8px;
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    outline: 0;
+  margin-top: 8px;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  outline: 0;
 }
 
 .ba-auth-form-buttons {
-    margin-top: 16px;
-    display: flex;
-    justify-content: space-between;
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
 }

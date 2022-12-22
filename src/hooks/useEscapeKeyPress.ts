@@ -7,9 +7,9 @@ const useEscapeKeyPress = (callback: () => void): void => {
         callback();
       }
     };
-      
+
     document.addEventListener('keydown', onEscapePress);
-      
+
     return () => {
       document.removeEventListener('keydown', onEscapePress);
     };
