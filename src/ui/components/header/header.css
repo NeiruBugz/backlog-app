@@ -9,3 +9,8 @@
     width: 160px;
     justify-content: space-between;
 }
+
+.ba-header__user {
+    width: 160px;
+    color: #242424;
+}
