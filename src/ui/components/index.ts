@@ -3,3 +3,4 @@ export { Header } from './header/Header';
 export { Button } from './button/Button';
 export { AuthModal } from './modal/AuthModal';
 export { Portal } from './modal/Portal';
+export { LabeledInput } from './labeled-input/LabeledInput';

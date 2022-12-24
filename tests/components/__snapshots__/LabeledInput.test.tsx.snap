@@ -1,0 +1,35 @@
+// Vitest Snapshot v1
+
+exports[`LabeledInput > snapshot 1`] = `
+<div>
+  <label
+    class="ba-label"
+    for="snapshot"
+  >
+    Snapshot
+    <input
+      class="ba-input"
+      id="snapshot"
+      name="snapshot"
+      type="text"
+    />
+  </label>
+</div>
+`;
+
+exports[`LabeledInput > snapshot with classes 1`] = `
+<div>
+  <label
+    class="ba-label"
+    for="snapshot"
+  >
+    Snapshot
+    <input
+      class="ba-input"
+      id="snapshot"
+      name="snapshot"
+      type="text"
+    />
+  </label>
+</div>
+`;

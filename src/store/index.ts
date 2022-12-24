@@ -1,10 +1,20 @@
-import { createApi, createStore } from 'effector';
+import { createApi, createEvent, createStore } from 'effector';
+import { Game } from '@/types/data/game';
 
-const $auth = createStore(false);
+const auth = createStore(false);
 
-const { login, logout } = createApi($auth, {
+const gamesList = createStore<Game[]>([]);
+
+const { login, logout } = createApi(auth, {
   login: state => state = true,
   logout: state => state = false,
 });
 
-export { $auth, login, logout };
+const addGame = createEvent<Game>('add game');
+const removeGame = createEvent<string>('remove game');
+
+gamesList
+  .on(addGame, (state, game: Game) => [...state, game])
+  .on(removeGame, (state, title) => state.filter((game) => game.title !== title));
+
+export { auth, login, logout, gamesList, addGame, removeGame };

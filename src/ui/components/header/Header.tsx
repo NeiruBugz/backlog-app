@@ -1,5 +1,5 @@
 import { useStore } from 'effector-react';
-import { $auth } from '@store';
+import { auth } from '@store';
 import { Button } from '@/ui/components';
 import './header.css';
 
@@ -8,12 +8,12 @@ export const Header = ({
 }: {
   setModalOpen: (flag: boolean) => void;
 }): JSX.Element => {
-  const auth = useStore($auth);
+  const isAuth = useStore(auth);
   
   return (
     <header className="ba-header">
       <a href="src/ui/components#">Backlog App</a>
-      {auth ? (
+      {isAuth ? (
         <p className="ba-header__user">NeiruBugz</p>
       ) : (
         <div className="ba-header__buttons">

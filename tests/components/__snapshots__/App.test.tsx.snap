@@ -13,34 +13,31 @@ exports[`App Component > snapshot 1`] = `
       >
         Backlog App
       </a>
-      <p
-        class="ba-header__user"
-      >
-        NeiruBugz
-      </p>
-    </header>
-    <div
-      class="ba-card"
-    >
       <div
-        class="ba-card__image"
-        style="background-image: url(https://assets1.ignimgs.com/2020/02/14/persona-5-royal---button-fin-1581716582492.jpg);"
-      />
-      <div
-        class="ba-card__info"
+        class="ba-header__buttons"
       >
-        <p
-          class="ba-card__title"
+        <button
+          class="ba-button ba-button--primary"
         >
-          Persona 5 Royal
-        </p>
-        <span
-          class="ba-card__platform ba-card__platform--nintendo"
+          Sign in
+        </button>
+        <button
+          class="ba-button ba-button--secondary"
         >
-          Nintendo Switch
-        </span>
+          Sign up
+        </button>
       </div>
-    </div>
+    </header>
+    <button
+      class="ba-button ba-button--primary"
+    >
+      Add Persona 5
+    </button>
+    <button
+      class="ba-button ba-button--secondary"
+    >
+      Remove Persona 5
+    </button>
   </div>
 </div>
 `;
