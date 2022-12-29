@@ -1,12 +1,12 @@
-import { Portal } from './Portal';
+import { Modal } from 'antd';
 import './auth-modal.css';
 import { login } from '@store';
 import { Button, LabeledInput } from '@components';
 
-const AuthModal = ({ isOpen }: { isOpen: boolean }): JSX.Element | null => {
+const AuthModal = ({ isOpen, onCancel }: { isOpen: boolean, onCancel: () => void; }): JSX.Element | null => {
   return isOpen ? (
-    <Portal>
-      <div className="ba-modal-overlay">
+    <div className="ba-modal-overlay">
+      <Modal centered footer={null} title='Sign In' className="ba-modal" open={isOpen} onCancel={onCancel}>
         <div className="ba-modal">
           <header className="ba-modal-header">Sign In</header>
           <div className="ba-modal-body">
@@ -34,8 +34,8 @@ const AuthModal = ({ isOpen }: { isOpen: boolean }): JSX.Element | null => {
             </form>
           </div>
         </div>
-      </div>
-    </Portal>
+      </Modal>
+    </div>
   ) : null;
 };
 

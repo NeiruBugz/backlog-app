@@ -11,6 +11,10 @@
   -webkit-text-size-adjust: 100%;
   --ba-modal-index: 1000;
   --ba-color-nintendo: #e60012;
+  --ba-color-playstation: #0070D1;
+  --ba-color-xbox: #107C10;
+  --ba-card-height: 120px;
+  --ba-card-width: 320px;
 }
 
 a,

@@ -1,3 +1,9 @@
 // Vitest Snapshot v1
 
-exports[`AuthModal Component > snapshot 1`] = `<div />`;
+exports[`AuthModal Component > snapshot 1`] = `
+<div>
+  <div
+    class="ba-modal-overlay"
+  />
+</div>
+`;

@@ -1,13 +1,16 @@
 import 'normalize.css/normalize.css';
 import './App.css';
 import { useCallback, useState } from 'react';
+import { Layout, Button, Space } from 'antd';
 
-import { Header, Card, AuthModal, Button } from '@components';
+import { Card, AuthModal, Header } from '@components';
 import { useEscapeKeyPress } from './hooks/useEscapeKeyPress';
-import { cardProps } from './mocks/data/card.mock';
 import { useList } from 'effector-react';
-import { addGame, gamesList, removeGame } from '@store';
+import { addGame, gamesList } from '@store';
+import { cardProps } from './mocks/data/card.mock';
 import { Game } from './types/data/game';
+
+const { Content, Sider } = Layout;
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -15,13 +18,21 @@ function App() {
 
   return (
     <>
-      <div className="container">
+      <Layout style={{ height: '100vh' }}>
         <Header setModalOpen={setModalOpen} />
-        <Button mode={'primary'} text={'Add Persona 5'} onClick={() => addGame(cardProps as Game)} />
-        <Button mode={'secondary'} text={'Remove Persona 5'} onClick={() => removeGame('Persona 5 Royal')} />
-        {useList(gamesList, (game) => <Card {...game} />)}
-      </div>
-      <AuthModal isOpen={modalOpen} />
+        <Layout>
+          <Sider width={200}>Sider</Sider>
+          <Content>
+            <div className="container">
+              <Button type='primary' onClick={() => addGame(cardProps as Game)}>Add Persona 5</Button>
+              <Space wrap>
+                {useList(gamesList, (game) => <Card {...game} />)}
+              </Space>
+            </div>
+          </Content>
+        </Layout>
+      </Layout>
+      <AuthModal isOpen={modalOpen} onCancel={() => setModalOpen(false)} />
     </>
   );
 }

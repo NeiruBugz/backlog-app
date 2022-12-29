@@ -1,9 +1,10 @@
 import { createApi, createEvent, createStore } from 'effector';
 import { Game } from '@/types/data/game';
+import { gamesList as mockList } from '@/mocks/data/card.mock';
 
 const auth = createStore(false);
 
-const gamesList = createStore<Game[]>([]);
+const gamesList = createStore<Game[]>(mockList);
 
 const { login, logout } = createApi(auth, {
   login: state => state = true,

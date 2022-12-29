@@ -1,4 +1,5 @@
 import { CardProps } from '@localtypings';
+import { Card as AntdCard } from 'antd';
 import './card.css';
 
 const createPlatformClassName = (platform: string) => {
@@ -17,15 +18,17 @@ const createPlatformClassName = (platform: string) => {
 
 const Card = ({ title, img, platform }: CardProps): JSX.Element => {
   return (
-    <div className="ba-card">
-      <div className="ba-card__image" style={{ backgroundImage: `url(${img})` }} />
-      <div className="ba-card__info">
-        <p className="ba-card__title">{title}</p>
-        <span className={`ba-card__platform ${createPlatformClassName(platform.toLowerCase())}`}>
-          {platform}
-        </span>
+    <AntdCard className="ba-card--antd">
+      <div className="ba-card">
+        <div className="ba-card__image" style={{ backgroundImage: `url(${img})` }} />
+        <div className="ba-card__info">
+          <p className="ba-card__title">{title}</p>
+          <span className={`ba-card__platform ${createPlatformClassName(platform.toLowerCase())}`}>
+            {platform}
+          </span>
+        </div>
       </div>
-    </div>
+    </AntdCard>
   );
 };
 

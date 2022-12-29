@@ -1,14 +1,20 @@
 .ba-card {
-  position: relative;
-  width: 320px;
-  height: 480px;
-  border-radius: 4px;
+  color: white;
+}
+
+.ba-card--antd {
+  width: var(--ba-card-width);
+  height: var(--ba-card-height);
+}
+
+.ba-card--antd .ant-card-body {
+  padding: 0;
 }
 
 .ba-card__info {
   box-sizing: border-box;
-  width: 320px;
-  height: 120px;
+  width: var(--ba-card-width);
+  height: 118px;
   border-radius: 4px;
   bottom: 0;
   position: absolute;
@@ -22,8 +28,8 @@
 }
 
 .ba-card__image {
-  width: 320px;
-  height: 480px;
+  width: var(--ba-card-width);
+  height: 118px;
   background-size: cover;
   border-radius: 4px;
 }
@@ -36,4 +42,12 @@
 
 .ba-card__platform--nintendo {
   background-color: var(--ba-color-nintendo);
+}
+
+.ba-card__platform--playstation {
+  background-color: var(--ba-color-playstation);
+}
+
+.ba-card__platform--xbox {
+  background-color: var(--ba-color-xbox);
 }

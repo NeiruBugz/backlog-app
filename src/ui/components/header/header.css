@@ -2,6 +2,15 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  padding: 16px 0;
+}
+
+.ba-header.ant-layout-header {
+  background-color: transparent;
+}
+
+.ba-title {
+  margin: 0;
 }
 
 .ba-header__buttons {
@@ -12,5 +21,4 @@
 
 .ba-header__user {
   width: 160px;
-  color: #242424;
 }

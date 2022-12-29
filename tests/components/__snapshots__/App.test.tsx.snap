@@ -2,42 +2,218 @@
 
 exports[`App Component > snapshot 1`] = `
 <div>
-  <div
-    class="container"
+  <section
+    class="ant-layout css-dev-only-do-not-override-acm2ia"
+    style="height: 100vh;"
   >
     <header
-      class="ba-header"
+      class="ant-layout-header ba-header"
     >
-      <a
-        href="src/ui/components#"
+      <h4
+        class="ant-typography ba-title css-dev-only-do-not-override-acm2ia"
       >
-        Backlog App
-      </a>
+        <a
+          href="#"
+        >
+          Backlog App
+        </a>
+      </h4>
       <div
         class="ba-header__buttons"
       >
         <button
-          class="ba-button ba-button--primary"
+          class="ant-btn css-dev-only-do-not-override-acm2ia ant-btn-primary"
+          type="button"
         >
-          Sign in
+          <span>
+            Sign in
+          </span>
         </button>
         <button
-          class="ba-button ba-button--secondary"
+          class="ant-btn css-dev-only-do-not-override-acm2ia ant-btn-text"
+          type="button"
         >
-          Sign up
+          <span>
+            Sign up
+          </span>
         </button>
       </div>
     </header>
-    <button
-      class="ba-button ba-button--primary"
+    <section
+      class="ant-layout ant-layout-has-sider css-dev-only-do-not-override-acm2ia"
     >
-      Add Persona 5
-    </button>
-    <button
-      class="ba-button ba-button--secondary"
-    >
-      Remove Persona 5
-    </button>
-  </div>
+      <aside
+        class="ant-layout-sider ant-layout-sider-dark"
+        style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;"
+      >
+        <div
+          class="ant-layout-sider-children"
+        >
+          Sider
+        </div>
+      </aside>
+      <main
+        class="ant-layout-content"
+      >
+        <div
+          class="container"
+        >
+          <button
+            class="ant-btn css-dev-only-do-not-override-acm2ia ant-btn-primary"
+            type="button"
+          >
+            <span>
+              Add Persona 5
+            </span>
+          </button>
+          <div
+            class="ant-space css-dev-only-do-not-override-acm2ia ant-space-horizontal ant-space-align-center"
+            style="flex-wrap: wrap; margin-bottom: -8px;"
+          >
+            <div
+              class="ant-space-item"
+              style="margin-right: 8px; padding-bottom: 8px;"
+            >
+              <div
+                class="ant-card ant-card-bordered ba-card--antd css-dev-only-do-not-override-acm2ia"
+              >
+                <div
+                  class="ant-card-body"
+                >
+                  <div
+                    class="ba-card"
+                  >
+                    <div
+                      class="ba-card__image"
+                      style="background-image: url();"
+                    />
+                    <div
+                      class="ba-card__info"
+                    >
+                      <p
+                        class="ba-card__title"
+                      >
+                        God of War: Ragnarök
+                      </p>
+                      <span
+                        class="ba-card__platform ba-card__platform--playstation"
+                      >
+                        PlayStation 5
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ant-space-item"
+              style="margin-right: 8px; padding-bottom: 8px;"
+            >
+              <div
+                class="ant-card ant-card-bordered ba-card--antd css-dev-only-do-not-override-acm2ia"
+              >
+                <div
+                  class="ant-card-body"
+                >
+                  <div
+                    class="ba-card"
+                  >
+                    <div
+                      class="ba-card__image"
+                      style="background-image: url();"
+                    />
+                    <div
+                      class="ba-card__info"
+                    >
+                      <p
+                        class="ba-card__title"
+                      >
+                        The Last Of Us Part I
+                      </p>
+                      <span
+                        class="ba-card__platform ba-card__platform--playstation"
+                      >
+                        PlayStation 5
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ant-space-item"
+              style="margin-right: 8px; padding-bottom: 8px;"
+            >
+              <div
+                class="ant-card ant-card-bordered ba-card--antd css-dev-only-do-not-override-acm2ia"
+              >
+                <div
+                  class="ant-card-body"
+                >
+                  <div
+                    class="ba-card"
+                  >
+                    <div
+                      class="ba-card__image"
+                      style="background-image: url();"
+                    />
+                    <div
+                      class="ba-card__info"
+                    >
+                      <p
+                        class="ba-card__title"
+                      >
+                        Forza Horizon 5
+                      </p>
+                      <span
+                        class="ba-card__platform ba-card__platform--xbox"
+                      >
+                        Xbox
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ant-space-item"
+              style="padding-bottom: 8px;"
+            >
+              <div
+                class="ant-card ant-card-bordered ba-card--antd css-dev-only-do-not-override-acm2ia"
+              >
+                <div
+                  class="ant-card-body"
+                >
+                  <div
+                    class="ba-card"
+                  >
+                    <div
+                      class="ba-card__image"
+                      style="background-image: url(https://assets1.ignimgs.com/2020/02/14/persona-5-royal---button-fin-1581716582492.jpg);"
+                    />
+                    <div
+                      class="ba-card__info"
+                    >
+                      <p
+                        class="ba-card__title"
+                      >
+                        Persona 5 Royal
+                      </p>
+                      <span
+                        class="ba-card__platform ba-card__platform--nintendo"
+                      >
+                        Nintendo Switch
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </section>
+  </section>
 </div>
 `;

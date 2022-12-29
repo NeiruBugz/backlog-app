@@ -1,6 +1,6 @@
 import { useStore } from 'effector-react';
 import { auth } from '@store';
-import { Button } from '@/ui/components';
+import { Button, Layout, Typography } from 'antd';
 import './header.css';
 
 export const Header = ({
@@ -11,16 +11,18 @@ export const Header = ({
   const isAuth = useStore(auth);
   
   return (
-    <header className="ba-header">
-      <a href="src/ui/components#">Backlog App</a>
+    <Layout.Header className='ba-header'>
+      <Typography.Title level={4} className="ba-title">
+        <a href="#">Backlog App</a>
+      </Typography.Title>
       {isAuth ? (
         <p className="ba-header__user">NeiruBugz</p>
       ) : (
         <div className="ba-header__buttons">
-          <Button mode="primary" text="Sign in" onClick={() => setModalOpen(true)} />
-          <Button mode="secondary" text="Sign up" onClick={() => setModalOpen(false)} />
+          <Button type="primary" onClick={() => setModalOpen(true)}>Sign in</Button>
+          <Button type="text" onClick={() => setModalOpen(false)}>Sign up</Button>
         </div>
       )}
-    </header>
+    </Layout.Header>
   );
 };

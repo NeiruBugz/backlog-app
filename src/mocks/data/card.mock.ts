@@ -4,4 +4,18 @@ const cardProps = {
   platform: 'Nintendo Switch',
 };
 
-export { cardProps };
+const gamesList = [{
+  title: 'God of War: Ragnarök',
+  img: '',
+  platform: 'PlayStation 5'
+}, {
+  title: 'The Last Of Us Part I',
+  img: '',
+  platform: 'PlayStation 5'
+}, {
+  title: 'Forza Horizon 5',
+  img: '',
+  platform: 'Xbox'
+}, cardProps];
+
+export { cardProps, gamesList };
