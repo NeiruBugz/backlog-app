@@ -1,10 +1,12 @@
-const cardProps = {
+import type { Game } from 'shared/types';
+
+const cardProps: Game = {
   title: 'Persona 5 Royal',
   img: 'https://assets1.ignimgs.com/2020/02/14/persona-5-royal---button-fin-1581716582492.jpg',
   platform: 'Nintendo Switch',
 };
 
-const gamesList = [
+const gamesList: Game[] = [
   {
     title: 'God of War: Ragnarök',
     img: '',
@@ -23,4 +25,9 @@ const gamesList = [
   cardProps,
 ];
 
-export { cardProps, gamesList };
+const user = {
+  username: 'NeiruBugz',
+  avatarUrl: '',
+};
+
+export { cardProps, gamesList, user };

@@ -27,6 +27,7 @@
       "@shared": ["shared"],
       "@pages": ["pages"],
       "@widgets": ["widgets"],
+      "@mocks": ["mocks"]
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },

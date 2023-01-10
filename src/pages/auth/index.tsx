@@ -1,4 +1,4 @@
-import { useAuth } from 'shared/api/useAuth';
+import { useAuth } from '@shared';
 
 const Auth = (): JSX.Element => {
   const { login } = useAuth();

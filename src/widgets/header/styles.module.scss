@@ -1,0 +1,11 @@
+.ba-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.ba-header-navigation {
+  a:not(:last-of-type) {
+    margin-right: 8px;
+  }
+}
