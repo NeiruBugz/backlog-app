@@ -1,6 +1,6 @@
 import './index.scss';
 
-const TestPage = () => {
+const Home = (): JSX.Element => {
   return (
     <div className="container">
       <div className="ba-home">
@@ -10,4 +10,4 @@ const TestPage = () => {
   );
 };
 
-export default TestPage;
+export default Home;
