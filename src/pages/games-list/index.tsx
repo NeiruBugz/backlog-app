@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getGames } from '@shared';
 import type { Game } from '@entities';
+import { GameCard } from 'entities/game/ui';
+import styles from './styles.module.scss';
 
 const GamesList = (): JSX.Element => {
   const [games, setGames] = useState<Game[]>([]);
@@ -11,12 +13,14 @@ const GamesList = (): JSX.Element => {
 
   return (
     <div>
-      <ul>
-        {games.length !== 0 ? games.map((game) => <li key={game.title}>
-          <span>{game.title}</span>
-          {' '}
-          <span>{game.platform}</span>
-        </li>) : 'Loading...'}
+      <ul className={styles['ba-gameslist']}>
+        {games.length !== 0 ? games.map((game) => {
+          return (
+            <li className={styles['ba-gameslist--item']} key={game.title}>
+              <GameCard {...game} />
+            </li>
+          );}
+        ) : 'Loading...'}
       </ul>
     </div>
   );
