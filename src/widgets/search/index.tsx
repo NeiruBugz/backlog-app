@@ -16,6 +16,7 @@ const SearchInput = ({ onSearch, isLoading }: SearchInputProps): JSX.Element => 
       size="large"
       onSearch={onSearch}
       loading={isLoading}
+      disabled
     />
   );
 };

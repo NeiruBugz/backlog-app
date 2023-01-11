@@ -1,11 +1,12 @@
 import { useAuth } from '@shared';
+import { Button } from 'antd';
 
 const Auth = (): JSX.Element => {
   const { login } = useAuth();
 
   return (
     <div>
-      <button onClick={login}>Auth</button>
+      <Button onClick={login}>Auth</Button>
     </div>
   );
 };

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import { Button } from 'antd';
 import { getGames } from '@shared';
 import type { Game } from '@entities';
-import { GameCard } from 'entities/game/ui';
+import { GameCard } from '@entities';
 import styles from './styles.module.scss';
 
 const GamesList = (): JSX.Element => {
@@ -13,6 +14,7 @@ const GamesList = (): JSX.Element => {
 
   return (
     <div>
+      <Button>Add Game</Button>
       <ul className={styles['ba-gameslist']}>
         {games.length !== 0 ? games.map((game) => {
           return (
