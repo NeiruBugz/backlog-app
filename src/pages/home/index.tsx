@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 
 const Home = (): JSX.Element => {
   const [isLoading, setLoading] = useState<boolean>(false);
-  const { nativeSearch } = useHowLongToBeat();
+  const { search } = useHowLongToBeat();
 
   const onGameSearch = (value: string) => {
     if (!value.length) {
@@ -15,11 +15,11 @@ const Home = (): JSX.Element => {
     message.info(`Searching for: ${value}`, 1);
     setLoading(true);
 
-    nativeSearch(value).then((result: any) => {
+    search(value).then((result) => {
       console.log(result);
-    }).catch((error: any) => {
+    }).catch((error) => {
       console.log(error);
-      message.info(`Error while searching ${value}`, 1);
+      message.error(`Error while searching ${value}`, 1);
     }).finally(() => {
       setLoading(false);
     });
