@@ -1,4 +1,4 @@
-import type { Game } from 'shared/types';
+import type { Game } from '@entities';
 
 const cardProps: Game = {
   title: 'Persona 5 Royal',
