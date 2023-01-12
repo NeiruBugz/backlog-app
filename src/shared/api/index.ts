@@ -1,5 +1,5 @@
 import { gamesList } from 'mocks';
-import type { Game } from 'shared/types';
+import type { Game } from '@entities';
 
 export const getGames = (): Promise<Game[]> => {
   return Promise.resolve(gamesList);
