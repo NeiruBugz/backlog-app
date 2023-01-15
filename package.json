@@ -6,13 +6,16 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cleanup": "eslint --fix src && prettier --write src"
   },
   "dependencies": {
     "@ant-design/icons": "5.0.0",
     "antd": "5.1.4",
     "classnames": "2.3.2",
     "compose-function": "3.0.3",
+    "effector": "22.5.0",
+    "effector-react": "22.4.0",
     "howlongtobeat": "1.7.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",

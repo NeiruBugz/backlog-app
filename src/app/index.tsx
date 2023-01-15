@@ -4,9 +4,7 @@ import { Routing } from '@pages';
 import './index.scss';
 
 const App = () => {
-  return (
-    <Routing />
-  );
+  return <Routing />;
 };
 
 export default withProviders(App);

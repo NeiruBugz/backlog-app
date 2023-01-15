@@ -1,14 +1,68 @@
-import { gamesList } from 'mocks';
 import type { Game } from '@entities';
 
-export const getGames = (): Promise<Game[]> => {
-  return Promise.resolve(gamesList);
+const API_URL = 'http://localhost:8080/';
+
+const getGames = (): Promise<Game[]> => {
+  return new Promise((resolve, reject) => {
+    fetch('http://localhost:8080/games').then((result) => {
+      if (result.status === 200) {
+        resolve(result.json());
+      }
+
+      reject([]);
+    });
+  });
 };
 
-export const getGame = (id: number): Promise<string | Game> => {
-  if (gamesList.length < id) {
-    return Promise.reject('Cannot find this game');
-  }
+const getGame = (id: string): Promise<string | Game> => {
+  return new Promise((resolve, reject) => {
+    fetch(`${API_URL}games/${id}`).then((result) => {
+      if (result.status === 200) {
+        resolve(result.json());
+      }
 
-  return Promise.resolve(gamesList[id]);
+      reject('No game found');
+    });
+  });
+};
+
+const updateGame = (id: string, payload: Partial<Game>) => {
+  return new Promise((resolve, reject) => {
+    fetch(`${API_URL}games/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(payload),
+      headers: { 'Content-Type': 'application/json' },
+    }).then((response) => {
+      if (response.status === 200) {
+        resolve(response.json());
+      }
+
+      reject(false);
+    });
+  });
+};
+
+const addGame = (payload: Game): Promise<Response> => {
+  return new Promise((resolve, reject) => {
+    fetch('http://localhost:8080/games', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => {
+      if (response.status === 200) {
+        resolve(response.json());
+      }
+
+      reject(false);
+    });
+  });
+};
+
+export const api = {
+  getGame,
+  getGames,
+  addGame,
+  updateGame,
 };

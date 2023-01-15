@@ -1,4 +1,31 @@
+.ba-gameslist-page__nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ba-gameslist-page__nav-filters {
+  display: block;
+  button {
+    margin-right: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ba-gameslist-page__nav-filters {
+    display: none;
+  }
+}
+
+.ba-gameslist-page__nav-filters--mobile {
+  display: block;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
 .ba-gameslist {
+  margin-top: 12px;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
@@ -7,7 +34,6 @@
 }
 
 .ba-gameslist--item {
-
 }
 
 .ba-gameslist--item:not(:last-of-type) {

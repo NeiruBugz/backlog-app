@@ -10,9 +10,7 @@ const Header = (): JSX.Element => {
   return (
     <header className={styles['ba-header']}>
       <nav className={styles['ba-header-navigation']}>
-        <Link to="/">
-          Backlog App
-        </Link>
+        <Link to="/">Backlog App</Link>
         {'  '}
         {checkAuth() ? <Link to="/list">Games</Link> : <Link to="/auth">Login</Link>}
       </nav>

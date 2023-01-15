@@ -15,18 +15,21 @@ const Home = (): JSX.Element => {
     message.info(`Searching for: ${value}`, 1);
     setLoading(true);
 
-    search(value).then((result) => {
-      console.log(result);
-    }).catch((error) => {
-      console.log(error);
-      message.error(`Error while searching ${value}`, 1);
-    }).finally(() => {
-      setLoading(false);
-    });
+    search(value)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+        message.error(`Error while searching ${value}`, 1);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
-    <div className={styles.container}>
+    <div>
       <div className={styles['ba-home']}>
         <SearchInput onSearch={onGameSearch} isLoading={isLoading} />
       </div>
