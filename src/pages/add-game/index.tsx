@@ -40,7 +40,7 @@ const AddGame = (): JSX.Element => {
     navigate('/list');
   };
 
-  const onFinishFailed = (errorInfo: string) => {
+  const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
 
