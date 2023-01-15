@@ -6,8 +6,13 @@ import mkcert from 'vite-plugin-mkcert';
 // https://vitejs.dev/config/
 export default defineConfig({
   define: {
-    global: {},
+    globals: true,
   },
-  server: { https: true, origin: 'https://backlog-app.localhost.com:8080' },
+  server: {
+    https: true,
+    origin: 'https://backlog-app.localhost.com:8080',
+    host: 'backlog-app.localhost.com',
+    port: 3000,
+  },
   plugins: [react(), tsconfigPaths(), mkcert()]
 });

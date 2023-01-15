@@ -1,12 +1,12 @@
 import type { Game } from '@entities';
 
-const API_URL = 'http://localhost:8080/';
+const API_URL = 'http://localhost:8080';
 
 const getGames = (): Promise<Game[]> => {
   return new Promise((resolve, reject) => {
-    fetch('http://localhost:8080/games').then((result) => {
-      if (result.status === 200) {
-        resolve(result.json());
+    fetch(`${API_URL}/games`).then((response) => {
+      if (response.status === 200) {
+        resolve(response.json());
       }
 
       reject([]);
@@ -16,9 +16,9 @@ const getGames = (): Promise<Game[]> => {
 
 const getGame = (id: string): Promise<string | Game> => {
   return new Promise((resolve, reject) => {
-    fetch(`${API_URL}games/${id}`).then((result) => {
-      if (result.status === 200) {
-        resolve(result.json());
+    fetch(`${API_URL}/games/${id}`).then((response) => {
+      if (response.status === 200) {
+        resolve(response.json());
       }
 
       reject('No game found');
@@ -28,7 +28,7 @@ const getGame = (id: string): Promise<string | Game> => {
 
 const updateGame = (id: string, payload: Partial<Game>) => {
   return new Promise((resolve, reject) => {
-    fetch(`${API_URL}games/${id}`, {
+    fetch(`${API_URL}/games/${id}`, {
       method: 'PATCH',
       body: JSON.stringify(payload),
       headers: { 'Content-Type': 'application/json' },
@@ -44,7 +44,7 @@ const updateGame = (id: string, payload: Partial<Game>) => {
 
 const addGame = (payload: Game): Promise<Response> => {
   return new Promise((resolve, reject) => {
-    fetch('http://localhost:8080/games', {
+    fetch(`${API_URL}/games`, {
       method: 'POST',
       body: JSON.stringify(payload),
       headers: {
