@@ -1,12 +1,50 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, MenuProps } from 'antd';
+import { Button, MenuProps, Typography } from 'antd';
 
 import type { Filter, Game } from '@entities';
 import { List } from '@entities';
 import { filterCallback, filterCriteria, capitalize } from '@shared';
 import styles from './styles.module.scss';
 import { DropdownWidget } from '../../widgets/dropdown';
+import { useStore } from 'effector-react';
+import { $filter, $games, setFilter } from 'entities/game/models';
+
+const ListBody = ({
+  games,
+  filter,
+  filteredGames,
+}: {
+  games: Game[];
+  filter: string;
+  filteredGames: Game[];
+}) => {
+  return (
+    <>
+      {filter === 'all' ? (
+        <>
+          {filterCriteria.map((criteria) => {
+            return (
+              <List
+                listItems={games.filter((game) => filterCallback(game, criteria, filter === 'all'))}
+                dividerText={capitalize(criteria)}
+                key={criteria}
+                listClass={styles['ba-gameslist']}
+                listItemClass={styles['ba-gameslist--item']}
+              />
+            );
+          })}
+        </>
+      ) : (
+        <List
+          listItems={filteredGames}
+          listClass={styles['ba-gameslist']}
+          listItemClass={styles['ba-gameslist--item']}
+        />
+      )}
+    </>
+  );
+};
 
 const dropdownFilters: MenuProps['items'] = [
   {
@@ -28,8 +66,8 @@ const dropdownFilters: MenuProps['items'] = [
 ];
 
 const GamesList = (): JSX.Element => {
-  const [games, setGames] = useState<Game[]>([]);
-  const [filter, setFilter] = useState<Filter>('all');
+  const filter = useStore($filter);
+  const games = useStore($games);
 
   const onFilter = useCallback((filterType: Filter) => {
     setFilter(filterType);
@@ -75,26 +113,12 @@ const GamesList = (): JSX.Element => {
           <Button type="primary">Add Game</Button>
         </Link>
       </nav>
-      {filter === 'all' ? (
-        <>
-          {filterCriteria.map((criteria) => {
-            return (
-              <List
-                listItems={games.filter((game) => filterCallback(game, criteria, filter === 'all'))}
-                dividerText={capitalize(criteria)}
-                key={criteria}
-                listClass={styles['ba-gameslist']}
-                listItemClass={styles['ba-gameslist--item']}
-              />
-            );
-          })}
-        </>
+      {games.length === 0 ? (
+        <div className={styles['ba-gameslist--no-games']}>
+          <Typography>There are no games. Let&apos;s add first!</Typography>
+        </div>
       ) : (
-        <List
-          listItems={filteredGames}
-          listClass={styles['ba-gameslist']}
-          listItemClass={styles['ba-gameslist--item']}
-        />
+        <ListBody games={games} filteredGames={filteredGames} filter={filter} />
       )}
     </>
   );
