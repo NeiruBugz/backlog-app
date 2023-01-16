@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, MenuProps } from 'antd';
 
 import type { Filter, Game } from '@entities';
 import { List } from '@entities';
-import { filterCallback, filterCriteria, api, capitalize } from '@shared';
+import { filterCallback, filterCriteria, capitalize } from '@shared';
 import styles from './styles.module.scss';
 import { DropdownWidget } from '../../widgets/dropdown';
 
@@ -30,10 +30,6 @@ const dropdownFilters: MenuProps['items'] = [
 const GamesList = (): JSX.Element => {
   const [games, setGames] = useState<Game[]>([]);
   const [filter, setFilter] = useState<Filter>('all');
-
-  useEffect(() => {
-    api.getGames().then((result) => setGames(result));
-  }, []);
 
   const onFilter = useCallback((filterType: Filter) => {
     setFilter(filterType);
