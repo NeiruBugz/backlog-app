@@ -3,7 +3,6 @@ import { Filter, Game, UpdateGamePayload } from '../types';
 
 const $games = createStore<Game[]>([]);
 const addGame = createEvent<Game>('addGame');
-const updateGame = createEvent<UpdateGamePayload>('updateGame');
 const updateGameFx = createEffect<UpdateGamePayload, UpdateGamePayload, Error>();
 
 const $filter = createStore<Filter>('all');
@@ -26,4 +25,4 @@ $games
 
 $filter.on(setFilter, (state, payload) => (state = payload));
 
-export { $games, addGame, updateGame, $filter, setFilter, updateGameFx };
+export { $games, addGame, $filter, setFilter, updateGameFx };

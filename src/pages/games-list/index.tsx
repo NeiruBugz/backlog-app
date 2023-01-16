@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { Button, MenuProps, Typography } from 'antd';
 
 import type { Filter, Game } from '@entities';

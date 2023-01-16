@@ -11,7 +11,7 @@ const useAuth = (): UseAuthReturnType => {
 
   const login = (): void => {
     localStorage.setItem('authorized', '1');
-    navigate('/');
+    navigate('/games');
   };
 
   const logout = (): void => {
