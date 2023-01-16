@@ -8,4 +8,12 @@ export type Game = {
   img?: string;
 };
 
+export type UpdateGamePayload = {
+  id: string;
+  field: {
+    key: keyof Game;
+    value: string;
+  };
+};
+
 export type Filter = GameStatus | 'all';
