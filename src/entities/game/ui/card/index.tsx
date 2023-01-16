@@ -1,16 +1,12 @@
 import { Card, MenuProps, Tag } from 'antd';
 import classnames from 'classnames';
 import type { Game as GameProps } from '@entities';
-import { api, capitalize, createPlatformClassName } from '@shared';
+import { capitalize, createPlatformClassName } from '@shared';
+import { DropdownWidget } from '@widgets';
+import { updateGameFx } from '@entities';
 import styles from './styles.module.scss';
-import { DropdownWidget } from '../../../../widgets/dropdown';
-import { useCallback } from 'react';
 
 const dropdownFilters: MenuProps['items'] = [
-  {
-    label: 'All',
-    key: 'all',
-  },
   {
     label: 'Backlog',
     key: 'backlog',
@@ -28,12 +24,9 @@ const dropdownFilters: MenuProps['items'] = [
 const GameCard = ({ id, title, platform }: GameProps): JSX.Element => {
   const platformClassName = createPlatformClassName(platform);
 
-  const onGameStatusChange = useCallback(
-    async (payload: string) => {
-      await api.updateGame(id, { id, status: payload });
-    },
-    [id]
-  );
+  const onGameStatusChange = (payload: string) => {
+    updateGameFx({ id: id, field: { key: 'status', value: payload } });
+  };
 
   return (
     <Card className={styles['ba-card']}>

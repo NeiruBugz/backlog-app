@@ -1,7 +1,8 @@
 import { Game } from '@entities';
-import { api } from '@shared';
 import { Input, Button, Form, Select } from 'antd';
+import { addGame } from 'entities/game/models';
 import { useNavigate } from 'react-router';
+import { v4 } from 'uuid';
 
 const PLATFORM_OPTIONS = [
   {
@@ -35,8 +36,8 @@ const STATUS_OPTIONS = [
 
 const AddGame = (): JSX.Element => {
   const navigate = useNavigate();
-  const onFinish = async (values: Game) => {
-    await api.addGame(values);
+  const onFinish = (values: Game) => {
+    addGame({ ...values, id: v4() });
     navigate('/list');
   };
 
