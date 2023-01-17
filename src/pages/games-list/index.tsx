@@ -31,7 +31,7 @@ const ListsBody = ({
                 dividerText={capitalize(criteria)}
                 key={criteria}
                 listClass={styles['ba-gameslist']}
-                listItemClass={styles['ba-gameslist--item']}
+                listItemClass={styles['ba-gameslist__item']}
               />
             );
           })}
@@ -40,7 +40,7 @@ const ListsBody = ({
         <List
           listItems={filteredGames}
           listClass={styles['ba-gameslist']}
-          listItemClass={styles['ba-gameslist--item']}
+          listItemClass={styles['ba-gameslist__item']}
         />
       )}
     </>

@@ -29,8 +29,8 @@ const GameCard = ({ id, title, platform }: GameProps): JSX.Element => {
   };
 
   return (
-    <Card className={styles['ba-card']} bodyStyle={{ padding: '24px 12px' }}>
-      <Typography.Title level={4}>{title}</Typography.Title>
+    <Card className={styles['ba-card']} bodyStyle={{ padding: '18px 12px' }}>
+      <Typography.Title level={5}>{title}</Typography.Title>
       <div className={styles['ba-card__info']}>
         <Tag className={classnames(styles['ba-card__platform'], styles[platformClassName])}>
           {capitalize(platform)}
