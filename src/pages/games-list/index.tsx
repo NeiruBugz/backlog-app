@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button, MenuProps, Typography } from 'antd';
 
 import type { Filter, Game } from '@entities';
@@ -9,8 +9,9 @@ import styles from './styles.module.scss';
 import { DropdownWidget } from '../../widgets/dropdown';
 import { useStore } from 'effector-react';
 import { $filter, $games, setFilter } from 'entities/game/models';
+import { dropdownFilters } from './constants';
 
-const ListBody = ({
+const ListsBody = ({
   games,
   filter,
   filteredGames,
@@ -46,25 +47,6 @@ const ListBody = ({
   );
 };
 
-const dropdownFilters: MenuProps['items'] = [
-  {
-    label: 'All',
-    key: 'all',
-  },
-  {
-    label: 'Backlog',
-    key: 'backlog',
-  },
-  {
-    label: 'In Progress',
-    key: 'in-progress',
-  },
-  {
-    label: 'Completed',
-    key: 'completed',
-  },
-];
-
 const GamesList = (): JSX.Element => {
   const filter = useStore($filter);
   const games = useStore($games);
@@ -87,7 +69,7 @@ const GamesList = (): JSX.Element => {
 
   return (
     <>
-      <nav className={styles['ba-gameslist-page__nav']}>
+      {games.length !== 0 ? <nav className={styles['ba-gameslist-page__nav']}>
         <div className={styles['ba-gameslist-page__nav-filters']}>
           <Button disabled={filter === 'all'} onClick={() => onFilter('all')}>
             All
@@ -112,13 +94,13 @@ const GamesList = (): JSX.Element => {
         <Link to="/add-game">
           <Button type="primary">Add Game</Button>
         </Link>
-      </nav>
+      </nav> : null}
       {games.length === 0 ? (
         <div className={styles['ba-gameslist--no-games']}>
-          <Typography>There are no games. Let&apos;s add first!</Typography>
+          <Typography.Title level={4}>There are no games. <Link to="/add-game">Let&apos;s add the first one!</Link></Typography.Title>
         </div>
       ) : (
-        <ListBody games={games} filteredGames={filteredGames} filter={filter} />
+        <ListsBody games={games} filteredGames={filteredGames} filter={filter} />
       )}
     </>
   );

@@ -1,5 +1,12 @@
 import { Divider } from 'antd';
 import { Game, GameCard } from '@entities';
+import { Typography } from 'antd';
+
+enum FilterKeys  {
+  BACKLOG = 'Backlog',
+  IN_PROGRESS = 'In progress',
+  COMPLETED = 'completed',
+};
 
 type ListProps = {
   listItems: Game[];
@@ -8,9 +15,21 @@ type ListProps = {
   listItemClass?: string;
 };
 
-const List = ({ listItems, dividerText, listClass, listItemClass }: ListProps): JSX.Element => {
-  if (listItems.length === 0) {
+const EmptyBacklogPropmt = () => (
+  <Typography.Title level={4}>Great! Your backlog is empty, keep it clean!</Typography.Title>
+);
+
+const EmptyList = ({ text }: { text: string }) => {
+  if (text === FilterKeys.BACKLOG) {
+    return <><Divider>{text}</Divider><EmptyBacklogPropmt/></>;
+  } else {
     return <></>;
+  }
+};
+
+const List = ({ listItems, dividerText, listClass, listItemClass }: ListProps): JSX.Element => {
+  if (listItems.length === 0 && dividerText) {
+    return <EmptyList text={dividerText} />;
   }
 
   return (

@@ -5,6 +5,11 @@
 }
 
 .ba-header-navigation {
+  display: flex;
+  align-items: center;
+}
+
+.ba-header-navigation {
   a:not(:last-of-type) {
     margin-right: 8px;
   }

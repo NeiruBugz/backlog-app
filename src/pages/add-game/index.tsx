@@ -1,38 +1,9 @@
-import { Game } from '@entities';
 import { Input, Button, Form, Select } from 'antd';
-import { addGame } from 'entities/game/models';
 import { useNavigate } from 'react-router';
 import { v4 } from 'uuid';
-
-const PLATFORM_OPTIONS = [
-  {
-    value: 'playstation',
-    label: 'Playstation',
-  },
-  {
-    value: 'xbox',
-    label: 'Xbox',
-  },
-  {
-    value: 'nintendo',
-    label: 'Nintendo',
-  },
-];
-
-const STATUS_OPTIONS = [
-  {
-    value: 'backlog',
-    label: 'Backlog',
-  },
-  {
-    value: 'in-progress',
-    label: 'In Progress',
-  },
-  {
-    value: 'completed',
-    label: 'Completed',
-  },
-];
+import { PLATFORM_OPTIONS, STATUS_OPTIONS } from './constants';
+import { addGame } from 'entities/game/models';
+import type { Game } from '@entities';
 
 const AddGame = (): JSX.Element => {
   const navigate = useNavigate();
@@ -47,7 +18,7 @@ const AddGame = (): JSX.Element => {
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 8 }}
-        initialValues={{ remember: true }}
+        initialValues={{ remember: true, status: 'backlog' }}
         onFinish={onFinish}
       >
         <Form.Item
@@ -57,11 +28,11 @@ const AddGame = (): JSX.Element => {
         >
           <Input />
         </Form.Item>
-        <Form.Item label="Platform" name="platform">
+        <Form.Item label="Platform" name="platform" rules={[{ required: true, message: 'Please, choose a platform' }]}>
           <Select options={PLATFORM_OPTIONS} />
         </Form.Item>
         <Form.Item label="Status" name="status">
-          <Select options={STATUS_OPTIONS} />
+          <Select options={STATUS_OPTIONS} value={'backlog'} />
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
