@@ -69,35 +69,39 @@ const GamesList = (): JSX.Element => {
 
   return (
     <>
-      {games.length !== 0 ? <nav className={styles['ba-gameslist-page__nav']}>
-        <div className={styles['ba-gameslist-page__nav-filters']}>
-          <Button disabled={filter === 'all'} onClick={() => onFilter('all')}>
-            All
-          </Button>
-          <Button disabled={filter === 'backlog'} onClick={() => onFilter('backlog')}>
-            Backlog
-          </Button>
-          <Button disabled={filter === 'in-progress'} onClick={() => onFilter('in-progress')}>
-            In progress
-          </Button>
-          <Button disabled={filter === 'completed'} onClick={() => onFilter('completed')}>
-            Completed
-          </Button>
-        </div>
-        <div className={styles['ba-gameslist-page__nav-filters--mobile']}>
-          <DropdownWidget
-            items={dropdownFilters}
-            onClick={handleDropdownItemClick}
-            label="Filters"
-          />
-        </div>
-        <Link to="/add-game">
-          <Button type="primary">Add Game</Button>
-        </Link>
-      </nav> : null}
+      {games.length !== 0 ? (
+        <nav className={styles['ba-gameslist-page__nav']}>
+          <div className={styles['ba-gameslist-page__nav-filters']}>
+            <Button disabled={filter === 'all'} onClick={() => onFilter('all')}>
+              All
+            </Button>
+            <Button disabled={filter === 'backlog'} onClick={() => onFilter('backlog')}>
+              Backlog
+            </Button>
+            <Button disabled={filter === 'in-progress'} onClick={() => onFilter('in-progress')}>
+              In progress
+            </Button>
+            <Button disabled={filter === 'completed'} onClick={() => onFilter('completed')}>
+              Completed
+            </Button>
+          </div>
+          <div className={styles['ba-gameslist-page__nav-filters--mobile']}>
+            <DropdownWidget
+              items={dropdownFilters}
+              onClick={handleDropdownItemClick}
+              label="Filters"
+            />
+          </div>
+          <Link to="/add-game">
+            <Button type="primary">Add Game</Button>
+          </Link>
+        </nav>
+      ) : null}
       {games.length === 0 ? (
         <div className={styles['ba-gameslist--no-games']}>
-          <Typography.Title level={4}>There are no games. <Link to="/add-game">Let&apos;s add the first one!</Link></Typography.Title>
+          <Typography.Title level={4}>
+            There are no games. <Link to="/add-game">Let&apos;s add the first one!</Link>
+          </Typography.Title>
         </div>
       ) : (
         <ListsBody games={games} filteredGames={filteredGames} filter={filter} />

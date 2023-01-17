@@ -17,7 +17,7 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   }
 
   return children;
-}; 
+};
 
 const Routing = () => {
   return (
@@ -26,8 +26,22 @@ const Routing = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Auth />} />
-        <Route path="/list" element={<ProtectedRoute><GamesList /></ProtectedRoute>} />
-        <Route path="/add-game" element={<ProtectedRoute><AddGame /></ProtectedRoute>} />
+        <Route
+          path="/list"
+          element={
+            <ProtectedRoute>
+              <GamesList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/add-game"
+          element={
+            <ProtectedRoute>
+              <AddGame />
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<p>There&apos;s nothing here: 404!</p>} />
       </Routes>
     </>

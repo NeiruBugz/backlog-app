@@ -2,11 +2,11 @@ import { Divider } from 'antd';
 import { Game, GameCard } from '@entities';
 import { Typography } from 'antd';
 
-enum FilterKeys  {
+enum FilterKeys {
   BACKLOG = 'Backlog',
   IN_PROGRESS = 'In progress',
   COMPLETED = 'completed',
-};
+}
 
 type ListProps = {
   listItems: Game[];
@@ -21,7 +21,12 @@ const EmptyBacklogPropmt = () => (
 
 const EmptyList = ({ text }: { text: string }) => {
   if (text === FilterKeys.BACKLOG) {
-    return <><Divider>{text}</Divider><EmptyBacklogPropmt/></>;
+    return (
+      <>
+        <Divider>{text}</Divider>
+        <EmptyBacklogPropmt />
+      </>
+    );
   } else {
     return <></>;
   }

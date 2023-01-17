@@ -6,7 +6,6 @@ import { $user, logoutUserFx } from 'entities/user/models';
 
 const Header = (): JSX.Element => {
   const user = useStore($user);
-  
 
   const logout = async () => {
     await logoutUserFx({ authorized: false, username: '' });

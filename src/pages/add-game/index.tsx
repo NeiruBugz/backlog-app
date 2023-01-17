@@ -28,7 +28,11 @@ const AddGame = (): JSX.Element => {
         >
           <Input />
         </Form.Item>
-        <Form.Item label="Platform" name="platform" rules={[{ required: true, message: 'Please, choose a platform' }]}>
+        <Form.Item
+          label="Platform"
+          name="platform"
+          rules={[{ required: true, message: 'Please, choose a platform' }]}
+        >
           <Select options={PLATFORM_OPTIONS} />
         </Form.Item>
         <Form.Item label="Status" name="status">
