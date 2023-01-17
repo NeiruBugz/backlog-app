@@ -8,7 +8,8 @@
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
-    "prettier"
+    "prettier",
+    "plugin:effector/recommended"
   ],
   "overrides": [
   ],
@@ -24,7 +25,8 @@
   },
   "plugins": [
     "react",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "effector"
   ],
   "rules": {
     "react/react-in-jsx-scope": 0,
