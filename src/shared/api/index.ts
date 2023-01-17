@@ -40,7 +40,7 @@ const api = {
       });
     });
   },
-  addGame: function(payload: Game) {
+  addGame: function (payload: Game) {
     return new Promise((resolve, reject) => {
       fetch(`${API_URL}/games`, {
         method: 'POST',
@@ -56,13 +56,9 @@ const api = {
         reject(false);
       });
     });
-  }
+  },
 };
 
-const inMemoryApi = {
-};
+const inMemoryApi = {};
 
-export {
-  api,
-  inMemoryApi,
-};
+export { api, inMemoryApi };

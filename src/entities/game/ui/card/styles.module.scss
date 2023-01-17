@@ -1,10 +1,6 @@
 .ba-card {
   width: var(--ba-card-width);
   height: 118px;
-
-  .ant-card-body {
-    height: 100%;
-  }
 }
 
 .ba-card__title {
@@ -16,6 +12,8 @@
   border: none;
   color: #fdfdfd;
   background-color: black;
+  padding: 5px 15px;
+  font-size: 14px;
 }
 
 .ba-card__platform--nintendo {
@@ -28,4 +26,10 @@
 
 .ba-card__platform--xbox {
   background-color: var(--ba-color-xbox);
+}
+
+.ba-card__info {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
 }

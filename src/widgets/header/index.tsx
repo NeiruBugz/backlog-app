@@ -6,15 +6,14 @@ import { $user, logoutUserFx } from 'entities/user/models';
 
 const Header = (): JSX.Element => {
   const user = useStore($user);
-  
 
-  const logout = () => {
-    logoutUserFx({ authorized: false, username: '' });
+  const logout = async () => {
+    await logoutUserFx({ authorized: false, username: '' });
   };
 
   return (
     <header className={styles['ba-header']}>
-      <nav className={styles['ba-header-navigation']}>
+      <nav className={styles['ba-header__navigation']}>
         <Link to="/">Backlog App</Link>
         {'  '}
         {user.authorized ? <Link to="/list">Games</Link> : <Link to="/auth">Login</Link>}

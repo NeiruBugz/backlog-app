@@ -4,7 +4,12 @@
   margin-bottom: 32px;
 }
 
-.ba-header-navigation {
+.ba-header__navigation {
+  display: flex;
+  align-items: center;
+}
+
+.ba-header__navigation {
   a:not(:last-of-type) {
     margin-right: 8px;
   }

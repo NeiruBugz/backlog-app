@@ -33,10 +33,7 @@
   row-gap: 8px;
 }
 
-.ba-gameslist--item {
-}
-
-.ba-gameslist--item:not(:last-of-type) {
+.ba-gameslist__item:not(:last-of-type) {
   margin-right: 8px;
 }
 

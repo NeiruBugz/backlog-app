@@ -1,19 +1,18 @@
-import { Button, Dropdown, MenuProps, Space } from 'antd';
+import { Button, Dropdown, MenuProps } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 
-const DropdownWidget = ({
-  items,
-  onClick,
-  label,
-}: { label: string } & Pick<MenuProps, 'items' | 'onClick'>): JSX.Element => {
+type DropdownWidgetProps = {
+  label: string;
+  classname?: string;
+} & Pick<MenuProps, 'items' | 'onClick'>;
+
+const DropdownWidget = ({ items, onClick, label, classname }: DropdownWidgetProps): JSX.Element => {
   return (
     <>
-      <Dropdown menu={{ items, onClick }}>
+      <Dropdown className={classname} menu={{ items, onClick }}>
         <Button>
-          <Space>
-            {label}
-            <DownOutlined />
-          </Space>
+          {label}
+          <DownOutlined />
         </Button>
       </Dropdown>
     </>
