@@ -1,0 +1,44 @@
+.ba-search-result {
+  display: grid;
+  grid-template-areas: 'image title platforms completions controls';
+  grid-template-columns: 240px 1fr 1fr 1fr 1fr;
+  grid-gap: 12px;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.ba-search-result__title {
+  grid-area: title;
+  margin-right: 8px;
+}
+
+.ba-search-result__image {
+  grid-area: image;
+  width: 240px;
+  height: auto;
+  margin-right: 8px;
+}
+
+.ba-search-result__tags {
+  grid-area: platforms;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 8px;
+  height: 216px;
+}
+
+.ba-search-result__completions {
+  grid-area: completions;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ba-search-result__completions-tag {
+  border: none;
+  color: #fdfdfd;
+  background-color: black;
+  padding: 5px 15px;
+  font-size: 14px;
+}
