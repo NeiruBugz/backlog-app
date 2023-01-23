@@ -45,12 +45,9 @@ const AddGame = (): JSX.Element => {
   };
 
   const onFinish = (values: Game) => {
-    console.log(values);
     addGame({ ...values, id: v4() });
     navigate('/list');
   };
-
-  console.log(inputRef);
 
   const width = useMemo(() => {
     if (inputRef.current) {
