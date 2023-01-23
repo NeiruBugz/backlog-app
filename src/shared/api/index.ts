@@ -1,5 +1,5 @@
-import type { Game } from '@entities';
 import { HowLongToBeatEntry } from 'howlongtobeat';
+import { Game } from '@entities';
 
 const API_URL = 'https://backlog-app-nest.vercel.app/';
 
