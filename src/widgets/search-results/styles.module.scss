@@ -27,7 +27,7 @@
 .ba-search-result__image {
   grid-area: image;
 
-  @media(min-width: 320px) {
+  @media (min-width: 320px) {
     width: 160px;
     height: auto;
   }
@@ -69,8 +69,8 @@
   @media (min-width: 320px) {
     display: none;
   }
-  
-  @media (min-width: 768px) {
+
+  @media (min-width: 1024px) {
     display: flex;
     flex-direction: column;
     grid-gap: 8px;
@@ -87,5 +87,5 @@
 }
 
 .ba-search-result__actions {
-  grid-area: controls
+  grid-area: controls;
 }

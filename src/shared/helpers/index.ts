@@ -1,11 +1,6 @@
 import { Filter, Game } from '@entities';
 
-const NINTENDO_PLATFORMS = [
-  'wii',
-  'wii u',
-  'nes',
-  'snes',
-];
+const NINTENDO_PLATFORMS = ['wii', 'wii u', 'nes', 'snes'];
 
 const capitalize = (value: string): string => {
   return `${value[0].toUpperCase()}${value.substring(1)}`;
