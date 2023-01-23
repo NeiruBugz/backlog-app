@@ -31,6 +31,11 @@ const AddGame = (): JSX.Element => {
       setInputValue(payload.name);
       form.setFieldsValue({ title: payload.name });
     }
+
+    return () => {
+      setInputValue('');
+      form.setFieldsValue({ title: '' });
+    };
   }, [form, payload]);
 
   const onInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
