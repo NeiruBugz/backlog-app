@@ -1,12 +1,19 @@
 import { Filter, Game } from '@entities';
 
+const NINTENDO_PLATFORMS = [
+  'wii',
+  'wii u',
+  'nes',
+  'snes',
+];
+
 const capitalize = (value: string): string => {
   return `${value[0].toUpperCase()}${value.substring(1)}`;
 };
 
 const createPlatformClassName = (platform: string) => {
   const lowercasedPlatform = platform.toLowerCase();
-  if (lowercasedPlatform.includes('nintendo')) {
+  if (lowercasedPlatform.includes('nintendo') || NINTENDO_PLATFORMS.includes(lowercasedPlatform)) {
     return 'ba-tag__platform--nintendo';
   }
 

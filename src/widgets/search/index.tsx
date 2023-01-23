@@ -1,13 +1,20 @@
-import { Input } from 'antd';
+import { Input, message } from 'antd';
 
 const { Search } = Input;
 
 type SearchInputProps = {
   onSearch?: (searchQuery: string) => void;
   isLoading?: boolean;
+  disabled?: boolean;
 };
 
-const SearchInput = ({ onSearch, isLoading }: SearchInputProps): JSX.Element => {
+const SearchInput = ({ onSearch, isLoading, disabled }: SearchInputProps): JSX.Element => {
+  const onMouseOver = () => {
+    if (disabled) {
+      message.info('You should be logged in to use search', 1);
+    }
+  };
+
   return (
     <Search
       placeholder="Search game"
@@ -16,6 +23,8 @@ const SearchInput = ({ onSearch, isLoading }: SearchInputProps): JSX.Element => 
       size="large"
       onSearch={onSearch}
       loading={isLoading}
+      disabled={disabled}
+      onMouseOver={onMouseOver}
     />
   );
 };

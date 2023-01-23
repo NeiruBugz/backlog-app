@@ -12,14 +12,14 @@ const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => 
     }
 
     return (
-      <>
+      <div className={styles['ba-search-result__tags']}>
         <Typography.Title level={5}>Playable on</Typography.Title>
-        <div className={styles['ba-search-result__tags']}>
+        <div className={styles['ba-search-result__tags-wrapper']}>
           {platforms.map((platform) => {
             return <PlatformTag platform={platform} key={`${platform}--${id}`}/>;
           })}
         </div>
-      </>
+      </div>
     );
   };
 
@@ -27,15 +27,17 @@ const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => 
     return (
       <div className={styles['ba-search-result__completions']}>
         <Typography.Title level={5}>Completion hours</Typography.Title>
-        <Tag className={styles['ba-search-result__completions-tag']}>
-          Main: {gameplayMain} hours
-        </Tag>
-        <Tag className={styles['ba-search-result__completions-tag']}>
-          Main+Extra: {gameplayMainExtra} hours
-        </Tag>
-        <Tag className={styles['ba-search-result__completions-tag']}>
-          Completionist: {gameplayCompletionist} hours
-        </Tag>
+        <div className={styles['ba-search-result__completions-wrapper']}>
+          <Tag className={styles['ba-search-result__completions-tag']}>
+            Main: {gameplayMain} hours
+          </Tag>
+          <Tag className={styles['ba-search-result__completions-tag']}>
+            Main+Extra: {gameplayMainExtra} hours
+          </Tag>
+          <Tag className={styles['ba-search-result__completions-tag']}>
+            Completionist: {gameplayCompletionist} hours
+          </Tag>
+        </div>
       </div>
     );
   };
@@ -46,9 +48,7 @@ const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => 
       <Typography.Title level={4} className={styles['ba-search-result__title']}>
         {name}
       </Typography.Title>
-      <div>
-        <Tags/>
-      </div>
+      <Tags/>
       <Completions/>
       <div>
         <Typography.Title level={5}>Actions</Typography.Title>
