@@ -1,7 +1,7 @@
 import type { Game } from '@entities';
 import { HowLongToBeatEntry } from 'howlongtobeat';
 
-const API_URL = 'http://localhost:8080';
+const API_URL = import.meta.env.PROD ? import.meta.env.VITE_PROD_API : import.meta.env.VITE_DEV_API;
 
 const api = {
   search: function (query: string): Promise<Array<HowLongToBeatEntry>> {
