@@ -1,8 +1,20 @@
-import type { Game } from '@entities';
+import { HowLongToBeatEntry } from 'howlongtobeat';
+import { Game } from '@entities';
 
-const API_URL = 'http://localhost:8080';
+const API_URL = 'https://backlog-app-nest.vercel.app/';
 
 const api = {
+  search: function (query: string): Promise<Array<HowLongToBeatEntry>> {
+    return new Promise((resolve, reject) => {
+      fetch(`${API_URL}/search/${query}`).then((response) => {
+        if (response.status === 200) {
+          resolve(response.json());
+        }
+
+        reject([]);
+      });
+    });
+  },
   getGames: function () {
     return new Promise((resolve, reject) => {
       fetch(`${API_URL}/games`).then((response) => {
@@ -59,6 +71,4 @@ const api = {
   },
 };
 
-const inMemoryApi = {};
-
-export { api, inMemoryApi };
+export { api };

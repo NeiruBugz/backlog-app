@@ -1,0 +1,12 @@
+.ba-suggestbox-list {
+  position: absolute;
+  background-color: white;
+  z-index: 1;
+  width: 300px;
+  left: 34%;
+  top: 15%;
+
+  li:hover {
+    background-color: #bfbfbf;
+  }
+}

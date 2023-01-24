@@ -1,0 +1,26 @@
+.ba-tag__platform {
+  border: none;
+  color: #fdfdfd;
+  background-color: black;
+  padding: 5px 15px;
+  font-size: 14px;
+  max-width: 168px;
+  height: 30px;
+  max-height: 40px;
+}
+
+.ba-tag__platform--pc {
+  background-color: var(--ba-color-pc);
+}
+
+.ba-tag__platform--nintendo {
+  background-color: var(--ba-color-nintendo);
+}
+
+.ba-tag__platform--playstation {
+  background-color: var(--ba-color-playstation);
+}
+
+.ba-tag__platform--xbox {
+  background-color: var(--ba-color-xbox);
+}

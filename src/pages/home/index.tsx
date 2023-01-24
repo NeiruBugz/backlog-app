@@ -1,23 +1,29 @@
-import { SearchInput } from '@widgets';
 import { message } from 'antd';
-import { useHowLongToBeat } from 'entities/game/services/useHowLongToBeat';
 import { useState } from 'react';
+import { HowLongToBeatEntry } from 'howlongtobeat';
+import { SearchResultsList, SearchInput } from '@widgets';
+import { api } from '@shared';
 import styles from './styles.module.scss';
+import { useStore } from 'effector-react';
+import { $user } from '../../entities/user/models';
 
 const Home = (): JSX.Element => {
   const [isLoading, setLoading] = useState<boolean>(false);
-  const { search } = useHowLongToBeat();
+  const [searchResults, setSearchResults] = useState<HowLongToBeatEntry[]>([]);
+  const { authorized } = useStore($user);
 
   const onGameSearch = (value: string) => {
     if (!value.length) {
+      setSearchResults([]);
       return;
     }
     message.info(`Searching for: ${value}`, 1);
     setLoading(true);
 
-    search(value)
+    api
+      .search(value)
       .then((result) => {
-        console.log(result);
+        setSearchResults(result);
       })
       .catch((error) => {
         console.log(error);
@@ -31,8 +37,9 @@ const Home = (): JSX.Element => {
   return (
     <div>
       <div className={styles['ba-home']}>
-        <SearchInput onSearch={onGameSearch} isLoading={isLoading} />
+        <SearchInput onSearch={onGameSearch} isLoading={isLoading} disabled={!authorized} />
       </div>
+      <SearchResultsList results={searchResults} />
     </div>
   );
 };
