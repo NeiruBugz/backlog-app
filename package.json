@@ -1,13 +1,14 @@
 {
   "name": "backlog-app",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest",
+    "unit": "vitest",
+    "e2e": "npx playwright test",
     "lint": "eslint src",
     "cleanup": "eslint --fix src && prettier --write src"
   },
@@ -26,6 +27,7 @@
     "uuid": "9.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.29.2",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
     "@types/compose-function": "0.0.30",

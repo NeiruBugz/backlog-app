@@ -31,7 +31,7 @@ const SuggestBox = ({
   };
 
   return (
-    <List
+    <>{list.length ? <List
       className={styles['ba-suggestbox-list']}
       bordered
       style={{ width, left: xPos, top: yPos }}
@@ -43,7 +43,7 @@ const SuggestBox = ({
           </List.Item>
         )}
       </VirtualList>
-    </List>
+    </List> : null}</>
   );
 };
 
