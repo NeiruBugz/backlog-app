@@ -1,7 +1,7 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 import { devices } from '@playwright/test';
 
-const baseURL = process.env.CI ? 'https://localhost:5173/' : 'https://backlog-app.localhost.com:3000';
+const baseURL = process.env.CI ? 'https://localhost:3000' : 'https://backlog-app.localhost.com:3000';
 
 const config: PlaywrightTestConfig = {
   testDir: './tests/e2e',

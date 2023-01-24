@@ -10,7 +10,6 @@ export default defineConfig({
   },
   server: {
     https: true,
-    host: 'backlog-app.localhost.com',
     port: 3000,
   },
   plugins: [react(), tsconfigPaths(), mkcert()]
