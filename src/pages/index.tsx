@@ -3,11 +3,10 @@ import { lazy } from 'react';
 import { Header } from '@widgets';
 import { useStore } from 'effector-react';
 import { $user } from 'entities/user/models';
-
-const Home = lazy(() => import('./home/index'));
-const Auth = lazy(() => import('./auth/index'));
-const GamesList = lazy(() => import('./games-list/index'));
-const AddGame = lazy(() => import('./add-game/index'));
+import { Home } from './home';
+import { Auth } from './auth';
+import { AddGame } from './add-game';
+import { GamesList } from './games-list';
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const { authorized } = useStore($user);

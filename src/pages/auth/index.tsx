@@ -37,4 +37,4 @@ const Auth = (): JSX.Element => {
   );
 };
 
-export default Auth;
+export { Auth };
