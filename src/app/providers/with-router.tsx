@@ -1,11 +1,10 @@
-import { ReactNode, Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 // eslint-disable-next-line react/display-name
-const withRouter = (component: () => ReactNode) => () =>
+const withRouter = (component: () => JSX.Element) => () =>
   (
     <BrowserRouter>
-      <Suspense fallback="Loading...">{component()}</Suspense>
+      {component()}
     </BrowserRouter>
   );
 

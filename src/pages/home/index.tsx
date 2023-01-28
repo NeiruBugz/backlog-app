@@ -25,9 +25,9 @@ const Home = (): JSX.Element => {
       .then((result) => {
         setSearchResults(result);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         message.error(`Error while searching ${value}`, 1);
+        setLoading(false);
       })
       .finally(() => {
         setLoading(false);
@@ -44,4 +44,4 @@ const Home = (): JSX.Element => {
   );
 };
 
-export default Home;
+export { Home };
