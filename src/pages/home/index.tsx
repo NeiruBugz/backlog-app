@@ -14,6 +14,7 @@ const Home = (): JSX.Element => {
 
   const onGameSearch = (value: string) => {
     if (!value.length) {
+      message.info('Please, input search parameter', 1);
       setSearchResults([]);
       return;
     }
@@ -27,7 +28,6 @@ const Home = (): JSX.Element => {
       })
       .catch(() => {
         message.error(`Error while searching ${value}`, 1);
-        setLoading(false);
       })
       .finally(() => {
         setLoading(false);

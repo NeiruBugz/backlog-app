@@ -1,14 +1,14 @@
 import { HowLongToBeatEntry } from 'howlongtobeat';
 import { Game } from '@entities';
 
-const API_URL = 'https://backlog-app-nest.vercel.app';
+const API_URL = import.meta.env.DEV
+  ? import.meta.env.VITE_DEV_API
+  : 'https://backlog-app-nest.vercel.app/';
 
 const api = {
   search: function (query: string): Promise<Array<HowLongToBeatEntry>> {
     return new Promise((resolve, reject) => {
-      const headers = new Headers();
-      headers.append('Access-Control-Allow-Origin', '*');
-      fetch(`${API_URL}/search/${query}`, { headers })
+      fetch(`${API_URL}/search/${query}`)
         .then((response) => {
           resolve(response.json());
         })
