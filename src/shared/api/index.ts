@@ -1,7 +1,7 @@
 import { HowLongToBeatEntry } from 'howlongtobeat';
 import { Game } from '@entities';
 
-const API_URL = !import.meta.env.DEV
+const API_URL = import.meta.env.DEV
   ? import.meta.env.VITE_DEV_API
   : 'https://backlog-app-nest.vercel.app/api/v1';
 
