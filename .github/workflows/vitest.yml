@@ -1,4 +1,4 @@
-name: E2E tests
+name: Unit tests
 on:
   push:
     branches: [ main, master ]
@@ -15,10 +15,8 @@ jobs:
         node-version: 16
     - name: Install dependencies
       run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
+    - name: Run vitest
+      run: npm run unit
     - uses: actions/upload-artifact@v3
       if: always()
       with:

@@ -1,8 +1,6 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 import { devices } from '@playwright/test';
 
-const baseURL = process.env.CI ? 'https://localhost:3000' : 'https://backlog-app.localhost.com:3000';
-
 const config: PlaywrightTestConfig = {
   testDir: './tests/e2e',
   timeout: 30 * 1000,
@@ -17,13 +15,19 @@ const config: PlaywrightTestConfig = {
   use: {
     actionTimeout: 0,
     trace: 'on',
-    baseURL,
+    baseURL: 'https://localhost:4000/',
+  },
+  webServer: {
+    command: 'PLAYWRIGHT=1 npm run dev',
+    port: 4000,
+    ignoreHTTPSErrors: true,
   },
   projects: [
     {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
+        ignoreHTTPSErrors: true,
       },
     },
 
@@ -31,6 +35,7 @@ const config: PlaywrightTestConfig = {
       name: 'firefox',
       use: {
         ...devices['Desktop Firefox'],
+        ignoreHTTPSErrors: true,
       },
     },
 
@@ -38,26 +43,24 @@ const config: PlaywrightTestConfig = {
       name: 'webkit',
       use: {
         ...devices['Desktop Safari'],
+        ignoreHTTPSErrors: true,
       },
     },
     {
       name: 'Mobile Chrome',
       use: {
         ...devices['Pixel 5'],
+        ignoreHTTPSErrors: true,
       },
     },
     {
       name: 'Mobile Safari',
       use: {
         ...devices['iPhone 12'],
+        ignoreHTTPSErrors: true,
       },
     },
   ],
-  webServer: {
-    command: 'npm run dev',
-    timeout: 120 * 1000,
-    port: 3000,
-  },
 };
 
 export default config;

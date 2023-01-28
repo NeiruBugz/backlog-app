@@ -3,6 +3,10 @@ import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import mkcert from 'vite-plugin-mkcert';
 
+const port = process.env.PLAYWRIGHT ? 4000 : 3000;
+console.log(process.env.PLAYWRIGHT);
+
+
 // https://vitejs.dev/config/
 export default defineConfig({
   define: {
@@ -10,7 +14,7 @@ export default defineConfig({
   },
   server: {
     https: true,
-    port: 3000,
+    port,
   },
   plugins: [react(), tsconfigPaths(), mkcert()]
 });
