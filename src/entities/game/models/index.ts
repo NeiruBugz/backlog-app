@@ -28,7 +28,6 @@ $games
     if (gameIndex !== -1) {
       const game = state[gameIndex];
       game[key] = value;
-      console.log('after', game);
       state[gameIndex] = game;
     }
 

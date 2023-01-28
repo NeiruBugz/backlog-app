@@ -1,7 +1,9 @@
 import { HowLongToBeatEntry } from 'howlongtobeat';
 import { Game } from '@entities';
 
-const API_URL = 'https://backlog-app-nest.vercel.app';
+const API_URL = import.meta.env.DEV
+  ? import.meta.env.VITE_DEV_API
+  : 'https://backlog-app-nest.vercel.app/api/v1';
 
 const api = {
   search: function (query: string): Promise<Array<HowLongToBeatEntry>> {
