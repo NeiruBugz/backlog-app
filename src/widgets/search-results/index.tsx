@@ -5,10 +5,13 @@ import { PlatformTag } from '../platform-tag';
 import { savePayload } from '@entities';
 import { useNavigate } from 'react-router';
 import VirtualList from 'rc-virtual-list';
+import { useTranslation } from 'react-i18next';
+import { useCallback } from 'react';
 
 const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => {
   const { name, platforms, imageUrl, id, gameplayMain, gameplayMainExtra, gameplayCompletionist } =
     item;
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const onAddClick = () => {
@@ -23,7 +26,7 @@ const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => 
 
     return (
       <div className={styles['ba-search-result__tags']}>
-        <Typography.Title level={5}>Playable on</Typography.Title>
+        <Typography.Title level={5}>{t('games-list.searchResults.playableOn')}</Typography.Title>
         <div className={styles['ba-search-result__tags-wrapper']}>
           {platforms.map((platform) => {
             return <PlatformTag platform={platform} key={`${platform}--${id}`} />;
@@ -34,18 +37,40 @@ const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => 
   };
 
   const Completions = () => {
+    const determinePluralityKey = useCallback((count: number): string => {
+      if (count === 1) {
+        return 'hours_one';
+      } else if (count > 4 || count === 0) {
+        return 'hours_many';
+      } else {
+        return 'hours_few';
+      }
+    }, []);
+
     return (
       <div className={styles['ba-search-result__completions']}>
-        <Typography.Title level={5}>Completion hours</Typography.Title>
+        <Typography.Title level={5}>
+          {t('games-list.searchResults.completion.completionHours')}
+        </Typography.Title>
         <div className={styles['ba-search-result__completions-wrapper']}>
           <Tag className={styles['ba-search-result__completions-tag']}>
-            Main: {gameplayMain} hours
+            {t('games-list.searchResults.completion.main')}:{' '}
+            {t(`games-list.searchResults.completion.${determinePluralityKey(gameplayMain)}`, {
+              count: gameplayMain,
+            })}
           </Tag>
           <Tag className={styles['ba-search-result__completions-tag']}>
-            Main+Extra: {gameplayMainExtra} hours
+            {t('games-list.searchResults.completion.mainExtra')}:{' '}
+            {t(`games-list.searchResults.completion.${determinePluralityKey(gameplayMainExtra)}`, {
+              count: gameplayMainExtra,
+            })}
           </Tag>
           <Tag className={styles['ba-search-result__completions-tag']}>
-            Completionist: {gameplayCompletionist} hours
+            {t('games-list.searchResults.completion.completionist')}:{' '}
+            {t(
+              `games-list.searchResults.completion.${determinePluralityKey(gameplayCompletionist)}`,
+              { count: gameplayCompletionist }
+            )}
           </Tag>
         </div>
       </div>
@@ -62,7 +87,7 @@ const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => 
       <Completions />
       <div>
         <Typography.Title level={5}>Actions</Typography.Title>
-        <Button onClick={onAddClick}>Add Game</Button>
+        <Button onClick={onAddClick}>{t('common.addGame')}</Button>
       </div>
     </div>
   );
@@ -71,10 +96,7 @@ const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => 
 const SearchResultsList = ({ results }: { results: HowLongToBeatEntry[] }) => (
   <>
     {results.length ? (
-      <List
-        itemLayout="vertical"
-        header={<h3>Search Results</h3>}
-      >
+      <List itemLayout="vertical" header={<h3>Search Results</h3>}>
         <VirtualList data={results} itemKey="name" height={650}>
           {(item) => <SearchListItem item={item} />}
         </VirtualList>

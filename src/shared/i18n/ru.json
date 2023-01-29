@@ -2,7 +2,8 @@
   "common": {
     "backlog": "Бэклог",
     "inProgress": "В процессе",
-    "completed": "Пройдено"
+    "completed": "Пройдено",
+    "addGame": "Добавить игру"
   },
   "validation": {
     "gameTitle": "Пожалуйста, введите название игры",
@@ -54,7 +55,24 @@
       "completed": "Пройдено",
       "all": "Все"
     },
-    "addButton": "Добавить игру"
+    "addButton": "Добавить игру",
+    "emptyBacklog": "Отлично! Твой бэклог пуст, так держать!",
+    "gameCard": {
+      "moveTo": "Перенести"
+    },
+    "searchResults": {
+      "playableOn": "Доступно на",
+      "completion": {
+        "completionHours": "Время прохождения",
+        "main": "Основной сюжет",
+        "mainExtra": "Основной сюжет+дополнения",
+        "completionist": "Полное прохождение",
+        "hours": "часов",
+        "hours_one": "{{count}} час",
+        "hours_few": "{{count}} часа",
+        "hours_many": "{{count}} часов"
+      }
+    }
   },
   "auth": {
     "label": "Пользователь",

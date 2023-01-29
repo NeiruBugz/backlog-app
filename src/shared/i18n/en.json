@@ -2,7 +2,8 @@
   "common": {
     "backlog": "Backlog",
     "inProgress": "In Progress",
-    "completed": "Completed"
+    "completed": "Completed",
+    "addGame": "Add Game"
   },
   "validation": {
     "gameTitle": "Please input game title!",
@@ -54,7 +55,24 @@
       "completed": "Completed",
       "all": "All"
     },
-    "addButton": "Add Game"
+    "addButton": "Add Game",
+    "emptyBacklog": "Great! Your backlog is empty, keep it clean!",
+    "gameCard": {
+      "moveTo": "Move to"
+    },
+    "searchResults": {
+      "playableOn": "Playable on",
+      "completion": {
+        "completionHours": "Completion hours",
+        "main": "Main",
+        "mainExtra": "Main+Extra",
+        "completionist": "Completionist",
+        "hours": "hours",
+        "hours_one": "{{count}} hours",
+        "hours_few": "{{count}} hours",
+        "hours_many": "{{count}} hours"
+      }
+    }
   },
   "auth": {
     "label": "Username",
