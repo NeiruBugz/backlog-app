@@ -48,12 +48,15 @@ const Header = (): JSX.Element => {
           <Link to="/auth">{t('home.header.navigation.login')}</Link>
         )}
       </nav>
-      <DropdownWidget
-        label={t('home.header.language.label')}
-        items={LanguageItems}
-        onClick={onLanguageSelect}
-      />
-      {user.authorized ? <User {...user} onLogout={logout} /> : null}
+      <div className={styles['ba-header__controls']}>
+        {user.authorized ? <User {...user} onLogout={logout} /> : null}
+        <DropdownWidget
+          label={t('home.header.language.label')}
+          items={LanguageItems}
+          onClick={onLanguageSelect}
+          classname={styles['ba-header__language-select']}
+        />
+      </div>
     </header>
   );
 };

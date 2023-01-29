@@ -26,7 +26,7 @@ const User = ({ username, avatarUrl, onLogout }: UserProps): JSX.Element => {
             className={styles['ba-user-avatar']}
           />
         )}
-        <p>{username}</p>
+        <p className={styles['ba-user__name']}>{username}</p>
       </div>
     </Dropdown>
   );

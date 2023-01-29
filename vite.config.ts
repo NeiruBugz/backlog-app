@@ -4,7 +4,6 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import mkcert from 'vite-plugin-mkcert';
 
 const port = process.env.PLAYWRIGHT ? 4000 : 3000;
-console.log(process.env.PLAYWRIGHT);
 
 
 // https://vitejs.dev/config/
