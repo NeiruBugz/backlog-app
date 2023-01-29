@@ -1,4 +1,4 @@
-import { Card, MenuProps, Typography } from 'antd';
+import { Card, Typography } from 'antd';
 import type { Game as GameProps } from '@entities';
 import { DropdownWidget, PlatformTag } from '@widgets';
 import { updateGameFx } from '@entities';

@@ -27,7 +27,7 @@ exports[`GameCard > snapshots 1`] = `
           type="button"
         >
           <span>
-            Move to
+            games-list.gameCard.moveTo
           </span>
           <span
             aria-label="down"
