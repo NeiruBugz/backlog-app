@@ -1,0 +1,30 @@
+{
+  "home": {
+    "header": {
+      "navigation": {
+        "login": "Логин",
+        "games": "Игры"
+      },
+      "user": {
+        "dropdown": {
+          "options": {
+            "logout": "Выйти"
+          }
+        }
+      }
+    },
+    "search": {
+      "button": "Найти",
+      "inputPlaceholder": "Поиск игры"
+    }
+  },
+  "add-game": {},
+  "games-list": {
+    "motto": "Игр не найдено",
+    "mottoLink": "Давай добавим первую!"
+  },
+  "auth": {
+    "label": "Пользователь",
+    "submit": "Войти"
+  }
+}

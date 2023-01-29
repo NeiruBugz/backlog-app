@@ -1,0 +1,38 @@
+{
+  "home": {
+    "header": {
+      "navigation": {
+        "login": "Login",
+        "games": "Games"
+      },
+      "user": {
+        "dropdown": {
+          "options": {
+            "logout": "Logout"
+          }
+        }
+      }
+    },
+    "search": {
+      "button": "Search",
+      "inputPlaceholder": "Search game"
+    }
+  },
+  "add-game": {},
+  "games-list": {
+    "motto": "There are no games",
+    "mottoLink": "Let's add the first one!",
+    "filters": {
+      "label": "Filters",
+      "backlog": "Backlog",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "all": "All"
+    },
+    "addButton": "Add Game"
+  },
+  "auth": {
+    "label": "Username",
+    "submit": "Sign in"
+  }
+}

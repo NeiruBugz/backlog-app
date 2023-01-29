@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, MenuProps, Typography } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 import type { Filter, Game } from '@entities';
 import { List } from '@entities';
@@ -50,6 +51,7 @@ const ListsBody = ({
 const GamesList = (): JSX.Element => {
   const filter = useStore($filter);
   const games = useStore($games);
+  const { t } = useTranslation();
 
   const onFilter = useCallback((filterType: Filter) => {
     setFilter(filterType);
@@ -73,34 +75,34 @@ const GamesList = (): JSX.Element => {
         <nav className={styles['ba-gameslist-page__nav']}>
           <div className={styles['ba-gameslist-page__nav-filters']}>
             <Button disabled={filter === 'all'} onClick={() => onFilter('all')}>
-              All
+              {t('games-list.filters.all')}
             </Button>
             <Button disabled={filter === 'backlog'} onClick={() => onFilter('backlog')}>
-              Backlog
+              {t('games-list.filters.backlog')}
             </Button>
             <Button disabled={filter === 'in-progress'} onClick={() => onFilter('in-progress')}>
-              In progress
+              {t('games-list.filters.inProgress')}
             </Button>
             <Button disabled={filter === 'completed'} onClick={() => onFilter('completed')}>
-              Completed
+              {t('games-list.filters.completed')}
             </Button>
           </div>
           <div className={styles['ba-gameslist-page__nav-filters--mobile']}>
             <DropdownWidget
               items={dropdownFilters}
               onClick={handleDropdownItemClick}
-              label="Filters"
+              label={t('games-list.filters.label')}
             />
           </div>
           <Link to="/add-game">
-            <Button type="primary">Add Game</Button>
+            <Button type="primary">{t('games-list.addButton')}</Button>
           </Link>
         </nav>
       ) : null}
       {games.length === 0 ? (
         <div className={styles['ba-gameslist--no-games']}>
           <Typography.Title level={4}>
-            There are no games. <Link to="/add-game">Let&apos;s add the first one!</Link>
+            {t('games-list.motto')} <Link to="/add-game">{t('games-list.mottoLink')}</Link>
           </Typography.Title>
         </div>
       ) : (
