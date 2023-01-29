@@ -6,7 +6,8 @@
   },
   "validation": {
     "gameTitle": "Please input game title!",
-    "gamePlatform": "Please, choose a platform"
+    "gamePlatform": "Please, choose a platform",
+    "username": "Please input your username!"
   },
   "systemMessages": {
     "inputParameter": "Please, input search parameter",

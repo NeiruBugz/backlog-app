@@ -25,7 +25,7 @@ const Auth = (): JSX.Element => {
         <Form.Item
           label={t('auth.label')}
           name="username"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+          rules={[{ required: true, message: t('validation.username') || '' }]}
         >
           <Input />
         </Form.Item>
