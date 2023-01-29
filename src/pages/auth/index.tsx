@@ -12,9 +12,6 @@ const Auth = (): JSX.Element => {
     navigate('/list');
   };
 
-  console.log(t('auth.submit'));
-  
-
   return (
     <div>
       <Form

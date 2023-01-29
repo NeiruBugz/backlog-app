@@ -81,7 +81,6 @@ const AddGame = (): JSX.Element => {
     return STATUS_OPTIONS.map((item) => translateStatus(item, t));
   }, [t]);
 
-
   return (
     <>
       <Form

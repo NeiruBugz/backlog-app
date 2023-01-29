@@ -32,10 +32,16 @@ const STATUS_OPTIONS = [
   },
 ];
 
-const translateStatus = (statusItem: { value: string; label: string }, cb: (value: string) => string) => {
+const translateStatus = (
+  statusItem: { value: string; label: string },
+  cb: (value: string) => string
+) => {
   const withTranslation = { ...statusItem };
-  withTranslation.label = withTranslation.value === 'in-progress' ? cb('common.inProgress') : cb(`common.${withTranslation.value}`);
+  withTranslation.label =
+    withTranslation.value === 'in-progress'
+      ? cb('common.inProgress')
+      : cb(`common.${withTranslation.value}`);
   return withTranslation;
-}; 
+};
 
 export { PLATFORM_OPTIONS, STATUS_OPTIONS, translateStatus };

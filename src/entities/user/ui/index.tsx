@@ -10,7 +10,12 @@ const User = ({ username, avatarUrl, onLogout }: UserProps): JSX.Element => {
   const isDefault = Boolean(avatarUrl);
 
   return (
-    <Dropdown menu={{ items: [{ key: 1, label: t('home.header.user.dropdown.options.logout') }], onClick: onLogout }}>
+    <Dropdown
+      menu={{
+        items: [{ key: 1, label: t('home.header.user.dropdown.options.logout') }],
+        onClick: onLogout,
+      }}
+    >
       <div className={styles['ba-user']}>
         {!isDefault ? (
           <Avatar size={32} icon={<UserOutlined />} />

@@ -15,7 +15,7 @@ const LanguageItems = [
   {
     key: 'en',
     label: 'EN',
-  }
+  },
 ];
 
 const Header = (): JSX.Element => {
@@ -28,7 +28,6 @@ const Header = (): JSX.Element => {
       i18n.changeLanguage(lng);
     }
   }, [i18n]);
-
 
   const onLanguageSelect = ({ key }: { key: string }) => {
     i18n.changeLanguage(key);
@@ -49,7 +48,11 @@ const Header = (): JSX.Element => {
           <Link to="/auth">{t('home.header.navigation.login')}</Link>
         )}
       </nav>
-      <DropdownWidget label={t('home.header.language.label')} items={LanguageItems} onClick={onLanguageSelect} />
+      <DropdownWidget
+        label={t('home.header.language.label')}
+        items={LanguageItems}
+        onClick={onLanguageSelect}
+      />
       {user.authorized ? <User {...user} onLogout={logout} /> : null}
     </header>
   );
