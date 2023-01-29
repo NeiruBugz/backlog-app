@@ -3,11 +3,12 @@ import { useStore } from 'effector-react';
 import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { v4 } from 'uuid';
-import { PLATFORM_OPTIONS, STATUS_OPTIONS } from './constants';
+import { PLATFORM_OPTIONS, STATUS_OPTIONS, translateStatus } from './constants';
 import { $addPayload, addGame } from '@entities';
 import type { Game } from '@entities';
 import { HowLongToBeatEntry } from 'howlongtobeat';
 import { SuggestBox } from '@widgets';
+import { useTranslation } from 'react-i18next';
 
 const AddGame = (): JSX.Element => {
   const [initialValues, setInitialValues] = useState({
@@ -16,6 +17,7 @@ const AddGame = (): JSX.Element => {
   const [inputValue, setInputValue] = useState<string>('');
   const [query, setQuery] = useState<string>('');
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const payload = useStore($addPayload);
   const [form] = Form.useForm<Game>();
   const inputRef = useRef<InputRef>(null);
@@ -75,6 +77,11 @@ const AddGame = (): JSX.Element => {
     navigate('/list');
   };
 
+  const statuses = useMemo(() => {
+    return STATUS_OPTIONS.map((item) => translateStatus(item, t));
+  }, [t]);
+
+
   return (
     <>
       <Form
@@ -86,9 +93,9 @@ const AddGame = (): JSX.Element => {
         form={form}
       >
         <Form.Item
-          label="Game Title"
+          label={t('add-game.labels.title')}
           name="title"
-          rules={[{ required: true, message: 'Please input game title!' }]}
+          rules={[{ required: true, message: t('validation.gameTitle') || '' }]}
         >
           <Input onChange={onInputChange} value={inputValue} ref={inputRef} autoComplete="off" />
         </Form.Item>
@@ -102,14 +109,14 @@ const AddGame = (): JSX.Element => {
           />
         ) : null}
         <Form.Item
-          label="Platform"
+          label={t('add-game.labels.platform')}
           name="platform"
-          rules={[{ required: true, message: 'Please, choose a platform' }]}
+          rules={[{ required: true, message: t('validation.gamePlatform') || '' }]}
         >
           <Select options={PLATFORM_OPTIONS} />
         </Form.Item>
-        <Form.Item label="Status" name="status">
-          <Select options={STATUS_OPTIONS} value={'backlog'} />
+        <Form.Item label={t('add-game.labels.status')} name="status">
+          <Select options={statuses} value={'backlog'} />
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">

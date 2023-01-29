@@ -2,6 +2,14 @@ import { Filter, Game } from '@entities';
 
 const NINTENDO_PLATFORMS = ['wii', 'wii u', 'nes', 'snes'];
 
+const preparePlatform = (value: string): string => {
+  if (value.toLowerCase() === 'pc') {
+    return 'PC';
+  }
+
+  return capitalize(value);
+};
+
 const capitalize = (value: string): string => {
   return `${value[0].toUpperCase()}${value.substring(1)}`;
 };
@@ -37,4 +45,4 @@ const filterCallback = (item: Game, filter: Filter, condition?: boolean): boolea
 
 const filterCriteria: Filter[] = ['backlog', 'in-progress', 'completed'];
 
-export { capitalize, createPlatformClassName, filterCallback, filterCriteria };
+export { capitalize, createPlatformClassName, filterCallback, filterCriteria, preparePlatform };

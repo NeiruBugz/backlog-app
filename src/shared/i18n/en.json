@@ -1,4 +1,19 @@
 {
+  "common": {
+    "backlog": "Backlog",
+    "inProgress": "In Progress",
+    "completed": "Completed"
+  },
+  "validation": {
+    "gameTitle": "Please input game title!",
+    "gamePlatform": "Please, choose a platform"
+  },
+  "systemMessages": {
+    "inputParameter": "Please, input search parameter",
+    "searchingFor": "Searching for",
+    "searchErorr": "Error while searching",
+    "searchUnavailiable": "You should be logged in to use search"
+  },
   "home": {
     "header": {
       "navigation": {
@@ -11,6 +26,9 @@
             "logout": "Logout"
           }
         }
+      },
+      "language": {
+        "label": "Language"
       }
     },
     "search": {
@@ -18,7 +36,13 @@
       "inputPlaceholder": "Search game"
     }
   },
-  "add-game": {},
+  "add-game": {
+    "labels": {
+      "title": "Game title",
+      "platform": "Platform",
+      "status": "Status"
+    }
+  },
   "games-list": {
     "motto": "There are no games",
     "mottoLink": "Let's add the first one!",

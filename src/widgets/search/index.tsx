@@ -13,7 +13,7 @@ const SearchInput = ({ onSearch, isLoading, disabled }: SearchInputProps): JSX.E
   const { t } = useTranslation();
   const onMouseOver = () => {
     if (disabled) {
-      message.info('You should be logged in to use search', 1);
+      message.info(t('systemMessages.searchUnavailiable'), 1);
     }
   };
 

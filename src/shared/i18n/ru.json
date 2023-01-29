@@ -1,4 +1,19 @@
 {
+  "common": {
+    "backlog": "Бэклог",
+    "inProgress": "В процессе",
+    "completed": "Пройдено"
+  },
+  "validation": {
+    "gameTitle": "Пожалуйста, введите название игры",
+    "gamePlatform": "Пожалуйста, выберите платформу"
+  },
+  "systemMessages": {
+    "inputParameter": "Пожалуйста, введите поисковый запрос",
+    "searchingFor": "Ищем",
+    "searchErorr": "Произошла ошибка во время поиска",
+    "searchUnavailiable": "Нужно авторизоваться, чтобы воспользоваться поиском"
+  },
   "home": {
     "header": {
       "navigation": {
@@ -11,6 +26,9 @@
             "logout": "Выйти"
           }
         }
+      },
+      "language": {
+        "label": "Язык"
       }
     },
     "search": {
@@ -18,10 +36,24 @@
       "inputPlaceholder": "Поиск игры"
     }
   },
-  "add-game": {},
+  "add-game": {
+    "labels": {
+      "title": "Название игры",
+      "platform": "Платформа",
+      "status": "Статус"
+    }
+  },
   "games-list": {
     "motto": "Игр не найдено",
-    "mottoLink": "Давай добавим первую!"
+    "mottoLink": "Давай добавим первую!",
+    "filters": {
+      "label": "Фильтры",
+      "backlog": "Бэклог",
+      "inProgress": "В процессе",
+      "completed": "Пройдено",
+      "all": "Все"
+    },
+    "addButton": "Добавить игру"
   },
   "auth": {
     "label": "Пользователь",
