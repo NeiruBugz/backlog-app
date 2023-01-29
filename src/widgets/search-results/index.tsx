@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import { PlatformTag } from '../platform-tag';
 import { savePayload } from '@entities';
 import { useNavigate } from 'react-router';
+import VirtualList from 'rc-virtual-list';
 
 const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => {
   const { name, platforms, imageUrl, id, gameplayMain, gameplayMainExtra, gameplayCompletionist } =
@@ -72,17 +73,12 @@ const SearchResultsList = ({ results }: { results: HowLongToBeatEntry[] }) => (
     {results.length ? (
       <List
         itemLayout="vertical"
-        dataSource={results}
         header={<h3>Search Results</h3>}
-        pagination={
-          results.length <= 3
-            ? false
-            : { pageSize: 3, defaultCurrent: 1, total: results.length - 1 }
-        }
-        renderItem={(item: HowLongToBeatEntry) => {
-          return <SearchListItem item={item} />;
-        }}
-      />
+      >
+        <VirtualList data={results} itemKey="name" height={650}>
+          {(item) => <SearchListItem item={item} />}
+        </VirtualList>
+      </List>
     ) : null}
   </>
 );
