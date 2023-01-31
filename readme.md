@@ -1,5 +1,7 @@
 # Backlog App Client
 
+[![E2E tests](https://github.com/NeiruBugz/backlog-app/actions/workflows/playwright.yml/badge.svg)](https://github.com/NeiruBugz/backlog-app/actions/workflows/playwright.yml)
+
 I'm in love with games. Buying and not playing them, mostly.
 To fix my gaming behavior I need a gaming backlog tracker.
 So, this is my attempt to organize my gaming backlog as a pet-project
