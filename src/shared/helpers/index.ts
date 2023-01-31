@@ -2,6 +2,14 @@ import { Filter, Game } from '@entities';
 
 const NINTENDO_PLATFORMS = ['wii', 'wii u', 'nes', 'snes'];
 
+const preparePlatform = (value: string): string => {
+  if (value.toLowerCase() === 'pc') {
+    return 'PC';
+  }
+
+  return capitalize(value);
+};
+
 const capitalize = (value: string): string => {
   return `${value[0].toUpperCase()}${value.substring(1)}`;
 };
@@ -35,6 +43,38 @@ const filterCallback = (item: Game, filter: Filter, condition?: boolean): boolea
   return false;
 };
 
+const pluralTranslate = (count: number): string => {
+  let ending = '';
+  const stringifiedCount = count.toString();
+  const numberedLastChar = Number(stringifiedCount.charAt(stringifiedCount.length - 1));
+
+  const inBetween = (val: number, min: number, max: number): boolean => {
+    return val >= min && val <= max;
+  };
+
+  if (count === 1 || numberedLastChar == 1) {
+    ending = 'hours_one';
+  } else {
+    if (
+      (stringifiedCount.length >= 2 && inBetween(numberedLastChar, 2, 4)) ||
+      inBetween(count, 2, 4)
+    ) {
+      ending = 'hours_few';
+    } else if (numberedLastChar > 4 || count > 4) {
+      ending = 'hours_many';
+    }
+  }
+
+  return ending;
+};
+
 const filterCriteria: Filter[] = ['backlog', 'in-progress', 'completed'];
 
-export { capitalize, createPlatformClassName, filterCallback, filterCriteria };
+export {
+  capitalize,
+  createPlatformClassName,
+  filterCallback,
+  filterCriteria,
+  preparePlatform,
+  pluralTranslate,
+};

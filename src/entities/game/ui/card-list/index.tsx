@@ -1,6 +1,7 @@
 import { Divider } from 'antd';
 import { Game, GameCard } from '@entities';
 import { Typography } from 'antd';
+import { Translation } from 'react-i18next';
 
 enum FilterKeys {
   BACKLOG = 'Backlog',
@@ -16,7 +17,9 @@ type ListProps = {
 };
 
 const EmptyBacklogPropmt = () => (
-  <Typography.Title level={4}>Great! Your backlog is empty, keep it clean!</Typography.Title>
+  <Typography.Title level={4}>
+    <Translation>{(t) => t('games-list.emptyBacklog')}</Translation>
+  </Typography.Title>
 );
 
 const EmptyList = ({ text }: { text: string }) => {

@@ -1,0 +1,81 @@
+{
+  "common": {
+    "backlog": "Бэклог",
+    "inProgress": "В процессе",
+    "completed": "Пройдено",
+    "addGame": "Добавить игру"
+  },
+  "validation": {
+    "gameTitle": "Пожалуйста, введите название игры",
+    "gamePlatform": "Пожалуйста, выберите платформу",
+    "username": "Пожалуйста, введите имя пользователя"
+  },
+  "systemMessages": {
+    "inputParameter": "Пожалуйста, введите поисковый запрос",
+    "searchingFor": "Ищем",
+    "searchErorr": "Произошла ошибка во время поиска",
+    "searchUnavailiable": "Нужно авторизоваться, чтобы воспользоваться поиском"
+  },
+  "home": {
+    "header": {
+      "navigation": {
+        "login": "Логин",
+        "games": "Игры"
+      },
+      "user": {
+        "dropdown": {
+          "options": {
+            "logout": "Выйти"
+          }
+        }
+      },
+      "language": {
+        "label": "Язык"
+      }
+    },
+    "search": {
+      "button": "Найти",
+      "inputPlaceholder": "Поиск игры"
+    }
+  },
+  "add-game": {
+    "labels": {
+      "title": "Название игры",
+      "platform": "Платформа",
+      "status": "Статус"
+    }
+  },
+  "games-list": {
+    "motto": "Игр не найдено",
+    "mottoLink": "Давай добавим первую!",
+    "filters": {
+      "label": "Фильтры",
+      "backlog": "Бэклог",
+      "inProgress": "В процессе",
+      "completed": "Пройдено",
+      "all": "Все"
+    },
+    "addButton": "Добавить игру",
+    "emptyBacklog": "Отлично! Твой бэклог пуст, так держать!",
+    "gameCard": {
+      "moveTo": "Перенести"
+    },
+    "searchResults": {
+      "playableOn": "Доступно на",
+      "completion": {
+        "completionHours": "Время прохождения",
+        "main": "Основной сюжет",
+        "mainExtra": "Основной сюжет+дополнения",
+        "completionist": "Полное прохождение",
+        "hours": "часов",
+        "hours_one": "{{count}} час",
+        "hours_few": "{{count}} часа",
+        "hours_many": "{{count}} часов"
+      }
+    }
+  },
+  "auth": {
+    "label": "Пользователь",
+    "submit": "Войти"
+  }
+}

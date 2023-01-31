@@ -6,19 +6,21 @@ import { api } from '@shared';
 import styles from './styles.module.scss';
 import { useStore } from 'effector-react';
 import { $user } from '../../entities/user/models';
+import { useTranslation } from 'react-i18next';
 
 const Home = (): JSX.Element => {
   const [isLoading, setLoading] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<HowLongToBeatEntry[]>([]);
   const { authorized } = useStore($user);
+  const { t } = useTranslation();
 
   const onGameSearch = (value: string) => {
     if (!value.length) {
-      message.info('Please, input search parameter', 1);
+      message.info(t('systemMessages.inputParameter'), 1);
       setSearchResults([]);
       return;
     }
-    message.info(`Searching for: ${value}`, 1);
+    message.info(`${t('systemMessages.searchingFor')}: ${value}`, 1);
     setLoading(true);
 
     api
@@ -27,7 +29,7 @@ const Home = (): JSX.Element => {
         setSearchResults(result);
       })
       .catch(() => {
-        message.error(`Error while searching ${value}`, 1);
+        message.error(`${t('systemMessages.searchErorr')} ${value}`, 1);
       })
       .finally(() => {
         setLoading(false);

@@ -11,6 +11,10 @@ const PLATFORM_OPTIONS = [
     value: 'nintendo',
     label: 'Nintendo',
   },
+  {
+    value: 'pc',
+    label: 'PC',
+  },
 ];
 
 const STATUS_OPTIONS = [
@@ -28,4 +32,16 @@ const STATUS_OPTIONS = [
   },
 ];
 
-export { PLATFORM_OPTIONS, STATUS_OPTIONS };
+const translateStatus = (
+  statusItem: { value: string; label: string },
+  cb: (value: string) => string
+) => {
+  const withTranslation = { ...statusItem };
+  withTranslation.label =
+    withTranslation.value === 'in-progress'
+      ? cb('common.inProgress')
+      : cb(`common.${withTranslation.value}`);
+  return withTranslation;
+};
+
+export { PLATFORM_OPTIONS, STATUS_OPTIONS, translateStatus };

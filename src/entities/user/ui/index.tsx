@@ -3,12 +3,19 @@ import { UserOutlined } from '@ant-design/icons';
 import { UserProps } from '@shared';
 import user from 'shared/assets/user.png';
 import styles from './styles.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const User = ({ username, avatarUrl, onLogout }: UserProps): JSX.Element => {
+  const { t } = useTranslation();
   const isDefault = Boolean(avatarUrl);
 
   return (
-    <Dropdown menu={{ items: [{ key: 1, label: 'Logout' }], onClick: onLogout }}>
+    <Dropdown
+      menu={{
+        items: [{ key: 1, label: t('home.header.user.dropdown.options.logout') }],
+        onClick: onLogout,
+      }}
+    >
       <div className={styles['ba-user']}>
         {!isDefault ? (
           <Avatar size={32} icon={<UserOutlined />} />
@@ -19,7 +26,7 @@ const User = ({ username, avatarUrl, onLogout }: UserProps): JSX.Element => {
             className={styles['ba-user-avatar']}
           />
         )}
-        <p>{username}</p>
+        <p className={styles['ba-user__name']}>{username}</p>
       </div>
     </Dropdown>
   );

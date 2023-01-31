@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('App auth', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/', { waitUntil: 'domcontentloaded', timeout: 3000 });
+    await page.goto('/');
   });
 
   test('check user auth', async ({ page }) => {
@@ -17,7 +17,7 @@ test.describe('App auth', () => {
     });
     
     await test.step('submit login', async () => {
-      const button = page.locator('button', { hasText: 'Submit' });
+      const button = page.locator('text="Sign in"');
       await button.click();
     });
 

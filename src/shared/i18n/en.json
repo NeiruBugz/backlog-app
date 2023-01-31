@@ -1,0 +1,81 @@
+{
+  "common": {
+    "backlog": "Backlog",
+    "inProgress": "In Progress",
+    "completed": "Completed",
+    "addGame": "Add Game"
+  },
+  "validation": {
+    "gameTitle": "Please input game title!",
+    "gamePlatform": "Please, choose a platform",
+    "username": "Please input your username!"
+  },
+  "systemMessages": {
+    "inputParameter": "Please, input search parameter",
+    "searchingFor": "Searching for",
+    "searchErorr": "Error while searching",
+    "searchUnavailiable": "You should be logged in to use search"
+  },
+  "home": {
+    "header": {
+      "navigation": {
+        "login": "Login",
+        "games": "Games"
+      },
+      "user": {
+        "dropdown": {
+          "options": {
+            "logout": "Logout"
+          }
+        }
+      },
+      "language": {
+        "label": "Language"
+      }
+    },
+    "search": {
+      "button": "Search",
+      "inputPlaceholder": "Search game"
+    }
+  },
+  "add-game": {
+    "labels": {
+      "title": "Game title",
+      "platform": "Platform",
+      "status": "Status"
+    }
+  },
+  "games-list": {
+    "motto": "There are no games",
+    "mottoLink": "Let's add the first one!",
+    "filters": {
+      "label": "Filters",
+      "backlog": "Backlog",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "all": "All"
+    },
+    "addButton": "Add Game",
+    "emptyBacklog": "Great! Your backlog is empty, keep it clean!",
+    "gameCard": {
+      "moveTo": "Move to"
+    },
+    "searchResults": {
+      "playableOn": "Playable on",
+      "completion": {
+        "completionHours": "Completion hours",
+        "main": "Main",
+        "mainExtra": "Main+Extra",
+        "completionist": "Completionist",
+        "hours": "hours",
+        "hours_one": "{{count}} hours",
+        "hours_few": "{{count}} hours",
+        "hours_many": "{{count}} hours"
+      }
+    }
+  },
+  "auth": {
+    "label": "Username",
+    "submit": "Sign in"
+  }
+}

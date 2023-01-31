@@ -1,4 +1,5 @@
 import { Input, message } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 const { Search } = Input;
 
@@ -9,17 +10,18 @@ type SearchInputProps = {
 };
 
 const SearchInput = ({ onSearch, isLoading, disabled }: SearchInputProps): JSX.Element => {
+  const { t } = useTranslation();
   const onMouseOver = () => {
     if (disabled) {
-      message.info('You should be logged in to use search', 1);
+      message.info(t('systemMessages.searchUnavailiable'), 1);
     }
   };
 
   return (
     <Search
-      placeholder="Search game"
+      placeholder={t('home.search.inputPlaceholder') || ''}
       allowClear
-      enterButton="Search"
+      enterButton={t('home.search.button')}
       size="large"
       onSearch={onSearch}
       loading={isLoading}

@@ -1,18 +1,19 @@
 .ba-user {
-  width: 120px;
+  max-width: 120px;
   display: flex;
   justify-content: space-between;
   flex-direction: row-reverse;
   align-items: center;
   font-size: 14px;
   cursor: pointer;
-
-  p {
-    margin: 0;
-  }
 }
 
-.ba-user-avatar {
+.ba-user__name {
+  margin: 0 12px;
+}
+
+.ba-user__avatar {
+  margin-right: 4px;
   width: 32px;
   height: 32px;
 }
