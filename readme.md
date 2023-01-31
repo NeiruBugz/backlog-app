@@ -17,7 +17,11 @@ So, this is my attempt to organize my gaming backlog as a pet-project
 
 * React
 * TypeScript
+* effector
 * Scss modules
 * Antd Components
 * FSD-architecture
 * [howlongtobeat package](https://github.com/ckatzorke/howlongtobeat)
+* Playwright for e2e-tests
+* Vitest for unit-tests
+* react-i18next
