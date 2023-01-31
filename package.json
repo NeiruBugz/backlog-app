@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "unit": "vitest",
-    "e2e": "npx playwright test",
+    "e2e": "npx playwright test --config=playwright.config.ts",
     "lint": "eslint src",
     "cleanup": "eslint --fix src && prettier --write src"
   },

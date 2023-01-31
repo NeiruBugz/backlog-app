@@ -5,14 +5,13 @@ const auth = async (page: Page) => {
   await expect(page).toHaveURL('/auth');
   const input = page.locator('input');
   await input.fill('test user');
-  const button = page.locator('button', { hasText: 'Submit' });
+  const button = page.locator('text="Sign in"');
   await button.click();
 };
 
 test.describe('Add game', () => {
   test.beforeEach(async ({ page }) => {
-    await page.waitForLoadState('load', { timeout: 3000 });
-    await page.goto('/', { waitUntil: 'domcontentloaded', timeout: 3000 });
+    await page.goto('/');
     await auth(page);
   });
 
@@ -23,7 +22,7 @@ test.describe('Add game', () => {
     });
 
     await test.step('Locate game title input and fill it', async () => {
-      await page.locator('text="Game Title"').click();
+      await page.locator('text="Game title"').click();
       const focusedInput = page.locator('input:focus');
       await focusedInput.fill('Test game');
       expect(await focusedInput.inputValue()).toBe('Test game');
