@@ -1,7 +1,8 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/" },
-    { "source": "/list", "destination": "/list" },
-    { "source": "/auth", "destination": "/auth" }
-  ]
+		{
+			"source": "(.*)",
+			"destination": "/index.html"
+		}
+	]
 }
