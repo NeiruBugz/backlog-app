@@ -6,6 +6,7 @@ import { $user } from 'entities/user/models';
 import { Home } from './home';
 import { AddGame } from './add-game';
 import { GamesList } from './games-list';
+import { Auth } from './auth';
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const { authorized } = useStore($user);
@@ -25,6 +26,7 @@ const Routing = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/auth" element={<Auth />} />
           <Route
             path="/list"
             element={

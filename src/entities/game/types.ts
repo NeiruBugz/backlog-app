@@ -1,6 +1,7 @@
 export type GameStatus = 'backlog' | 'in-progress' | 'completed';
+export type Filter = GameStatus | 'all';
 
-export type Game = {
+export interface Game {
   id: string;
   title: string;
   platform: string;
@@ -8,12 +9,10 @@ export type Game = {
   img?: string;
 };
 
-export type UpdateGamePayload = {
+export interface UpdateGamePayload {
   id: string;
   field: {
     key: keyof Game;
     value: string;
   };
 };
-
-export type Filter = GameStatus | 'all';

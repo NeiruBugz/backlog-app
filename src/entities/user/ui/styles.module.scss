@@ -10,6 +10,14 @@
 
 .ba-user__name {
   margin: 0 12px;
+
+  @media (min-width: 320px) {
+    display: none;
+  }
+
+  @media (min-width: 460px) {
+    display: block;
+  }
 }
 
 .ba-user__avatar {

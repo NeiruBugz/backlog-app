@@ -9,6 +9,16 @@
   align-items: center;
 }
 
+.ba-header__navigation-link {
+  @media (min-width: 320px) {
+    font-size: 12px;
+  }
+
+  @media (min-width: 375px) {
+    font-size: 14px;
+  }
+}
+
 .ba-header__navigation {
   a:not(:last-of-type) {
     margin-right: 8px;
@@ -20,5 +30,5 @@
 }
 
 .ba-header__language-select {
-  margin-left: 12px;
+  margin: 0 12px;
 }

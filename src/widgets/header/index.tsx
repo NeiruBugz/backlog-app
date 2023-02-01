@@ -1,13 +1,11 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { User } from '@entities';
 import styles from './styles.module.scss';
 import { useStore } from 'effector-react';
-import { $user, authUserFx, logoutUserFx } from 'entities/user/models';
+import { $user, logoutUserFx } from 'entities/user/models';
 import { DropdownWidget } from 'widgets/dropdown';
-import { useEffect } from 'react';
-import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
-import jwtDecode from 'jwt-decode';
+import { useEffect, useMemo } from 'react';
 
 const LanguageItems = [
   {
@@ -23,7 +21,18 @@ const LanguageItems = [
 const Header = (): JSX.Element => {
   const { t, i18n } = useTranslation();
   const user = useStore($user);
-  const navigate = useNavigate();
+
+  const languageLabel = useMemo(() => {
+    if (i18n.language === 'ru') {
+      return '🇷🇺';
+    }
+
+    if (i18n.language === 'en') {
+      return '🇺🇸';
+    }
+
+    return '';
+  }, [i18n.language]);
 
   useEffect(() => {
     if ('navigator' in window) {
@@ -41,51 +50,35 @@ const Header = (): JSX.Element => {
     await logoutUserFx({ authorized: false, username: '', avatarUrl: '' });
   };
 
-  const onAuthSuccess = (resp: CredentialResponse) => {
-    if (resp.credential) {
-      const { name, picture } = jwtDecode(resp.credential) satisfies {
-        name: string;
-        picture: string;
-      };
-      localStorage.setItem('token', resp.credential);
-      authUserFx({ authorized: true, username: name, avatarUrl: picture });
-      navigate('/list');
-    }
-  };
-
   return (
     <header className={styles['ba-header']}>
       <nav className={styles['ba-header__navigation']}>
-        <Link to="/">Backlog App</Link>
+        <Link to="/" className={styles['ba-header__navigation-link']}>
+          Backlog App
+        </Link>
         {'  '}
         {user.authorized ? (
-          <Link to="/list">{t('home.header.navigation.games')}</Link>
+          <Link to="/list" className={styles['ba-header__navigation-link']}>
+            {t('home.header.navigation.games')}
+          </Link>
         ) : (
-          <Link to="/auth">{t('home.header.navigation.login')}</Link>
+          <Link to="/auth" className={styles['ba-header__navigation-link']}>
+            {t('home.header.navigation.login')}
+          </Link>
         )}
       </nav>
       <div className={styles['ba-header__controls']}>
         {user.authorized ? (
           <>
             <User {...user} onLogout={logout} />
-            <DropdownWidget
-              label={t('home.header.language.label')}
-              items={LanguageItems}
-              onClick={onLanguageSelect}
-              classname={styles['ba-header__language-select']}
-            />
           </>
-        ) : (
-          <>
-            <DropdownWidget
-              label={t('home.header.language.label')}
-              items={LanguageItems}
-              onClick={onLanguageSelect}
-              classname={styles['ba-header__language-select']}
-            />
-            <GoogleLogin type="icon" onSuccess={onAuthSuccess} locale={i18n.language} />
-          </>
-        )}
+        ) : null}
+        <DropdownWidget
+          label={languageLabel}
+          items={LanguageItems}
+          onClick={onLanguageSelect}
+          classname={styles['ba-header__language-select']}
+        />
       </div>
     </header>
   );

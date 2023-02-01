@@ -1,4 +1,4 @@
-export type User = {
+export interface User {
   authorized: boolean;
   username: string;
   avatarUrl?: string;
