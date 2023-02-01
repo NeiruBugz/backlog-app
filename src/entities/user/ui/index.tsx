@@ -23,7 +23,7 @@ const User = ({ username, avatarUrl, onLogout }: UserProps): JSX.Element => {
           <img
             src={avatarUrl ? avatarUrl : user}
             alt={`${username}'s avatar`}
-            className={styles['ba-user-avatar']}
+            className={styles['ba-user__avatar']}
           />
         )}
         <p className={styles['ba-user__name']}>{username}</p>
