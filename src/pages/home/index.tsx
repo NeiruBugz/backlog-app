@@ -1,18 +1,30 @@
 import { message } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HowLongToBeatEntry } from 'howlongtobeat';
 import { SearchResultsList, SearchInput } from '@widgets';
 import { api } from '@shared';
 import styles from './styles.module.scss';
 import { useStore } from 'effector-react';
-import { $user } from '../../entities/user/models';
+import { $user, authUserFx } from '../../entities/user/models';
 import { useTranslation } from 'react-i18next';
+import jwtDecode from 'jwt-decode';
+import { useNavigate } from 'react-router';
 
 const Home = (): JSX.Element => {
   const [isLoading, setLoading] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<HowLongToBeatEntry[]>([]);
   const { authorized } = useStore($user);
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const cred = localStorage.getItem('token');
+    if (cred) {
+      const user = jwtDecode(cred) satisfies { name: string; picture: string };
+      authUserFx({ authorized: true, username: user.name, avatarUrl: user.picture });
+      navigate('/list');
+    }
+  }, [navigate]);
 
   const onGameSearch = (value: string) => {
     if (!value.length) {

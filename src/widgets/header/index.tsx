@@ -1,11 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { User } from '@entities';
 import styles from './styles.module.scss';
 import { useStore } from 'effector-react';
-import { $user, logoutUserFx } from 'entities/user/models';
+import { $user, authUserFx, logoutUserFx } from 'entities/user/models';
 import { DropdownWidget } from 'widgets/dropdown';
 import { useEffect } from 'react';
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
+import jwtDecode from 'jwt-decode';
 
 const LanguageItems = [
   {
@@ -21,6 +23,7 @@ const LanguageItems = [
 const Header = (): JSX.Element => {
   const { t, i18n } = useTranslation();
   const user = useStore($user);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if ('navigator' in window) {
@@ -34,7 +37,20 @@ const Header = (): JSX.Element => {
   };
 
   const logout = async () => {
-    await logoutUserFx({ authorized: false, username: '' });
+    localStorage.removeItem('token');
+    await logoutUserFx({ authorized: false, username: '', avatarUrl: '' });
+  };
+
+  const onAuthSuccess = (resp: CredentialResponse) => {
+    if (resp.credential) {
+      const { name, picture } = jwtDecode(resp.credential) satisfies {
+        name: string;
+        picture: string;
+      };
+      localStorage.setItem('token', resp.credential);
+      authUserFx({ authorized: true, username: name, avatarUrl: picture });
+      navigate('/list');
+    }
   };
 
   return (
@@ -49,13 +65,27 @@ const Header = (): JSX.Element => {
         )}
       </nav>
       <div className={styles['ba-header__controls']}>
-        {user.authorized ? <User {...user} onLogout={logout} /> : null}
-        <DropdownWidget
-          label={t('home.header.language.label')}
-          items={LanguageItems}
-          onClick={onLanguageSelect}
-          classname={styles['ba-header__language-select']}
-        />
+        {user.authorized ? (
+          <>
+            <User {...user} onLogout={logout} />
+            <DropdownWidget
+              label={t('home.header.language.label')}
+              items={LanguageItems}
+              onClick={onLanguageSelect}
+              classname={styles['ba-header__language-select']}
+            />
+          </>
+        ) : (
+          <>
+            <DropdownWidget
+              label={t('home.header.language.label')}
+              items={LanguageItems}
+              onClick={onLanguageSelect}
+              classname={styles['ba-header__language-select']}
+            />
+            <GoogleLogin type="icon" onSuccess={onAuthSuccess} locale={i18n.language} />
+          </>
+        )}
       </div>
     </header>
   );
