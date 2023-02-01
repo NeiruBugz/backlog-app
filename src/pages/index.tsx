@@ -6,8 +6,6 @@ import { $user } from 'entities/user/models';
 import { Home } from './home';
 import { AddGame } from './add-game';
 import { GamesList } from './games-list';
-import { useEffect } from 'react';
-import { message } from 'antd';
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const { authorized } = useStore($user);
@@ -21,14 +19,6 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
 
 const Routing = () => {
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_KEY;
-  console.log(import.meta.env);
-  console.log(clientId);
-  
-  useEffect(() => {
-    if (!clientId) {
-      message.error('Google error', 1);
-    }
-  }, [clientId]);
   return (
     <GoogleOAuthProvider clientId={clientId.trim()}>
       <>

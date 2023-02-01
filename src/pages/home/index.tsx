@@ -22,7 +22,6 @@ const Home = (): JSX.Element => {
     if (cred) {
       const user = jwtDecode(cred) satisfies { name: string; picture: string };
       authUserFx({ authorized: true, username: user.name, avatarUrl: user.picture });
-      navigate('/list');
     }
   }, [navigate]);
 
