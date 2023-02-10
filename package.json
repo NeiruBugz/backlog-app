@@ -12,6 +12,9 @@
     "lint": "eslint src",
     "cleanup": "eslint --fix src && prettier --write src"
   },
+  "commitlint": {
+    "extends": ["@commitlint/config-conventional"]
+  },
   "dependencies": {
     "@ant-design/icons": "5.0.0",
     "antd": "5.1.4",
@@ -29,6 +32,8 @@
     "uuid": "9.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
     "@playwright/test": "^1.29.2",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
@@ -48,6 +53,7 @@
     "eslint-plugin-effector": "0.10.3",
     "eslint-plugin-react": "7.32.0",
     "eslint-plugin-react-hooks": "4.6.0",
+    "husky": "^8.0.3",
     "jsdom": "^21.0.0",
     "prettier": "2.8.2",
     "sass": "1.57.1",

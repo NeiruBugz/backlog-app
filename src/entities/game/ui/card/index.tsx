@@ -1,10 +1,9 @@
-import { Card, Typography } from 'antd';
-import type { Game as GameProps } from '@entities';
-import { DropdownWidget, PlatformTag } from '@widgets';
-import { updateGameFx } from '@entities';
-import styles from './styles.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
+import type { Game as GameProps } from '@entities';
+import { PlatformTag } from '@widgets';
+import { updateGameFx } from '@entities';
+import styles from './styles.module.scss';
 
 const dropdownFilters = [
   {
@@ -21,7 +20,7 @@ const dropdownFilters = [
   },
 ];
 
-const GameCard = ({ id, title, platform }: GameProps): JSX.Element => {
+const GameCard = ({ id, title, platform, img }: GameProps): JSX.Element => {
   const { t } = useTranslation();
 
   const onGameStatusChange = (payload: string) => {
@@ -40,17 +39,13 @@ const GameCard = ({ id, title, platform }: GameProps): JSX.Element => {
   }, [t]);
 
   return (
-    <Card className={styles['ba-card']} bodyStyle={{ padding: '18px 12px' }}>
-      <Typography.Title level={5}>{title}</Typography.Title>
-      <div className={styles['ba-card__info']}>
-        <PlatformTag platform={platform} />
-        <DropdownWidget
-          items={translatedFilters}
-          label={t('games-list.gameCard.moveTo')}
-          onClick={({ key }) => onGameStatusChange(key)}
-        />
+    <div className={styles['ba-card-alt']}>
+      <img src={img} className={styles['ba-card-alt__image']} />
+      <div className={styles['ba-card-alt__info']}>
+        <PlatformTag platform={platform}/>
+        <h3 className={styles['ba-card-alt__title']}>{title}</h3>
       </div>
-    </Card>
+    </div>
   );
 };
 

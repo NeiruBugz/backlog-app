@@ -6,6 +6,7 @@ export type Game = {
   platform: string;
   status: string;
   img?: string;
+  createdAt?: number;
 };
 
 export type UpdateGamePayload = {

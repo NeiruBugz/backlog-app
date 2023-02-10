@@ -38,7 +38,7 @@ const SuggestBox = ({
           bordered
           style={{ width, left: xPos, top: yPos }}
         >
-          <VirtualList data={list} itemKey="name" itemHeight={36} height={36 * 5}>
+          <VirtualList data={list} itemKey={(item) => `${item.name}--${item.id}`} itemHeight={36} height={36 * 5}>
             {(item) => (
               <List.Item onClick={() => onClick(item)} style={{ cursor: 'pointer' }}>
                 <List.Item.Meta avatar={<Avatar src={item.imageUrl} />} title={item.name} />
