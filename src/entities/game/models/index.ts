@@ -36,13 +36,4 @@ $games
 
 $filter.on(setFilter, (state, payload) => (state = payload));
 
-export {
-  $games,
-  addGame,
-  $filter,
-  setFilter,
-  updateGameFx,
-  $addPayload,
-  resetPayload,
-  savePayload,
-};
+export { $games, $filter, setFilter, updateGameFx, $addPayload, resetPayload, savePayload };

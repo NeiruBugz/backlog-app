@@ -19,6 +19,19 @@ const api = {
         });
     });
   },
+  details: function (title: string): Promise<HowLongToBeatEntry> {
+    return new Promise((resolve, reject) => {
+      const headers = new Headers();
+      headers.append('Access-Control-Allow-Origin', '*');
+      fetch(`${API_URL}/search/details/${title}`, { headers })
+        .then((response) => {
+          resolve(response.json());
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  },
   getGames: function () {
     return new Promise((resolve, reject) => {
       fetch(`${API_URL}/games`).then((response) => {

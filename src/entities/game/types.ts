@@ -7,12 +7,16 @@ export type Game = {
   status: string;
   img?: string;
   createdAt?: number;
+  review?: string;
+  rating?: unknown;
 };
+
+export type EditableGameKeys = 'platform' | 'status' | 'review' | 'rating';
 
 export type UpdateGamePayload = {
   id: string;
   field: {
-    key: keyof Game;
+    key: EditableGameKeys;
     value: string;
   };
 };

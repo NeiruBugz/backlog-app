@@ -70,6 +70,14 @@ const pluralTranslate = (count: number): string => {
 
 const filterCriteria: Filter[] = ['backlog', 'in-progress', 'completed'];
 
+const getLanguageLabel = (language: string) => {
+  if (language.includes('ru')) {
+    return '🇷🇺';
+  } else {
+    return '🇺🇸';
+  }
+};
+
 export {
   capitalize,
   createPlatformClassName,
@@ -77,4 +85,5 @@ export {
   filterCriteria,
   preparePlatform,
   pluralTranslate,
+  getLanguageLabel,
 };

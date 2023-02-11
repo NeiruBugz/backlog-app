@@ -2,11 +2,11 @@ import { Button, List, Tag, Typography } from 'antd';
 import { HowLongToBeatEntry } from 'howlongtobeat';
 import styles from './styles.module.scss';
 import { PlatformTag } from '../platform-tag';
-import { savePayload } from '@entities';
 import { useNavigate } from 'react-router';
 import VirtualList from 'rc-virtual-list';
 import { useTranslation } from 'react-i18next';
 import { useCallback } from 'react';
+import { changePayload } from '@entities';
 
 const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => {
   const { name, platforms, imageUrl, id, gameplayMain, gameplayMainExtra, gameplayCompletionist } =
@@ -15,7 +15,7 @@ const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => 
   const navigate = useNavigate();
 
   const onAddClick = () => {
-    savePayload(item);
+    changePayload(item);
     navigate('/add-game');
   };
 

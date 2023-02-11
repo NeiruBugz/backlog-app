@@ -1,51 +1,51 @@
-import { useTranslation } from 'react-i18next';
-import { useMemo } from 'react';
-import type { Game as GameProps } from '@entities';
+import { useState } from 'react';
+import type { Game as GameProps, GameStatus } from '@entities';
 import { PlatformTag } from '@widgets';
-import { updateGameFx } from '@entities';
 import styles from './styles.module.scss';
+import { message, Modal } from 'antd';
+import { api } from '@shared';
+import { HowLongToBeatEntry } from 'howlongtobeat';
+import { InfoModal } from '../info-modal';
 
-const dropdownFilters = [
-  {
-    label: 'Backlog',
-    key: 'backlog',
-  },
-  {
-    label: 'In Progress',
-    key: 'in-progress',
-  },
-  {
-    label: 'Completed',
-    key: 'completed',
-  },
-];
+const GameCard = ({ title, platform, img, status }: GameProps): JSX.Element => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [gameInfo, setGameInfo] = useState<HowLongToBeatEntry | null>(null);
 
-const GameCard = ({ id, title, platform, img }: GameProps): JSX.Element => {
-  const { t } = useTranslation();
-
-  const onGameStatusChange = (payload: string) => {
-    updateGameFx({ id: id, field: { key: 'status', value: payload } });
+  const showModal = () => {
+    api
+      .details(title)
+      .then((result) => {
+        setGameInfo(result);
+        setIsModalOpen(true);
+      })
+      .catch((err) => {
+        message.error(err);
+      });
   };
 
-  const translatedFilters = useMemo(() => {
-    return dropdownFilters.map((filter) => {
-      const trFilter = { ...filter };
-      if ('label' in trFilter && 'key' in trFilter) {
-        trFilter.label =
-          trFilter.key === 'in-progress' ? t('common.inProgress') : t(`common.${trFilter.key}`);
-      }
-      return trFilter;
-    });
-  }, [t]);
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   return (
-    <div className={styles['ba-card-alt']}>
-      <img src={img} className={styles['ba-card-alt__image']} />
-      <div className={styles['ba-card-alt__info']}>
-        <PlatformTag platform={platform}/>
-        <h3 className={styles['ba-card-alt__title']}>{title}</h3>
+    <>
+      <div className={styles['ba-card-alt']} onClick={showModal}>
+        <img src={img} className={styles['ba-card-alt__image']} />
+        <div className={styles['ba-card-alt__info']}>
+          <PlatformTag platform={platform} />
+          <h3 className={styles['ba-card-alt__title']}>{title}</h3>
+        </div>
       </div>
-    </div>
+      {gameInfo !== null ? (
+        <Modal title={title} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+          <InfoModal gameInfo={gameInfo} status={status as GameStatus} />
+        </Modal>
+      ) : null}
+    </>
   );
 };
 

@@ -6,15 +6,16 @@ import { useStore } from 'effector-react';
 import { $user, logoutUserFx } from 'entities/user/models';
 import { DropdownWidget } from 'widgets/dropdown';
 import { useEffect } from 'react';
+import { getLanguageLabel } from '@shared';
 
 const LanguageItems = [
   {
     key: 'ru',
-    label: 'RU',
+    label: '🇷🇺',
   },
   {
     key: 'en',
-    label: 'EN',
+    label: '🇺🇸',
   },
 ];
 
@@ -51,7 +52,7 @@ const Header = (): JSX.Element => {
       <div className={styles['ba-header__controls']}>
         {user.authorized ? <User {...user} onLogout={logout} /> : null}
         <DropdownWidget
-          label={t('home.header.language.label')}
+          label={getLanguageLabel(i18n.language)}
           items={LanguageItems}
           onClick={onLanguageSelect}
           classname={styles['ba-header__language-select']}

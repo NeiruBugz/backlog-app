@@ -1,27 +1,30 @@
 import { ChangeEvent, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Input, Button, Form, Select, InputRef } from 'antd';
-import { useStore } from 'effector-react';
 import { useNavigate } from 'react-router';
 import { HowLongToBeatEntry } from 'howlongtobeat';
 import { useTranslation } from 'react-i18next';
 import { v4 } from 'uuid';
 
-import { $addPayload, addGame } from '@entities';
+import { addGame } from '@entities';
 import { SuggestBox } from '@widgets';
 
 import { PLATFORM_OPTIONS, STATUS_OPTIONS, translateStatus } from './constants';
 import type { Game } from '@entities';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from 'app/providers/with-store';
 
 const AddGame = (): JSX.Element => {
   const [initialValues, setInitialValues] = useState({
     status: 'backlog',
   });
   const [inputValue, setInputValue] = useState<string>('');
-  const [gameImage, setGameImage] = useState<string>('');
   const [query, setQuery] = useState<string>('');
+  const [entryValues, setEntryValues] = useState({
+    image: '',
+    id: '',
+  });
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const payload = useStore($addPayload);
   const [form] = Form.useForm<Game>();
   const inputRef = useRef<InputRef>(null);
   const [suggestBoxPosition, setSuggestBoxPosition] = useState({
@@ -29,17 +32,19 @@ const AddGame = (): JSX.Element => {
     left: 0,
     top: 0,
   });
+  const payload = useSelector((state: RootState) => state.searchReducer);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (payload) {
+    if (payload && 'name' in payload) {
       setInitialValues((prevState) => {
         return {
-          title: payload.name,
+          title: payload,
           ...prevState,
         };
       });
-      setInputValue(payload.name);
-      form.setFieldsValue({ title: payload.name });
+      setInputValue(payload);
+      form.setFieldsValue({ title: payload });
     }
 
     return () => {
@@ -63,15 +68,19 @@ const AddGame = (): JSX.Element => {
     setInputValue(target.value);
   };
 
-  const onSearchEntryClick = ({ name, imageUrl }: HowLongToBeatEntry) => {
+  const onSearchEntryClick = ({ name, imageUrl, id }: HowLongToBeatEntry) => {
     setInputValue(name);
-    setGameImage(imageUrl);
+    setEntryValues({
+      image: imageUrl,
+      id,
+    });
     form.setFieldsValue({ title: name });
     setQuery('');
   };
 
   const onFinish = (values: Game) => {
-    addGame({ ...values, id: v4(), img: gameImage, createdAt: Date.now() });
+    const { id, image } = entryValues;
+    dispatch(addGame({ ...values, id: id || v4(), img: image, createdAt: Date.now() }));
     navigate('/list');
   };
 
