@@ -4,14 +4,14 @@ import { HowLongToBeatEntry } from 'howlongtobeat';
 import { SearchResultsList, SearchInput } from '@widgets';
 import { api } from '@shared';
 import styles from './styles.module.scss';
-import { useStore } from 'effector-react';
-import { $user } from '../../entities/user/models';
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from 'app/providers/with-store';
+import { getAuthState } from '@entities';
 
 const Home = (): JSX.Element => {
   const [isLoading, setLoading] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<HowLongToBeatEntry[]>([]);
-  const { authorized } = useStore($user);
+  const authorized = useAppSelector(getAuthState);
   const { t } = useTranslation();
 
   const onGameSearch = (value: string) => {

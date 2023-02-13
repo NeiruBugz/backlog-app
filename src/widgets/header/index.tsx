@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { User } from '@entities';
+import { getAuthState, getUserInfo, User, logout } from '@entities';
 import styles from './styles.module.scss';
-import { useStore } from 'effector-react';
-import { $user, logoutUserFx } from 'entities/user/models';
 import { DropdownWidget } from 'widgets/dropdown';
 import { useEffect } from 'react';
 import { getLanguageLabel } from '@shared';
+import { useAppDispatch, useAppSelector } from 'app/providers/with-store';
 
 const LanguageItems = [
   {
@@ -21,7 +20,9 @@ const LanguageItems = [
 
 const Header = (): JSX.Element => {
   const { t, i18n } = useTranslation();
-  const user = useStore($user);
+  const dispatch = useAppDispatch();
+  const authorized = useAppSelector(getAuthState);
+  const user = useAppSelector(getUserInfo);
 
   useEffect(() => {
     if ('navigator' in window) {
@@ -34,23 +35,24 @@ const Header = (): JSX.Element => {
     i18n.changeLanguage(key);
   };
 
-  const logout = async () => {
-    await logoutUserFx({ authorized: false, username: '' });
+  const onLogout = async () => {
+    dispatch(logout());
   };
+  
 
   return (
     <header className={styles['ba-header']}>
       <nav className={styles['ba-header__navigation']}>
         <Link to="/">Backlog App</Link>
         {'  '}
-        {user.authorized ? (
+        {authorized ? (
           <Link to="/list">{t('home.header.navigation.games')}</Link>
         ) : (
           <Link to="/auth">{t('home.header.navigation.login')}</Link>
         )}
       </nav>
       <div className={styles['ba-header__controls']}>
-        {user.authorized ? <User {...user} onLogout={logout} /> : null}
+        {authorized ? <User {...user} onLogout={onLogout} /> : null}
         <DropdownWidget
           label={getLanguageLabel(i18n.language)}
           items={LanguageItems}

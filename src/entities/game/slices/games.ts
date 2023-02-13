@@ -12,7 +12,6 @@ const gameSlice = createSlice({
   reducers: {
     addGame: (state, action: PayloadAction<Game>) => {
       state.push(action.payload);
-      console.log(state, action);
     },
     updateGame: (state, action: PayloadAction<UpdateGamePayload>) => {
       const { id, field } = action.payload;

@@ -1,5 +1,5 @@
 import { Button, List, Tag, Typography } from 'antd';
-import { HowLongToBeatEntry } from 'howlongtobeat';
+import type { HowLongToBeatEntry } from 'howlongtobeat';
 import styles from './styles.module.scss';
 import { PlatformTag } from '../platform-tag';
 import { useNavigate } from 'react-router';

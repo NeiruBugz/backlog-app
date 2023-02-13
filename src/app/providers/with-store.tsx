@@ -1,11 +1,13 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { Provider, TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
-import { gameReducer, searchReducer } from '@entities';
+import { gameReducer, searchReducer, userReducer, filterReducer } from '@entities';
 
 const rootReducer = combineReducers({
   gameReducer,
   searchReducer,
+  userReducer,
+  filterReducer,
 });
 
 export const store = configureStore({

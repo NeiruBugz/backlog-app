@@ -1,14 +1,17 @@
 import { Button, Form, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { authUserFx } from 'entities/user/models';
+import { login } from '@entities';
 import { User } from 'entities/user/types';
 import { useNavigate } from 'react-router';
+import { useAppDispatch } from 'app/providers/with-store';
 
 const Auth = (): JSX.Element => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
+
   const onAuthClick = (values: Pick<User, 'username'>) => {
-    authUserFx({ authorized: true, username: values.username });
+    dispatch(login({ authorized: true, username: values.username }));
     navigate('/list');
   };
 

@@ -8,10 +8,9 @@ import { List } from '@entities';
 import { filterCallback, filterCriteria, capitalize } from '@shared';
 import styles from './styles.module.scss';
 import { DropdownWidget } from '../../widgets/dropdown';
-import { useStore } from 'effector-react';
-import { $filter, setFilter } from 'entities/game/models';
+import { setStatusFilter } from '@entities';
 import { dropdownFilters } from './constants';
-import { useAppSelector } from 'app/providers/with-store';
+import { useAppDispatch, useAppSelector } from 'app/providers/with-store';
 
 const ListsBody = ({
   games,
@@ -50,13 +49,14 @@ const ListsBody = ({
 };
 
 const GamesList = (): JSX.Element => {
-  const filter = useStore($filter);
+  const filter = useAppSelector((state) => state.filterReducer.status);
   const gamesList = useAppSelector(games);
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
-  const onFilter = useCallback((filterType: Filter) => {
-    setFilter(filterType);
-  }, []);
+  const onFilter = useCallback((filterType: string) => {
+    dispatch(setStatusFilter(filterType));
+  }, [dispatch]);
 
   const filteredGames = useMemo(() => {
     if (filter === 'all') {

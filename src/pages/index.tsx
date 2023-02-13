@@ -1,14 +1,14 @@
 import { Navigate, Route, Routes } from 'react-router';
 import { Header } from '@widgets';
-import { useStore } from 'effector-react';
-import { $user } from 'entities/user/models';
 import { Home } from './home';
 import { Auth } from './auth';
 import { AddGame } from './add-game';
 import { GamesList } from './games-list';
+import { useAppSelector } from 'app/providers/with-store';
+import { getAuthState } from '@entities';
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  const { authorized } = useStore($user);
+  const authorized = useAppSelector(getAuthState);
 
   if (!authorized) {
     return <Navigate to="/" replace />;
