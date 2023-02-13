@@ -1,11 +1,11 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getAuthState, getUserInfo, User, logout } from '@entities';
+import { DropdownWidget } from '@widgets';
+import { useAppDispatch, useAppSelector, getLanguageLabel } from '@shared';
+
 import styles from './styles.module.scss';
-import { DropdownWidget } from 'widgets/dropdown';
-import { useEffect } from 'react';
-import { getLanguageLabel } from '@shared';
-import { useAppDispatch, useAppSelector } from 'app/providers/with-store';
 
 const LanguageItems = [
   {

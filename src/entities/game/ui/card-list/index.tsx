@@ -1,7 +1,8 @@
-import { Divider } from 'antd';
-import { Game, GameCard } from '@entities';
-import { Typography } from 'antd';
+import { Divider, Typography } from 'antd';
 import { Translation } from 'react-i18next';
+import { GameCard } from '@entities';
+
+import type { Game } from '@entities';
 
 import { colors } from 'app/styles/jssVars';
 
@@ -46,13 +47,11 @@ const List = ({ listItems, dividerText, listClass, listItemClass }: ListProps): 
     <>
       {dividerText ? <Divider style={{ color: colors.baWhite }}>{dividerText}</Divider> : null}
       <ul className={listClass}>
-        {listItems.map((game) => {
-          return (
-            <li className={listItemClass} key={game.id}>
-              <GameCard {...game} />
-            </li>
-          );
-        })}
+        {listItems.map((game) => (
+          <li className={listItemClass} key={game.id}>
+            <GameCard {...game} />
+          </li>
+        ))}
       </ul>
     </>
   );

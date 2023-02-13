@@ -1,5 +1,5 @@
-import { HowLongToBeatEntry } from 'howlongtobeat';
-import { Game } from '@entities';
+import type { HowLongToBeatEntry } from 'howlongtobeat';
+import type { Game } from '@entities';
 
 const API_URL = import.meta.env.DEV
   ? import.meta.env.VITE_DEV_API

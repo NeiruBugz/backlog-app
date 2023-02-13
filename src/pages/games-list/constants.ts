@@ -1,4 +1,4 @@
-import { MenuProps } from 'antd';
+import type { MenuProps } from 'antd';
 
 const dropdownFilters: MenuProps['items'] = [
   {

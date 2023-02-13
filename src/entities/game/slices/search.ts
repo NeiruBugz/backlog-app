@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { HowLongToBeatEntry } from 'howlongtobeat';
+
+import type { HowLongToBeatEntry } from 'howlongtobeat';
 
 type PayloadFromSearchState = Pick<HowLongToBeatEntry, 'name'> | '';
 

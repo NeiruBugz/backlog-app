@@ -1,16 +1,18 @@
 import { useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, MenuProps, Typography } from 'antd';
+import { Button, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-import { Filter, Game, games } from '@entities';
-import { List } from '@entities';
-import { filterCallback, filterCriteria, capitalize } from '@shared';
-import styles from './styles.module.scss';
-import { DropdownWidget } from '../../widgets/dropdown';
-import { setStatusFilter } from '@entities';
+import { games, List, setStatusFilter } from '@entities';
+import { filterCallback, filterCriteria, capitalize, useAppDispatch, useAppSelector } from '@shared';
+import { DropdownWidget } from '@widgets';
+
+import type { MenuProps } from 'antd';
+import type { Filter, Game } from '@entities';
+
 import { dropdownFilters } from './constants';
-import { useAppDispatch, useAppSelector } from 'app/providers/with-store';
+
+import styles from './styles.module.scss';
 
 const ListsBody = ({
   games,
@@ -20,33 +22,29 @@ const ListsBody = ({
   games: Game[];
   filter: string;
   filteredGames: Game[];
-}) => {
-  return (
-    <>
-      {filter === 'all' ? (
-        <>
-          {filterCriteria.map((criteria) => {
-            return (
-              <List
-                listItems={games.filter((game) => filterCallback(game, criteria, filter === 'all'))}
-                dividerText={capitalize(criteria)}
-                key={criteria}
-                listClass={styles['ba-gameslist']}
-                listItemClass={styles['ba-gameslist__item']}
-              />
-            );
-          })}
-        </>
-      ) : (
-        <List
-          listItems={filteredGames}
-          listClass={styles['ba-gameslist']}
-          listItemClass={styles['ba-gameslist__item']}
-        />
-      )}
-    </>
-  );
-};
+}) => (
+  <>
+    {filter === 'all' ? (
+      <>
+        {filterCriteria.map((criteria) => (
+          <List
+            listItems={games.filter((game) => filterCallback(game, criteria, filter === 'all'))}
+            dividerText={capitalize(criteria)}
+            key={criteria}
+            listClass={styles['ba-gameslist']}
+            listItemClass={styles['ba-gameslist__item']}
+          />
+        ))}
+      </>
+    ) : (
+      <List
+        listItems={filteredGames}
+        listClass={styles['ba-gameslist']}
+        listItemClass={styles['ba-gameslist__item']}
+      />
+    )}
+  </>
+);
 
 const GamesList = (): JSX.Element => {
   const filter = useAppSelector((state) => state.filterReducer.status);

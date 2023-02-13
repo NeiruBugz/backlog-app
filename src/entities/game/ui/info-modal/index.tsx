@@ -1,12 +1,11 @@
 import { Typography, Tag, Input, Rate, Button } from 'antd';
-import { HowLongToBeatEntry } from 'howlongtobeat';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { PlatformTag } from '@widgets';
 import { EditOutlined } from '@ant-design/icons';
+import { PlatformTag } from '@widgets';
 
 import type { GameStatus } from '@entities';
+import type { HowLongToBeatEntry } from 'howlongtobeat';
 
 const Tags = ({ platforms, id }: Pick<HowLongToBeatEntry, 'id' | 'platforms'>) => {
   const { t } = useTranslation();
@@ -18,11 +17,9 @@ const Tags = ({ platforms, id }: Pick<HowLongToBeatEntry, 'id' | 'platforms'>) =
     <div>
       <Typography.Title level={5}>{t('games-list.searchResults.playableOn')}</Typography.Title>
       <div>
-        {platforms.map((platform) => {
-          return (
-            <PlatformTag platform={platform} key={`${platform}--${id}`} style={{ margin: 2 }} />
-          );
-        })}
+        {platforms.map((platform) => (
+          <PlatformTag platform={platform} key={`${platform}--${id}`} style={{ margin: 2 }} />
+        ))}
       </div>
     </div>
   );

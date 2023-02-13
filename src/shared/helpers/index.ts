@@ -1,4 +1,4 @@
-import { Filter, Game } from '@entities';
+import type { Filter, Game } from '@entities';
 
 const NINTENDO_PLATFORMS = ['wii', 'wii u', 'nes', 'snes'];
 
@@ -10,9 +10,7 @@ const preparePlatform = (value: string): string => {
   return capitalize(value);
 };
 
-const capitalize = (value: string): string => {
-  return `${value[0].toUpperCase()}${value.substring(1)}`;
-};
+const capitalize = (value: string): string => `${value[0].toUpperCase()}${value.substring(1)}`;
 
 const createPlatformClassName = (platform: string) => {
   const lowercasedPlatform = platform.toLowerCase();
@@ -48,9 +46,7 @@ const pluralTranslate = (count: number): string => {
   const stringifiedCount = count.toString();
   const numberedLastChar = Number(stringifiedCount.charAt(stringifiedCount.length - 1));
 
-  const inBetween = (val: number, min: number, max: number): boolean => {
-    return val >= min && val <= max;
-  };
+  const inBetween = (val: number, min: number, max: number): boolean => val >= min && val <= max;
 
   if (count === 1 || numberedLastChar == 1) {
     ending = 'hours_one';

@@ -1,9 +1,11 @@
 import { Button, Form, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { login } from '@entities';
-import { User } from 'entities/user/types';
 import { useNavigate } from 'react-router';
-import { useAppDispatch } from 'app/providers/with-store';
+
+import { login } from '@entities';
+import { useAppDispatch } from '@shared';
+
+import type { User } from 'entities/user/types';
 
 const Auth = (): JSX.Element => {
   const navigate = useNavigate();

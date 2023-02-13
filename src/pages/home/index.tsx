@@ -1,12 +1,14 @@
 import { message } from 'antd';
 import { useState } from 'react';
-import { HowLongToBeatEntry } from 'howlongtobeat';
-import { SearchResultsList, SearchInput } from '@widgets';
-import { api } from '@shared';
-import styles from './styles.module.scss';
 import { useTranslation } from 'react-i18next';
-import { useAppSelector } from 'app/providers/with-store';
+
+import { SearchResultsList, SearchInput } from '@widgets';
+import { api, useAppSelector } from '@shared';
 import { getAuthState } from '@entities';
+
+import type { HowLongToBeatEntry } from 'howlongtobeat';
+
+import styles from './styles.module.scss';
 
 const Home = (): JSX.Element => {
   const [isLoading, setLoading] = useState<boolean>(false);

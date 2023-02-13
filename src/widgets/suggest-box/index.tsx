@@ -1,8 +1,10 @@
-import { HowLongToBeatEntry } from 'howlongtobeat';
 import { useEffect, useMemo, useState } from 'react';
-import { api } from '@shared';
 import { Avatar, List } from 'antd';
 import VirtualList from 'rc-virtual-list';
+import { api } from '@shared';
+
+import type { HowLongToBeatEntry } from 'howlongtobeat';
+
 import styles from './styles.module.scss';
 
 const LIST_ITEM_HEIGHT = 72;

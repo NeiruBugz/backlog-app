@@ -1,17 +1,23 @@
-import { ChangeEvent, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { Input, Button, Form, Select, InputRef } from 'antd';
+
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { Input, Button, Form, Select } from 'antd';
 import { useNavigate } from 'react-router';
-import { HowLongToBeatEntry } from 'howlongtobeat';
 import { useTranslation } from 'react-i18next';
 import { v4 } from 'uuid';
+import { useSelector } from 'react-redux';
 
 import { addGame } from '@entities';
 import { SuggestBox } from '@widgets';
+import { useAppDispatch } from '@shared';
+
+import type { ChangeEvent } from 'react';
+import type { InputRef } from 'antd';
+import type { HowLongToBeatEntry } from 'howlongtobeat';
+import type { RootState } from '@shared';
+import type { Game } from '@entities';
+
 
 import { PLATFORM_OPTIONS, STATUS_OPTIONS, translateStatus } from './constants';
-import type { Game } from '@entities';
-import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from 'app/providers/with-store';
 
 const AddGame = (): JSX.Element => {
   const [initialValues, setInitialValues] = useState({
@@ -37,12 +43,10 @@ const AddGame = (): JSX.Element => {
 
   useEffect(() => {
     if (payload && 'name' in payload) {
-      setInitialValues((prevState) => {
-        return {
-          title: payload,
-          ...prevState,
-        };
-      });
+      setInitialValues((prevState) => ({
+        title: payload,
+        ...prevState,
+      }));
       setInputValue(payload);
       form.setFieldsValue({ title: payload });
     }
@@ -84,9 +88,7 @@ const AddGame = (): JSX.Element => {
     navigate('/list');
   };
 
-  const statuses = useMemo(() => {
-    return STATUS_OPTIONS.map((item) => translateStatus(item, t));
-  }, [t]);
+  const statuses = useMemo(() => STATUS_OPTIONS.map((item) => translateStatus(item, t)), [t]);
 
   const { width, top, left } = suggestBoxPosition;
 

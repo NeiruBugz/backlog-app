@@ -1,5 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from 'app/providers/with-store';
+import { createSlice } from '@reduxjs/toolkit';
+
+import type { PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '@shared';
 import type { Game, UpdateGamePayload } from '../types';
 
 type GameSliceState = Game[];

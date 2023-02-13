@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import type { Game as GameProps, GameStatus } from '@entities';
-import { PlatformTag } from '@widgets';
-import styles from './styles.module.scss';
 import { message, Modal } from 'antd';
 import { api } from '@shared';
-import { HowLongToBeatEntry } from 'howlongtobeat';
+import { PlatformTag } from '@widgets';
 import { InfoModal } from '../info-modal';
+
+import type { HowLongToBeatEntry } from 'howlongtobeat';
+import type { Game as GameProps, GameStatus } from '@entities';
+
+import styles from './styles.module.scss';
 
 const GameCard = ({ title, platform, img, status }: GameProps): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(false);

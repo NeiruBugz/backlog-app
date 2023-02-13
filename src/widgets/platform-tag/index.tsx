@@ -1,8 +1,10 @@
 import { Tag } from 'antd';
 import classNames from 'classnames';
 import { createPlatformClassName, preparePlatform } from '@shared';
+
+import type { CSSProperties } from 'react';
+
 import styles from './styles.module.scss';
-import { CSSProperties } from 'react';
 
 const PlatformTag = ({ platform, style }: { platform: string; style?: CSSProperties }) => {
   const platformClassName = createPlatformClassName(platform);

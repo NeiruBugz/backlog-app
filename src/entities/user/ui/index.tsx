@@ -1,9 +1,11 @@
 import { Avatar, Dropdown } from 'antd';
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
-import { UserProps } from '@shared';
+import { useTranslation } from 'react-i18next';
+
+import type { UserProps } from '@shared';
+
 import user from 'shared/assets/user.png';
 import styles from './styles.module.scss';
-import { useTranslation } from 'react-i18next';
 
 const User = ({ username, avatarUrl, onLogout }: UserProps): JSX.Element => {
   const { t } = useTranslation();
