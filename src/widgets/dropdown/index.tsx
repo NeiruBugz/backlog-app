@@ -1,10 +1,10 @@
 import { Button, Dropdown, MenuProps } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 
-type DropdownWidgetProps = {
+interface DropdownWidgetProps extends MenuProps {
   label: string;
   classname?: string;
-} & Pick<MenuProps, 'items' | 'onClick'>;
+}
 
 const DropdownWidget = ({ items, onClick, label, classname }: DropdownWidgetProps): JSX.Element => {
   return (

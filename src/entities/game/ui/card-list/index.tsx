@@ -3,13 +3,15 @@ import { Game, GameCard } from '@entities';
 import { Typography } from 'antd';
 import { Translation } from 'react-i18next';
 
+import { colors } from 'app/styles/jssVars';
+
 enum FilterKeys {
   BACKLOG = 'Backlog',
   IN_PROGRESS = 'In progress',
   COMPLETED = 'completed',
 }
 
-type ListProps = {
+interface ListProps {
   listItems: Game[];
   dividerText?: string;
   listClass?: string;
@@ -17,7 +19,7 @@ type ListProps = {
 };
 
 const EmptyBacklogPropmt = () => (
-  <Typography.Title level={4}>
+  <Typography.Title level={4} style={{ color: colors.baWhite }}>
     <Translation>{(t) => t('games-list.emptyBacklog')}</Translation>
   </Typography.Title>
 );
@@ -26,7 +28,7 @@ const EmptyList = ({ text }: { text: string }) => {
   if (text === FilterKeys.BACKLOG) {
     return (
       <>
-        <Divider>{text}</Divider>
+        <Divider style={{ color: colors.baWhite }}>{text}</Divider>
         <EmptyBacklogPropmt />
       </>
     );
@@ -42,7 +44,7 @@ const List = ({ listItems, dividerText, listClass, listItemClass }: ListProps): 
 
   return (
     <>
-      {dividerText ? <Divider>{dividerText}</Divider> : null}
+      {dividerText ? <Divider style={{ color: colors.baWhite }}>{dividerText}</Divider> : null}
       <ul className={listClass}>
         {listItems.map((game) => {
           return (

@@ -1,6 +1,8 @@
 export type GameStatus = 'backlog' | 'in-progress' | 'completed';
+export type EditableGameKeys = 'platform' | 'status' | 'review' | 'rating';
+export type Filter = GameStatus | 'all';
 
-export type Game = {
+export interface Game {
   id: string;
   title: string;
   platform: string;
@@ -11,14 +13,11 @@ export type Game = {
   rating?: unknown;
 };
 
-export type EditableGameKeys = 'platform' | 'status' | 'review' | 'rating';
 
-export type UpdateGamePayload = {
+export interface UpdateGamePayload {
   id: string;
   field: {
     key: EditableGameKeys;
     value: string;
   };
 };
-
-export type Filter = GameStatus | 'all';
