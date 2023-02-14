@@ -1,5 +1,5 @@
-import { HowLongToBeatEntry } from 'howlongtobeat';
-import { Game } from '@entities';
+import type { HowLongToBeatEntry } from 'howlongtobeat';
+import type { Game } from '@entities';
 
 const API_URL = import.meta.env.DEV
   ? import.meta.env.VITE_DEV_API
@@ -11,6 +11,19 @@ const api = {
       const headers = new Headers();
       headers.append('Access-Control-Allow-Origin', '*');
       fetch(`${API_URL}/search/${query}`, { headers })
+        .then((response) => {
+          resolve(response.json());
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  },
+  details: function (title: string): Promise<HowLongToBeatEntry> {
+    return new Promise((resolve, reject) => {
+      const headers = new Headers();
+      headers.append('Access-Control-Allow-Origin', '*');
+      fetch(`${API_URL}/search/details/${title}`, { headers })
         .then((response) => {
           resolve(response.json());
         })

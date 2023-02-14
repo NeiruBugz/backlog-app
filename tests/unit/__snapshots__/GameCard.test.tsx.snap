@@ -3,53 +3,25 @@
 exports[`GameCard > snapshots 1`] = `
 <div>
   <div
-    class="ant-card ant-card-bordered _ba-card_53d2b9 css-dev-only-do-not-override-sk7ap8"
+    class="_ba-card-alt_53d2b9"
   >
+    <img
+      class="_ba-card-alt__image_53d2b9"
+      src="https://assets1.ignimgs.com/2020/02/14/persona-5-royal---button-fin-1581716582492.jpg"
+    />
     <div
-      class="ant-card-body"
-      style="padding: 18px 12px;"
+      class="_ba-card-alt__info_53d2b9"
     >
-      <h5
-        class="ant-typography css-dev-only-do-not-override-sk7ap8"
+      <span
+        class="ant-tag _ba-tag__platform_202fa9 _ba-tag__platform--nintendo_202fa9 css-dev-only-do-not-override-sk7ap8"
+      >
+        Nintendo Switch
+      </span>
+      <h3
+        class="_ba-card-alt__title_53d2b9"
       >
         Persona 5 Royal
-      </h5>
-      <div
-        class="_ba-card__info_53d2b9"
-      >
-        <span
-          class="ant-tag _ba-tag__platform_202fa9 _ba-tag__platform--nintendo_202fa9 css-dev-only-do-not-override-sk7ap8"
-        >
-          Nintendo Switch
-        </span>
-        <button
-          class="ant-btn css-dev-only-do-not-override-sk7ap8 ant-btn-default ant-dropdown-trigger"
-          type="button"
-        >
-          <span>
-            games-list.gameCard.moveTo
-          </span>
-          <span
-            aria-label="down"
-            class="anticon anticon-down"
-            role="img"
-          >
-            <svg
-              aria-hidden="true"
-              data-icon="down"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
-            >
-              <path
-                d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
-              />
-            </svg>
-          </span>
-        </button>
-      </div>
+      </h3>
     </div>
   </div>
 </div>

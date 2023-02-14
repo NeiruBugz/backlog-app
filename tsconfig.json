@@ -27,10 +27,9 @@
       "@shared": ["shared"],
       "@pages": ["pages"],
       "@widgets": ["widgets"],
-      "@mocks": ["mocks"]
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
-  "include": ["src"],
+  "include": ["src", "tests/unit/mocks"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

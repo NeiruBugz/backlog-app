@@ -1,9 +1,13 @@
-import { HowLongToBeatEntry } from 'howlongtobeat';
-import { useEffect, useState } from 'react';
-import { api } from '@shared';
+import { useEffect, useMemo, useState } from 'react';
 import { Avatar, List } from 'antd';
 import VirtualList from 'rc-virtual-list';
+import { api } from '@shared';
+
+import type { HowLongToBeatEntry } from 'howlongtobeat';
+
 import styles from './styles.module.scss';
+
+const LIST_ITEM_HEIGHT = 72;
 
 const SuggestBox = ({
   query,
@@ -30,6 +34,14 @@ const SuggestBox = ({
     }
   };
 
+  const listHeight = useMemo(() => {
+    if (list.length < 5) {
+      return LIST_ITEM_HEIGHT * list.length;
+    }
+
+    return LIST_ITEM_HEIGHT * 5;
+  }, [list]);
+
   return (
     <>
       {list.length ? (
@@ -38,7 +50,12 @@ const SuggestBox = ({
           bordered
           style={{ width, left: xPos, top: yPos }}
         >
-          <VirtualList data={list} itemKey="name" itemHeight={36} height={36 * 5}>
+          <VirtualList
+            data={list}
+            itemKey={(item) => `${item.name}--${item.id}`}
+            itemHeight={LIST_ITEM_HEIGHT}
+            height={listHeight}
+          >
             {(item) => (
               <List.Item onClick={() => onClick(item)} style={{ cursor: 'pointer' }}>
                 <List.Item.Meta avatar={<Avatar src={item.imageUrl} />} title={item.name} />

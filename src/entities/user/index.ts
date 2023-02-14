@@ -1,1 +1,2 @@
-export { User } from './ui';
+export * from './ui';
+export * from './slice';

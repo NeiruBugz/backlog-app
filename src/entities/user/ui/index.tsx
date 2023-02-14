@@ -1,19 +1,42 @@
 import { Avatar, Dropdown } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
-import { UserProps } from '@shared';
+import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
+
+import type { UserProps } from '@shared';
+
 import user from 'shared/assets/user.png';
 import styles from './styles.module.scss';
-import { useTranslation } from 'react-i18next';
 
 const User = ({ username, avatarUrl, onLogout }: UserProps): JSX.Element => {
   const { t } = useTranslation();
   const isDefault = Boolean(avatarUrl);
 
+  const onDropdownItemClick = ({ key }: { key: string }) => {
+    if (key === 'logout') {
+      onLogout?.();
+    } else {
+      console.log('menu click');
+    }
+  };
+
   return (
     <Dropdown
+      trigger={['click']}
       menu={{
-        items: [{ key: 1, label: t('home.header.user.dropdown.options.logout') }],
-        onClick: onLogout,
+        items: [
+          {
+            type: 'group',
+            label: username,
+            children: [
+              {
+                key: 'logout',
+                label: t('home.header.user.dropdown.options.logout'),
+                icon: <LogoutOutlined />,
+              },
+            ],
+          },
+        ],
+        onClick: onDropdownItemClick,
       }}
     >
       <div className={styles['ba-user']}>
@@ -26,7 +49,6 @@ const User = ({ username, avatarUrl, onLogout }: UserProps): JSX.Element => {
             className={styles['ba-user-avatar']}
           />
         )}
-        <p className={styles['ba-user__name']}>{username}</p>
       </div>
     </Dropdown>
   );

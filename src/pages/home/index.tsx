@@ -1,18 +1,21 @@
 import { message } from 'antd';
 import { useState } from 'react';
-import { HowLongToBeatEntry } from 'howlongtobeat';
-import { SearchResultsList, SearchInput } from '@widgets';
-import { api } from '@shared';
-import styles from './styles.module.scss';
-import { useStore } from 'effector-react';
-import { $user } from '../../entities/user/models';
 import { useTranslation } from 'react-i18next';
 
+import { SearchResultsList, SearchInput } from '@widgets';
+import { api, useAppSelector } from '@shared';
+import { getAuthState } from '@entities';
+
+import type { HowLongToBeatEntry } from 'howlongtobeat';
+
+import styles from './styles.module.scss';
+
 const Home = (): JSX.Element => {
+  const { t } = useTranslation();
+  
   const [isLoading, setLoading] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<HowLongToBeatEntry[]>([]);
-  const { authorized } = useStore($user);
-  const { t } = useTranslation();
+  const authorized = useAppSelector(getAuthState);
 
   const onGameSearch = (value: string) => {
     if (!value.length) {

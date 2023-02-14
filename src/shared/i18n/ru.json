@@ -67,10 +67,10 @@
         "main": "Основной сюжет",
         "mainExtra": "Основной сюжет+дополнения",
         "completionist": "Полное прохождение",
-        "hours": "часов",
-        "hours_one": "{{count}} час",
-        "hours_few": "{{count}} часа",
-        "hours_many": "{{count}} часов"
+        "hours": "ч",
+        "hours_one": "{{count}} ч",
+        "hours_few": "{{count}} ч",
+        "hours_many": "{{count}} ч"
       }
     }
   },

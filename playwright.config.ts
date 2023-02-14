@@ -46,20 +46,20 @@ const config: PlaywrightTestConfig = {
         ignoreHTTPSErrors: true,
       },
     },
-//    {
-//      name: 'Mobile Chrome',
-//      use: {
-//        ...devices['Pixel 5'],
-//        ignoreHTTPSErrors: true,
-//      },
-//    },
-//    {
-//      name: 'Mobile Safari',
-//      use: {
-//        ...devices['iPhone 12'],
-//        ignoreHTTPSErrors: true,
-//      },
-//    },
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: {
+    //     ...devices['Pixel 5'],
+    //     ignoreHTTPSErrors: true,
+    //   },
+    // },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: {
+    //     ...devices['iPhone 12'],
+    //     ignoreHTTPSErrors: true,
+    //   },
+    // },
   ],
 };
 

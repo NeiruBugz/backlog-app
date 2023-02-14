@@ -1,12 +1,14 @@
-import { Button, List, Tag, Typography } from 'antd';
-import { HowLongToBeatEntry } from 'howlongtobeat';
-import styles from './styles.module.scss';
-import { PlatformTag } from '../platform-tag';
-import { savePayload } from '@entities';
 import { useNavigate } from 'react-router';
 import VirtualList from 'rc-virtual-list';
 import { useTranslation } from 'react-i18next';
 import { useCallback } from 'react';
+import { Button, List, Tag, Typography } from 'antd';
+import { PlatformTag } from '../platform-tag';
+import { changePayload } from '@entities';
+
+import type { HowLongToBeatEntry } from 'howlongtobeat';
+
+import styles from './styles.module.scss';
 
 const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => {
   const { name, platforms, imageUrl, id, gameplayMain, gameplayMainExtra, gameplayCompletionist } =
@@ -15,7 +17,7 @@ const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => 
   const navigate = useNavigate();
 
   const onAddClick = () => {
-    savePayload(item);
+    changePayload(item);
     navigate('/add-game');
   };
 
@@ -28,9 +30,7 @@ const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => 
       <div className={styles['ba-search-result__tags']}>
         <Typography.Title level={5}>{t('games-list.searchResults.playableOn')}</Typography.Title>
         <div className={styles['ba-search-result__tags-wrapper']}>
-          {platforms.map((platform) => {
-            return <PlatformTag platform={platform} key={`${platform}--${id}`} />;
-          })}
+          {platforms.map((platform) => <PlatformTag platform={platform} key={`${platform}--${id}`} />)}
         </div>
       </div>
     );

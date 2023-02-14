@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 const { Search } = Input;
 
-type SearchInputProps = {
+interface SearchInputProps {
   onSearch?: (searchQuery: string) => void;
   isLoading?: boolean;
   disabled?: boolean;
