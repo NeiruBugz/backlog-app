@@ -1,60 +1,24 @@
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-import { games, List, setStatusFilter } from '@entities';
-import { filterCallback, filterCriteria, capitalize, useAppDispatch, useAppSelector } from '@shared';
-import { DropdownWidget } from '@widgets';
-
-import type { MenuProps } from 'antd';
-import type { Filter, Game } from '@entities';
-
-import { dropdownFilters } from './constants';
+import { games, setStatusFilter } from '@entities';
+import { useAppDispatch, useAppSelector } from '@shared';
+import { Filters, ListsBody } from '@widgets';
 
 import styles from './styles.module.scss';
 
-const ListsBody = ({
-  games,
-  filter,
-  filteredGames,
-}: {
-  games: Game[];
-  filter: string;
-  filteredGames: Game[];
-}) => (
-  <>
-    {filter === 'all' ? (
-      <>
-        {filterCriteria.map((criteria) => (
-          <List
-            listItems={games.filter((game) => filterCallback(game, criteria, filter === 'all'))}
-            dividerText={capitalize(criteria)}
-            key={criteria}
-            listClass={styles['ba-gameslist']}
-            listItemClass={styles['ba-gameslist__item']}
-          />
-        ))}
-      </>
-    ) : (
-      <List
-        listItems={filteredGames}
-        listClass={styles['ba-gameslist']}
-        listItemClass={styles['ba-gameslist__item']}
-      />
-    )}
-  </>
-);
-
 const GamesList = (): JSX.Element => {
+  const { t } = useTranslation();
+
   const filter = useAppSelector((state) => state.filterReducer.status);
   const gamesList = useAppSelector(games);
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
 
-  const onFilter = useCallback((filterType: string) => {
+  const onFilter = (filterType: string) => {
     dispatch(setStatusFilter(filterType));
-  }, [dispatch]);
+  };
 
   const filteredGames = useMemo(() => {
     if (filter === 'all') {
@@ -64,35 +28,11 @@ const GamesList = (): JSX.Element => {
     return gamesList.filter((game) => game.status === filter);
   }, [filter, gamesList]);
 
-  const handleDropdownItemClick: MenuProps['onClick'] = (e) => {
-    onFilter(e.key as Filter);
-  };
-
   return (
     <>
       {gamesList.length !== 0 ? (
         <nav className={styles['ba-gameslist-page__nav']}>
-          <div className={styles['ba-gameslist-page__nav-filters']}>
-            <Button disabled={filter === 'all'} onClick={() => onFilter('all')}>
-              {t('games-list.filters.all')}
-            </Button>
-            <Button disabled={filter === 'backlog'} onClick={() => onFilter('backlog')}>
-              {t('games-list.filters.backlog')}
-            </Button>
-            <Button disabled={filter === 'in-progress'} onClick={() => onFilter('in-progress')}>
-              {t('games-list.filters.inProgress')}
-            </Button>
-            <Button disabled={filter === 'completed'} onClick={() => onFilter('completed')}>
-              {t('games-list.filters.completed')}
-            </Button>
-          </div>
-          <div className={styles['ba-gameslist-page__nav-filters--mobile']}>
-            <DropdownWidget
-              items={dropdownFilters}
-              onClick={handleDropdownItemClick}
-              label={t('games-list.filters.label')}
-            />
-          </div>
+          <Filters onFilter={onFilter} filter={filter} />
           <Link to="/add-game">
             <Button type="primary">{t('games-list.addButton')}</Button>
           </Link>

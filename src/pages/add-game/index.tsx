@@ -20,6 +20,11 @@ import type { Game } from '@entities';
 import { PLATFORM_OPTIONS, STATUS_OPTIONS, translateStatus } from './constants';
 
 const AddGame = (): JSX.Element => {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const [form] = Form.useForm<Game>();
+  const payload = useSelector((state: RootState) => state.searchReducer);
+
   const [initialValues, setInitialValues] = useState({
     status: 'backlog',
   });
@@ -29,16 +34,14 @@ const AddGame = (): JSX.Element => {
     image: '',
     id: '',
   });
-  const navigate = useNavigate();
-  const { t } = useTranslation();
-  const [form] = Form.useForm<Game>();
-  const inputRef = useRef<InputRef>(null);
   const [suggestBoxPosition, setSuggestBoxPosition] = useState({
     width: 0,
     left: 0,
     top: 0,
   });
-  const payload = useSelector((state: RootState) => state.searchReducer);
+
+  const inputRef = useRef<InputRef>(null);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {

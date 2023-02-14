@@ -11,10 +11,11 @@ import type { HowLongToBeatEntry } from 'howlongtobeat';
 import styles from './styles.module.scss';
 
 const Home = (): JSX.Element => {
+  const { t } = useTranslation();
+  
   const [isLoading, setLoading] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<HowLongToBeatEntry[]>([]);
   const authorized = useAppSelector(getAuthState);
-  const { t } = useTranslation();
 
   const onGameSearch = (value: string) => {
     if (!value.length) {

@@ -4,8 +4,6 @@ import { GameCard } from '@entities';
 
 import type { Game } from '@entities';
 
-import { colors } from 'app/styles/jssVars';
-
 enum FilterKeys {
   BACKLOG = 'Backlog',
   IN_PROGRESS = 'In progress',
@@ -20,7 +18,7 @@ interface ListProps {
 };
 
 const EmptyBacklogPropmt = () => (
-  <Typography.Title level={4} style={{ color: colors.baWhite }}>
+  <Typography.Title level={4}>
     <Translation>{(t) => t('games-list.emptyBacklog')}</Translation>
   </Typography.Title>
 );
@@ -29,7 +27,7 @@ const EmptyList = ({ text }: { text: string }) => {
   if (text === FilterKeys.BACKLOG) {
     return (
       <>
-        <Divider style={{ color: colors.baWhite }}>{text}</Divider>
+        <Divider>{text}</Divider>
         <EmptyBacklogPropmt />
       </>
     );
@@ -45,7 +43,7 @@ const List = ({ listItems, dividerText, listClass, listItemClass }: ListProps): 
 
   return (
     <>
-      {dividerText ? <Divider style={{ color: colors.baWhite }}>{dividerText}</Divider> : null}
+      {dividerText ? <Divider >{dividerText}</Divider> : null}
       <ul className={listClass}>
         {listItems.map((game) => (
           <li className={listItemClass} key={game.id}>

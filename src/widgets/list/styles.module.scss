@@ -1,0 +1,19 @@
+.ba-gameslist {
+  margin-top: 12px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  row-gap: 8px;
+}
+
+.ba-gameslist__item:not(:last-of-type) {
+  margin-right: 8px;
+}
+
+.ba-gameslist--no-games {
+  height: 100%;
+  width: 100%;
+  margin-top: 24px;
+  text-align: center;
+}
