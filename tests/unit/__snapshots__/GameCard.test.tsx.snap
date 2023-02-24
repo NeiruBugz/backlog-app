@@ -13,7 +13,7 @@ exports[`GameCard > snapshots 1`] = `
       class="_ba-card-alt__info_53d2b9"
     >
       <span
-        class="ant-tag _ba-tag__platform_202fa9 _ba-tag__platform--nintendo_202fa9 css-dev-only-do-not-override-sk7ap8"
+        class="_ba-tag__platform_7f2adc _ba-tag__platform--nintendo_7f2adc"
       >
         Nintendo Switch
       </span>
