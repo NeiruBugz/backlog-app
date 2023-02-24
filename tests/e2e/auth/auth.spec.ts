@@ -12,8 +12,15 @@ test.describe('App auth', () => {
     });
 
     await test.step('input username', async () => {
-      const input = page.locator('input');
+      const input = page.locator('input[placeholder="Username"]');
+      await input.click();
       await input.fill('test user');
+    });
+
+    await test.step('input password', async () => {
+      const input = page.locator('input[placeholder="Password"]');
+      await input.click();
+      await input.fill('password');
     });
     
     await test.step('submit login', async () => {
