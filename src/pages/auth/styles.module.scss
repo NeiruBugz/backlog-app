@@ -1,0 +1,50 @@
+.ba-auth__form {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: auto;
+  align-items: center;
+  row-gap: 10px;
+  column-gap: 10px;
+  grid-template-areas: 'labelUser username' 'labelPassword password' 'login signup';
+  width: 400px;
+}
+
+.ba-auth__label {}
+
+.ba-auth__label--username {
+  @extend .ba-auth__label;
+  grid-area: labelUser;
+}
+
+.ba-auth__label--password {
+  @extend .ba-auth__label;
+  grid-area: labelPassword;
+}
+
+.ba-auth {
+  display: flex;
+  justify-content: center;
+}
+
+.ba-auth__input {
+  grid-area: input;
+}
+
+.ba-auth__input--password {
+  @extend .ba-auth__input;
+  grid-area: password;
+}
+
+.ba-auth__input--username {
+  @extend .ba-auth__input;
+  grid-area: username;
+}
+
+.ba-auth__button--login {
+  grid-area: login;
+}
+
+.ba-auth__button--signup {
+  background: transparent;
+  grid-area: signup;
+}

@@ -1,12 +1,25 @@
+.ba-tag {
+  padding: 5px 15px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
 .ba-tag__platform {
-  border: none;
+  @extend .ba-tag;
   color: #fdfdfd;
   background-color: black;
-  padding: 5px 15px;
-  font-size: 14px;
   max-width: 168px;
   height: 30px;
   max-height: 40px;
+}
+
+.ba-tag__common {
+  @extend .ba-tag;
+  background-color: gainsboro;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .ba-tag__platform--pc {

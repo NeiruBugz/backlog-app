@@ -1,6 +1,6 @@
-import { Divider, Typography } from 'antd';
 import { Translation } from 'react-i18next';
 import { GameCard } from '@entities';
+import { Divider, Text } from '@widgets';
 
 import type { Game } from '@entities';
 
@@ -18,9 +18,9 @@ interface ListProps {
 };
 
 const EmptyBacklogPropmt = () => (
-  <Typography.Title level={4}>
+  <Text heading={true} level={4}>
     <Translation>{(t) => t('games-list.emptyBacklog')}</Translation>
-  </Typography.Title>
+  </Text>
 );
 
 const EmptyList = ({ text }: { text: string }) => {

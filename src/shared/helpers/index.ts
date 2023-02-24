@@ -2,7 +2,11 @@ import type { Filter, Game } from '@entities';
 
 const NINTENDO_PLATFORMS = ['wii', 'wii u', 'nes', 'snes'];
 
-const preparePlatform = (value: string): string => {
+const preparePlatform = (value: string): string | undefined => {
+  if (!value) {
+    return;
+  }
+
   if (value.toLowerCase() === 'pc') {
     return 'PC';
   }

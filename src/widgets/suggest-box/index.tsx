@@ -1,13 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Avatar, List } from 'antd';
-import VirtualList from 'rc-virtual-list';
+import { useEffect, useRef, useState } from 'react';
+import { useVirtualizer } from '@tanstack/react-virtual';
 import { api } from '@shared';
 
 import type { HowLongToBeatEntry } from 'howlongtobeat';
 
 import styles from './styles.module.scss';
-
-const LIST_ITEM_HEIGHT = 72;
 
 const SuggestBox = ({
   query,
@@ -23,46 +20,57 @@ const SuggestBox = ({
   yPos?: number;
 }): JSX.Element => {
   const [list, setList] = useState<HowLongToBeatEntry[]>([]);
+  const parentRef = useRef<HTMLDivElement>(null);
+  const virtualizer = useVirtualizer({
+    count: list.length,
+    getScrollElement: () => parentRef?.current,
+    estimateSize: () => 72,
+  });
+
+  useEffect(() => {
+    parentRef.current?.focus();
+  }, []);
 
   useEffect(() => {
     api.search(query).then(setList);
   }, [query]);
 
-  const onClick = (entry: HowLongToBeatEntry) => {
-    if (onItemClick) {
-      onItemClick(entry);
-    }
-  };
-
-  const listHeight = useMemo(() => {
-    if (list.length < 5) {
-      return LIST_ITEM_HEIGHT * list.length;
-    }
-
-    return LIST_ITEM_HEIGHT * 5;
-  }, [list]);
-
   return (
     <>
       {list.length ? (
-        <List
+        <div
           className={styles['ba-suggestbox-list']}
-          bordered
-          style={{ width, left: xPos, top: yPos }}
+          ref={parentRef}
+          style={{ height: 400, overflow: 'auto', width, left: xPos, top: yPos }}
         >
-          <VirtualList
-            data={list}
-            itemKey={(item) => `${item.name}--${item.id}`}
-            itemHeight={LIST_ITEM_HEIGHT}
-            height={listHeight}
+          <ul
+            style={{
+              height: `${virtualizer.getTotalSize()}px`,
+              width: '100%',
+              position: 'relative',
+            }}
           >
-            {(item) => (
-              <List.Item onClick={() => onClick(item)} style={{ cursor: 'pointer' }}>
-                <List.Item.Meta avatar={<Avatar src={item.imageUrl} />} title={item.name} />
-              </List.Item>
-            )}
-          </VirtualList>
-        </List>
+            {virtualizer.getVirtualItems().map((virtualItem, index) => (
+              <li
+                key={virtualItem.key}
+                ref={virtualizer.measureElement}
+                data-index={virtualItem.index}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: `${virtualItem.size}px`,
+                  transform: `translateY(${virtualItem.start}px)`,
+                }}
+                onClick={() => onItemClick(list[index])}
+              >
+                <img src={list[index].imageUrl} alt={list[index].name} />
+                <span>{list[index].name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       ) : null}
     </>
   );

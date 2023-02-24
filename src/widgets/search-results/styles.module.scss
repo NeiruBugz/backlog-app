@@ -79,11 +79,7 @@
 
 .ba-search-result__completions-wrapper {
   display: flex;
-}
-
-.ba-search-result__completions-tag {
-  padding: 8px 4px;
-  font-size: 14px;
+  gap: 8px;
 }
 
 .ba-search-result__actions {

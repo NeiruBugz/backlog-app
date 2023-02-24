@@ -1,0 +1,49 @@
+.ba-add-game {
+  display: flex;
+  justify-content: center;
+}
+
+.ba-add-game__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.ba-add-game__form-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  
+  span {
+    width: 100px;
+  }
+}
+
+.ba-add-game__form-input {
+  width: 100%;
+  min-width: 15ch;
+  max-width: 30ch;
+}
+
+.ba-add-game__form-select {
+  // min-width: 15ch;
+  // max-width: 30ch;
+  // border: 1px solid #777;
+  // border-radius: 0.25em;
+  // padding: 0.25em 0.5em;
+  // font-size: 1.25rem;
+  // cursor: pointer;
+  // line-height: 1.1;
+  // background-color: #fff;
+  // background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+  // display: grid;
+
+  // &::after {
+  //   content: "";
+  //   width: 0.8em;
+  //   height: 0.5em;
+  //   background-color: #777;
+  //   clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+  // }
+}

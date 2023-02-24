@@ -1,37 +1,60 @@
-
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { Input, Button, Form, Select } from 'antd';
-import { useNavigate } from 'react-router';
+import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { v4 } from 'uuid';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { v4 } from 'uuid';
 
-import { addGame } from '@entities';
 import { SuggestBox } from '@widgets';
 import { useAppDispatch } from '@shared';
+import { addGame } from '@entities';
 
 import type { ChangeEvent } from 'react';
-import type { InputRef } from 'antd';
 import type { HowLongToBeatEntry } from 'howlongtobeat';
+import type { SubmitHandler } from 'react-hook-form';
 import type { RootState } from '@shared';
 import type { Game } from '@entities';
 
+import styles from './styles.module.scss';
 
 import { PLATFORM_OPTIONS, STATUS_OPTIONS, translateStatus } from './constants';
+import { Listbox } from '@headlessui/react';
+
+type AddGameInputs = Pick<Game, 'title' | 'platform' | 'status'>;
+
+const Select = ({
+  selected,
+  items,
+}: {
+  selected: { value: string; label: string };
+  items: { value: string; label: string }[];
+} & HTMLSelectElement) => (
+  <Listbox value={selected.value} as="div" style={{ position: 'absolute' }}>
+    <Listbox.Button>{selected.label}</Listbox.Button>
+    <Listbox.Options style={{ position: 'absolute' }}>
+      {items.map((item) => (
+        <Listbox.Option key={item.value} value={item.value}>
+          {item.label}
+        </Listbox.Option>
+      ))}
+    </Listbox.Options>
+  </Listbox>
+);
 
 const AddGame = (): JSX.Element => {
-  const navigate = useNavigate();
   const { t } = useTranslation();
-  const [form] = Form.useForm<Game>();
+  const navigate = useNavigate();
+  const { register, handleSubmit, control } = useForm<AddGameInputs>({
+    defaultValues: {
+      title: '',
+    },
+  });
   const payload = useSelector((state: RootState) => state.searchReducer);
 
-  const [initialValues, setInitialValues] = useState({
-    status: 'backlog',
-  });
   const [inputValue, setInputValue] = useState<string>('');
   const [query, setQuery] = useState<string>('');
-  const [entryValues, setEntryValues] = useState({
-    image: '',
+  const [entryValues, setEntryValues] = useState<Pick<HowLongToBeatEntry, 'imageUrl' | 'id'>>({
+    imageUrl: '',
     id: '',
   });
   const [suggestBoxPosition, setSuggestBoxPosition] = useState({
@@ -40,33 +63,25 @@ const AddGame = (): JSX.Element => {
     top: 0,
   });
 
-  const inputRef = useRef<InputRef>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (payload && 'name' in payload) {
-      setInitialValues((prevState) => ({
-        title: payload,
-        ...prevState,
-      }));
       setInputValue(payload);
-      form.setFieldsValue({ title: payload });
     }
 
     return () => {
       setInputValue('');
-      form.setFieldsValue({ title: '' });
     };
-  }, [form, payload]);
+  }, [payload]);
 
   useLayoutEffect(() => {
-    if (inputRef.current?.input) {
+    if (inputRef.current) {
       const { current } = inputRef;
-      if ('input' in current && current.input) {
-        const { width, x, y, height } = current.input.getBoundingClientRect();
-        setSuggestBoxPosition({ width, left: x, top: y + height });
-      }
+      const { width, x, y, height } = current.getBoundingClientRect();
+      setSuggestBoxPosition({ width, left: x, top: y + height });
     }
   }, [inputRef]);
 
@@ -78,16 +93,27 @@ const AddGame = (): JSX.Element => {
   const onSearchEntryClick = ({ name, imageUrl, id }: HowLongToBeatEntry) => {
     setInputValue(name);
     setEntryValues({
-      image: imageUrl,
+      imageUrl,
       id,
     });
-    form.setFieldsValue({ title: name });
     setQuery('');
   };
 
-  const onFinish = (values: Game) => {
-    const { id, image } = entryValues;
-    dispatch(addGame({ ...values, id: id || v4(), img: image, createdAt: Date.now() }));
+  const onFinish: SubmitHandler<AddGameInputs> = (values) => {
+    if (!values.title || inputValue) {
+      return;
+    }
+
+    const { id, imageUrl } = entryValues;
+    dispatch(
+      addGame({
+        ...values,
+        title: inputValue,
+        id: id || v4(),
+        img: imageUrl,
+        createdAt: Date.now(),
+      })
+    );
     navigate('/list');
   };
 
@@ -96,48 +122,66 @@ const AddGame = (): JSX.Element => {
   const { width, top, left } = suggestBoxPosition;
 
   return (
-    <>
-      <Form
-        name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 8 }}
-        initialValues={{ remember: true, ...initialValues }}
-        onFinish={onFinish}
-        form={form}
-      >
-        <Form.Item
-          label={t('add-game.labels.title')}
-          name="title"
-          rules={[{ required: true, message: t('validation.gameTitle') || '' }]}
-        >
-          <Input onChange={onInputChange} value={inputValue} ref={inputRef} autoComplete="off" />
-        </Form.Item>
-        {query ? (
-          <SuggestBox
-            query={query}
-            onItemClick={onSearchEntryClick}
-            width={width}
-            xPos={left}
-            yPos={top}
+    <main className={styles['ba-add-game']}>
+      <form onSubmit={handleSubmit(onFinish)} className={styles['ba-add-game__form']}>
+        <label htmlFor="title" className={styles['ba-add-game__form-label']}>
+          <span>{t('add-game.labels.title')}</span>
+          <Controller
+            name="title"
+            control={control}
+            render={({ field }) => (
+              <input
+                {...field}
+                id="title"
+                placeholder="Enter game title"
+                autoComplete="off"
+                value={inputValue}
+                onChange={onInputChange}
+                ref={inputRef}
+              />
+            )}
           />
-        ) : null}
-        <Form.Item
-          label={t('add-game.labels.platform')}
-          name="platform"
-          rules={[{ required: true, message: t('validation.gamePlatform') || '' }]}
-        >
-          <Select options={PLATFORM_OPTIONS} />
-        </Form.Item>
-        <Form.Item label={t('add-game.labels.status')} name="status">
-          <Select options={statuses} value={'backlog'} />
-        </Form.Item>
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
-    </>
+          {query ? (
+            <SuggestBox
+              query={query}
+              onItemClick={onSearchEntryClick}
+              width={width}
+              xPos={left}
+              yPos={top}
+            />
+          ) : null}
+        </label>
+        <label htmlFor="platform" className={styles['ba-add-game__form-label']}>
+          <span>{t('add-game.labels.platform')}</span>
+          <select
+            id="platform"
+            className={styles['ba-add-game__form-select']}
+            {...register('platform', { required: true })}
+          >
+            {PLATFORM_OPTIONS.map((platform) => (
+              <option value={platform.value} key={platform.value}>
+                {platform.label}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label htmlFor="status" className={styles['ba-add-game__form-label']}>
+          <span>{t('add-game.labels.status')}</span>
+          <select
+            id="status"
+            className={styles['ba-add-game__form-select']}
+            {...register('status', { required: true })}
+          >
+            {statuses.map((status) => (
+              <option value={status.value} key={status.value}>
+                {status.label}
+              </option>
+            ))}
+          </select>
+        </label>
+        <button type="submit">Submit</button>
+      </form>
+    </main>
   );
 };
 

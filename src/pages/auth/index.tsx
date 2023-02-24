@@ -1,46 +1,61 @@
-import { Button, Form, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
+import { useForm } from 'react-hook-form';
 
 import { login } from '@entities';
 import { useAppDispatch } from '@shared';
 
-import type { User } from 'entities/user/types';
+import type { SubmitHandler } from 'react-hook-form';
+
+import styles from './styles.module.scss';
+
+interface AuthInputs {
+  username: string;
+  password: string;
+}
 
 const Auth = (): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { register, handleSubmit } = useForm<AuthInputs>();
   const { t } = useTranslation();
 
-  const onAuthClick = (values: Pick<User, 'username'>) => {
-    dispatch(login({ authorized: true, username: values.username }));
+  const onAuthClick: SubmitHandler<AuthInputs> = ({ username, password }) => {
+    dispatch(login({ authorized: true, username: username }));
     navigate('/list');
   };
 
   return (
-    <div>
-      <Form
-        name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 8 }}
-        initialValues={{ remember: true }}
-        onFinish={onAuthClick}
-        autoComplete="off"
-      >
-        <Form.Item
-          label={t('auth.label')}
-          name="username"
-          rules={[{ required: true, message: t('validation.username') || '' }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            {t('auth.submit')}
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
+    <main className={styles['ba-auth']}>
+      <form onSubmit={handleSubmit(onAuthClick)} className={styles['ba-auth__form']}>
+        <label htmlFor="login" className={styles['ba-auth__label']}>
+          {t('auth.label')}
+        </label>
+        <input
+          type="text"
+          id="login"
+          placeholder={t('auth.label') || ''}
+          className={styles['ba-auth__input--username']}
+          {...register('username', { required: true })}
+        />
+        <label htmlFor="password" className={styles['ba-auth__label']}>
+          Password
+        </label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          className={styles['ba-auth__input--password']}
+          {...register('password', { required: true })}
+        />
+        <button type="submit" className={styles['ba-auth__button--login']}>
+          {t('auth.submit')}
+        </button>
+        <button type="button" className={styles['ba-auth__button--signup']}>
+          Sign Up
+        </button>
+      </form>
+    </main>
   );
 };
 

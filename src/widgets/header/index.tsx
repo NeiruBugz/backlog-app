@@ -31,7 +31,7 @@ const Header = (): JSX.Element => {
     }
   }, [i18n]);
 
-  const onLanguageSelect = ({ key }: { key: string }) => {
+  const onLanguageSelect = (key: string) => {
     i18n.changeLanguage(key);
   };
 

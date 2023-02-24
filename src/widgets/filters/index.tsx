@@ -1,12 +1,9 @@
-import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { DropdownWidget } from '@widgets';
 
-import type { MenuProps } from 'antd';
-
 import styles from './styles.module.scss';
 
-const dropdownFilters: MenuProps['items'] = [
+const dropdownFilters = [
   {
     label: 'All',
     key: 'all',
@@ -34,41 +31,43 @@ const Filters = ({
 }) => {
   const { t } = useTranslation();
 
-  const handleDropdownItemClick: MenuProps['onClick'] = (e) => {
-    onFilter(e.key);
+  const handleDropdownItemClick = (e: unknown) => {
+    if (e !== null && typeof e === 'object' && 'key' in e) {
+      onFilter(e.key as string);
+    }
   };
 
   return (
     <>
       <div className={styles['ba-gameslist-page__nav-filters']}>
-        <Button
+        <button
           disabled={filter === 'all'}
           onClick={() => onFilter('all')}
           className={styles['ba-filter__button']}
         >
           {t('games-list.filters.all')}
-        </Button>
-        <Button
+        </button>
+        <button
           disabled={filter === 'backlog'}
           onClick={() => onFilter('backlog')}
           className={styles['ba-filter__button']}
         >
           {t('games-list.filters.backlog')}
-        </Button>
-        <Button
+        </button>
+        <button
           disabled={filter === 'in-progress'}
           onClick={() => onFilter('in-progress')}
           className={styles['ba-filter__button']}
         >
           {t('games-list.filters.inProgress')}
-        </Button>
-        <Button
+        </button>
+        <button
           disabled={filter === 'completed'}
           onClick={() => onFilter('completed')}
           className={styles['ba-filter__button']}
         >
           {t('games-list.filters.completed')}
-        </Button>
+        </button>
       </div>
       <div className={styles['ba-gameslist-page__nav-filters--mobile']}>
         <DropdownWidget

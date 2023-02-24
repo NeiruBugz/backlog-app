@@ -1,10 +1,9 @@
 import { useNavigate } from 'react-router';
-import VirtualList from 'rc-virtual-list';
 import { useTranslation } from 'react-i18next';
-import { useCallback } from 'react';
-import { Button, List, Tag, Typography } from 'antd';
-import { PlatformTag } from '../platform-tag';
+import { useCallback, useRef } from 'react';
+import { useVirtualizer } from '@tanstack/react-virtual';
 import { changePayload } from '@entities';
+import { Text, Tag } from '@widgets';
 
 import type { HowLongToBeatEntry } from 'howlongtobeat';
 
@@ -28,9 +27,13 @@ const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => 
 
     return (
       <div className={styles['ba-search-result__tags']}>
-        <Typography.Title level={5}>{t('games-list.searchResults.playableOn')}</Typography.Title>
+        <Text heading level={5}>
+          {t('games-list.searchResults.playableOn')}
+        </Text>
         <div className={styles['ba-search-result__tags-wrapper']}>
-          {platforms.map((platform) => <PlatformTag platform={platform} key={`${platform}--${id}`} />)}
+          {platforms.map((platform) => (
+            <Tag type="platform" platform={platform} key={`${platform}--${id}`} />
+          ))}
         </div>
       </div>
     );
@@ -49,23 +52,23 @@ const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => 
 
     return (
       <div className={styles['ba-search-result__completions']}>
-        <Typography.Title level={5}>
+        <Text heading level={5}>
           {t('games-list.searchResults.completion.completionHours')}
-        </Typography.Title>
+        </Text>
         <div className={styles['ba-search-result__completions-wrapper']}>
-          <Tag className={styles['ba-search-result__completions-tag']}>
+          <Tag type="common">
             {t('games-list.searchResults.completion.main')}:{' '}
             {t(`games-list.searchResults.completion.${determinePluralityKey(gameplayMain)}`, {
               count: gameplayMain,
             })}
           </Tag>
-          <Tag className={styles['ba-search-result__completions-tag']}>
+          <Tag type="common">
             {t('games-list.searchResults.completion.mainExtra')}:{' '}
             {t(`games-list.searchResults.completion.${determinePluralityKey(gameplayMainExtra)}`, {
               count: gameplayMainExtra,
             })}
           </Tag>
-          <Tag className={styles['ba-search-result__completions-tag']}>
+          <Tag type="common">
             {t('games-list.searchResults.completion.completionist')}:{' '}
             {t(
               `games-list.searchResults.completion.${determinePluralityKey(gameplayCompletionist)}`,
@@ -80,29 +83,54 @@ const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => 
   return (
     <div className={styles['ba-search-result']}>
       <img className={styles['ba-search-result__image']} src={imageUrl} alt={`${name}'s image`} />
-      <Typography.Title level={4} className={styles['ba-search-result__title']}>
+      <Text heading level={4} className={styles['ba-search-result__title']}>
         {name}
-      </Typography.Title>
+      </Text>
       <Tags />
       <Completions />
       <div>
-        <Typography.Title level={5}>Actions</Typography.Title>
-        <Button onClick={onAddClick}>{t('common.addGame')}</Button>
+        <Text heading level={5}>
+          Actions
+        </Text>
+        <button onClick={onAddClick}>{t('common.addGame')}</button>
       </div>
     </div>
   );
 };
 
-const SearchResultsList = ({ results }: { results: HowLongToBeatEntry[] }) => (
-  <>
-    {results.length ? (
-      <List itemLayout="vertical" header={<h3>Search Results</h3>}>
-        <VirtualList data={results} itemKey="name" height={650}>
-          {(item) => <SearchListItem item={item} />}
-        </VirtualList>
-      </List>
-    ) : null}
-  </>
-);
+const SearchResultsList = ({ results }: { results: HowLongToBeatEntry[] }) => {
+  const parentRef = useRef<HTMLDivElement>(null);
+  const virtualizer = useVirtualizer({
+    count: results.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 140,
+  });
+
+  return (
+    <div ref={parentRef} style={{ height: '100%', overflow: 'auto' }}>
+      <ul
+        style={{
+          height: `${virtualizer.getTotalSize()}px`,
+          width: '100%',
+          position: 'relative',
+          listStyle: 'none'
+        }}
+      >
+        {virtualizer.getVirtualItems().map((virtualItem) => (
+          <li data-index={virtualItem.index} key={virtualItem.key} ref={virtualizer.measureElement}>
+            <SearchListItem item={results[virtualItem.index]} />
+          </li>
+        ))}
+      </ul>
+      {/* {results.length ? (
+        <List itemLayout="vertical" header={<h3>Search Results</h3>}>
+          <VirtualList data={results} itemKey="name" height={650}>
+            {(item) => <SearchListItem item={item} />}
+          </VirtualList>
+        </List>
+      ) : null} */}
+    </div>
+  );
+};
 
 export { SearchResultsList };
