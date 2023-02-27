@@ -38,17 +38,22 @@ const Header = (): JSX.Element => {
   const onLogout = async () => {
     dispatch(logout());
   };
-  
 
   return (
     <header className={styles['ba-header']}>
       <nav className={styles['ba-header__navigation']}>
-        <Link to="/">Backlog App</Link>
-        {'  '}
+        <Link to="/" className={styles['ba-header__navigation-link']}>
+          Backlog App
+        </Link>
+        &nbsp;&nbsp;
         {authorized ? (
-          <Link to="/list">{t('home.header.navigation.games')}</Link>
+          <Link to="/list" className={styles['ba-header__navigation-link']}>
+            {t('home.header.navigation.games')}
+          </Link>
         ) : (
-          <Link to="/auth">{t('home.header.navigation.login')}</Link>
+          <Link to="/auth" className={styles['ba-header__navigation-link']}>
+            {t('home.header.navigation.login')}
+          </Link>
         )}
       </nav>
       <div className={styles['ba-header__controls']}>

@@ -27,12 +27,12 @@ const Home = (): JSX.Element => {
   };
 
   return (
-    <div>
+    <main>
       <div className={styles['ba-home']}>
         <SearchInput onSearch={onGameSearch} />
       </div>
       <SearchResultsList results={searchResults} />
-    </div>
+    </main>
   );
 };
 

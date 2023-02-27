@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import type { ChangeEvent } from 'react';
+import type { FC, ChangeEvent } from 'react';
 
 import styles from './styles.module.scss';
 
@@ -9,7 +9,7 @@ interface SearchInputProps {
   onSearch: (searchQuery: string) => void;
 }
 
-const SearchInput = ({ onSearch }: SearchInputProps) => {
+const SearchInput: FC<SearchInputProps> = ({ onSearch }) => {
   const { t } = useTranslation();
   const [query, setQuery] = useState('');
 

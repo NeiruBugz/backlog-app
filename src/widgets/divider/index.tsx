@@ -1,8 +1,8 @@
-import type { ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
 
 import styles from './styles.module.scss';
 
-const Divider = ({ children }: { children: ReactNode }) => (
+const Divider: FC<{ children: ReactNode }> = ({ children }) => (
   <div className={styles['ba-divider']}>{children}</div>
 );
 

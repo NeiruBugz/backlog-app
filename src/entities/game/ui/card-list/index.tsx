@@ -2,6 +2,7 @@ import { Translation } from 'react-i18next';
 import { GameCard } from '@entities';
 import { Divider, Text } from '@widgets';
 
+import type { FC } from 'react';
 import type { Game } from '@entities';
 
 enum FilterKeys {
@@ -17,13 +18,13 @@ interface ListProps {
   listItemClass?: string;
 };
 
-const EmptyBacklogPropmt = () => (
+const EmptyBacklogPropmt = (): JSX.Element => (
   <Text heading={true} level={4}>
     <Translation>{(t) => t('games-list.emptyBacklog')}</Translation>
   </Text>
 );
 
-const EmptyList = ({ text }: { text: string }) => {
+const EmptyList: FC<{ text: string }> = ({ text }) => {
   if (text === FilterKeys.BACKLOG) {
     return (
       <>
@@ -36,7 +37,7 @@ const EmptyList = ({ text }: { text: string }) => {
   }
 };
 
-const List = ({ listItems, dividerText, listClass, listItemClass }: ListProps): JSX.Element => {
+const List: FC<ListProps> = ({ listItems, dividerText, listClass, listItemClass }) => {
   if (listItems.length === 0 && dividerText) {
     return <EmptyList text={dividerText} />;
   }

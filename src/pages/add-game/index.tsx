@@ -18,28 +18,8 @@ import type { Game } from '@entities';
 import styles from './styles.module.scss';
 
 import { PLATFORM_OPTIONS, STATUS_OPTIONS, translateStatus } from './constants';
-import { Listbox } from '@headlessui/react';
 
 type AddGameInputs = Pick<Game, 'title' | 'platform' | 'status'>;
-
-const Select = ({
-  selected,
-  items,
-}: {
-  selected: { value: string; label: string };
-  items: { value: string; label: string }[];
-} & HTMLSelectElement) => (
-  <Listbox value={selected.value} as="div" style={{ position: 'absolute' }}>
-    <Listbox.Button>{selected.label}</Listbox.Button>
-    <Listbox.Options style={{ position: 'absolute' }}>
-      {items.map((item) => (
-        <Listbox.Option key={item.value} value={item.value}>
-          {item.label}
-        </Listbox.Option>
-      ))}
-    </Listbox.Options>
-  </Listbox>
-);
 
 const AddGame = (): JSX.Element => {
   const { t } = useTranslation();

@@ -2,23 +2,20 @@ import { useEffect, useRef, useState } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { api } from '@shared';
 
+import type { FC } from 'react';
 import type { HowLongToBeatEntry } from 'howlongtobeat';
 
 import styles from './styles.module.scss';
 
-const SuggestBox = ({
-  query,
-  onItemClick,
-  width,
-  xPos,
-  yPos,
-}: {
+interface SuggestBoxProps {
   query: string;
   onItemClick: (item: HowLongToBeatEntry) => void;
-  width?: number;
-  xPos?: number;
-  yPos?: number;
-}): JSX.Element => {
+  width: number;
+  xPos: number;
+  yPos: number;
+}
+
+const SuggestBox: FC<SuggestBoxProps> = ({ query, onItemClick, width, xPos, yPos }) => {
   const [list, setList] = useState<HowLongToBeatEntry[]>([]);
   const parentRef = useRef<HTMLDivElement>(null);
   const virtualizer = useVirtualizer({

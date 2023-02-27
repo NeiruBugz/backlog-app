@@ -5,11 +5,12 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 import { changePayload } from '@entities';
 import { Text, Tag } from '@widgets';
 
+import type { FC } from 'react';
 import type { HowLongToBeatEntry } from 'howlongtobeat';
 
 import styles from './styles.module.scss';
 
-const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => {
+const SearchListItem: FC<{ item: HowLongToBeatEntry }> = ({ item }) => {
   const { name, platforms, imageUrl, id, gameplayMain, gameplayMainExtra, gameplayCompletionist } =
     item;
   const { t } = useTranslation();
@@ -20,7 +21,7 @@ const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => 
     navigate('/add-game');
   };
 
-  const Tags = () => {
+  const Tags = (): JSX.Element => {
     if (platforms.length === 0) {
       return <></>;
     }
@@ -39,7 +40,7 @@ const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => 
     );
   };
 
-  const Completions = () => {
+  const Completions = (): JSX.Element => {
     const determinePluralityKey = useCallback((count: number): string => {
       if (count === 1) {
         return 'hours_one';
@@ -98,7 +99,7 @@ const SearchListItem = ({ item }: { item: HowLongToBeatEntry }): JSX.Element => 
   );
 };
 
-const SearchResultsList = ({ results }: { results: HowLongToBeatEntry[] }) => {
+const SearchResultsList: FC<{ results: HowLongToBeatEntry[] }> = ({ results }) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const virtualizer = useVirtualizer({
     count: results.length,
@@ -122,13 +123,6 @@ const SearchResultsList = ({ results }: { results: HowLongToBeatEntry[] }) => {
           </li>
         ))}
       </ul>
-      {/* {results.length ? (
-        <List itemLayout="vertical" header={<h3>Search Results</h3>}>
-          <VirtualList data={results} itemKey="name" height={650}>
-            {(item) => <SearchListItem item={item} />}
-          </VirtualList>
-        </List>
-      ) : null} */}
     </div>
   );
 };

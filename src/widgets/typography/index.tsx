@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import type { ReactNode, HTMLAttributes } from 'react';
+import type { FC, ReactNode, HTMLAttributes } from 'react';
 
 type TypographyAttributes = HTMLHeadingElement | HTMLParagraphElement;
 
@@ -11,7 +11,7 @@ interface TypographyProps extends HTMLAttributes<TypographyAttributes>{
 
 const titleLevels = [1, 2, 3, 4, 5];
 
-const Text = ({ children, heading, level, ...rest }: TypographyProps) => {
+const Text: FC<TypographyProps> = ({ children, heading, level, ...rest }) => {
   const detectTitleElement = () => {
     let el = 'p';
 

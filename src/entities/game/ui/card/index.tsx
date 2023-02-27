@@ -1,10 +1,11 @@
 import { Tag } from '@widgets';
 
+import type { FC } from 'react';
 import type { Game as GameProps } from '@entities';
 
 import styles from './styles.module.scss';
 
-const GameCard = ({ title, platform, img }: GameProps): JSX.Element => (
+const GameCard: FC<GameProps> = ({ title, platform, img }) => (
   <>
     <div className={styles['ba-card-alt']}>
       <img src={img} className={styles['ba-card-alt__image']} />

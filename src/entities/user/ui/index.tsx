@@ -1,12 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { Menu } from '@headlessui/react';
 
+import type { FC } from 'react';
 import type { UserProps } from '@shared';
 
 import user from 'shared/assets/user.png';
 import styles from './styles.module.scss';
 
-const User = ({ username, avatarUrl, onLogout }: UserProps): JSX.Element => {
+const User: FC<UserProps> = ({ username, avatarUrl, onLogout }) => {
   const { t } = useTranslation();
 
   return (
