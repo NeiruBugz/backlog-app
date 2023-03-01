@@ -1,8 +1,13 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
 
 import type { FirebaseOptions } from 'firebase/app';
+import type { Game } from '@entities';
+
+interface FirebaseAddGamePayload extends Omit<Game, 'id'> {
+  user: string;
+}
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -18,7 +23,11 @@ const firebaseApp = initializeApp(firebaseConfig);
 const firebaseAuth = getAuth(firebaseApp);
 const firebaseStore = getFirestore(firebaseApp);
 
+const addDocument = async (data: FirebaseAddGamePayload, collectionName: string) => 
+  await addDoc(collection(firebaseStore, collectionName), { ...data });
+
 export {
   firebaseAuth,
-  firebaseStore
+  firebaseStore,
+  addDocument,
 };
