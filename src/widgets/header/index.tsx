@@ -1,9 +1,12 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useSignOut } from 'react-firebase-hooks/auth';
+
 import { getAuthState, getUserInfo, User, logout } from '@entities';
 import { DropdownWidget } from '@widgets';
 import { useAppDispatch, useAppSelector, getLanguageLabel } from '@shared';
+import { firebaseAuth } from 'shared/api/firebase';
 
 const LanguageItems = [
   {
@@ -35,6 +38,8 @@ const createThemeOptions = (): { key: string; label: string }[] => {
 
 const Header = (): JSX.Element => {
   const { t, i18n } = useTranslation();
+  const [signOut, error] = useSignOut(firebaseAuth);
+
   const dispatch = useAppDispatch();
   const authorized = useAppSelector(getAuthState);
   const user = useAppSelector(getUserInfo);
@@ -56,7 +61,13 @@ const Header = (): JSX.Element => {
   };
 
   const onLogout = async () => {
-    dispatch(logout());
+    signOut().then((result) => {
+      if (result) {
+        dispatch(logout());
+      } else {
+        alert(error);
+      }
+    });
   };
 
   return (

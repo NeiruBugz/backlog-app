@@ -1,40 +1,53 @@
-import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
-import { useForm } from 'react-hook-form';
+import {
+  useSignInWithGoogle,
+} from 'react-firebase-hooks/auth';
 
 import { login } from '@entities';
 import { useAppDispatch } from '@shared';
+import { firebaseAuth } from 'shared/api/firebase';
 
-import type { SubmitHandler } from 'react-hook-form';
-
-interface AuthInputs {
-  username: string;
-  password: string;
-}
+import type { MouseEventHandler } from 'react';
 
 const Auth = (): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { register, handleSubmit } = useForm<AuthInputs>();
-  const { t } = useTranslation();
+  const [signInWithGoogle] = useSignInWithGoogle(firebaseAuth);
 
-  const onAuthClick: SubmitHandler<AuthInputs> = ({ username, password }) => {
-    dispatch(login({ authorized: true, username: username }));
-    navigate('/list');
+  const onGoogleLogin: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.preventDefault();
+    signInWithGoogle().then((res) => {
+      if (res) {
+        const {
+          user: { displayName, photoURL, uid },
+        } = res;
+        if (displayName) {
+          dispatch(
+            login({
+              uid,
+              authorized: true,
+              username: displayName,
+              avatarUrl: photoURL ?? '',
+            })
+          );
+          navigate('/list');
+        }
+      }
+    });
   };
 
   return (
     <main className="flex justify-center items-center">
-      <form onSubmit={handleSubmit(onAuthClick)} className="form-control w-full max-w-2xl">
-        <label htmlFor="login" className="label">
-          {t('auth.label')}
+      <form className="form-control w-full max-w-2xl">
+        {/* <label htmlFor="login" className="label">
+          Email
         </label>
         <input
           type="text"
           id="login"
-          placeholder={t('auth.label') || ''}
+          placeholder={'Enter email'}
           className="input input-bordered input-primary"
-          {...register('username', { required: true })}
+          {...register('email', { required: true })}
         />
         <label htmlFor="password" className="label">
           Password
@@ -50,10 +63,13 @@ const Auth = (): JSX.Element => {
           <button type="submit" className="btn btn-primary">
             {t('auth.submit')}
           </button>
-          <button type="button" className="btn btn-secondary">
+          <button type="button" className="btn btn-secondary" onClick={onSignUp}>
             Sign Up
           </button>
-        </div>
+        </div> */}
+        <button type="button" className="btn btn-accent my-3" onClick={onGoogleLogin}>
+          Sign in with Google
+        </button>
       </form>
     </main>
   );

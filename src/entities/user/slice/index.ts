@@ -5,6 +5,7 @@ import type { RootState } from '@shared';
 import type { User } from '../types';
 
 const initialState: User = {
+  uid: '',
   username: '',
   authorized: false,
   avatarUrl: '',
