@@ -12,6 +12,14 @@ const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
+    setGames: (state, action: PayloadAction<Game[]>) => {
+      const { payload } = action;
+      payload.map((game) => {
+        if (state.length === 0 || state.findIndex((stateGame) => stateGame.id === game.id) === -1) {
+          state.push(game);
+        }
+      });
+    },
     addGame: (state, action: PayloadAction<Game>) => {
       state.push(action.payload);
     },
@@ -32,5 +40,5 @@ const gameSlice = createSlice({
 });
 
 export const gameReducer = gameSlice.reducer;
-export const { addGame, updateGame, deleteGame } = gameSlice.actions;
+export const { addGame, updateGame, deleteGame, setGames } = gameSlice.actions;
 export const games = (state: RootState) => state.gameReducer;
