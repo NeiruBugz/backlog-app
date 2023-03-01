@@ -7,8 +7,6 @@ import { useAppDispatch } from '@shared';
 
 import type { SubmitHandler } from 'react-hook-form';
 
-import styles from './styles.module.scss';
-
 interface AuthInputs {
   username: string;
   password: string;
@@ -26,34 +24,36 @@ const Auth = (): JSX.Element => {
   };
 
   return (
-    <main className={styles['ba-auth']}>
-      <form onSubmit={handleSubmit(onAuthClick)} className={styles['ba-auth__form']}>
-        <label htmlFor="login" className={styles['ba-auth__label']}>
+    <main className="flex justify-center items-center">
+      <form onSubmit={handleSubmit(onAuthClick)} className="form-control w-full max-w-2xl">
+        <label htmlFor="login" className="label">
           {t('auth.label')}
         </label>
         <input
           type="text"
           id="login"
           placeholder={t('auth.label') || ''}
-          className={styles['ba-auth__input--username']}
+          className="input input-bordered input-primary"
           {...register('username', { required: true })}
         />
-        <label htmlFor="password" className={styles['ba-auth__label']}>
+        <label htmlFor="password" className="label">
           Password
         </label>
         <input
           type="password"
           id="password"
           placeholder="Password"
-          className={styles['ba-auth__input--password']}
+          className="input input-bordered input-primary"
           {...register('password', { required: true })}
         />
-        <button type="submit" className={styles['ba-auth__button--login']}>
-          {t('auth.submit')}
-        </button>
-        <button type="button" className={styles['ba-auth__button--signup']}>
-          Sign Up
-        </button>
+        <div className="btn-group btn-group-vertical mt-3">
+          <button type="submit" className="btn btn-primary">
+            {t('auth.submit')}
+          </button>
+          <button type="button" className="btn btn-secondary">
+            Sign Up
+          </button>
+        </div>
       </form>
     </main>
   );

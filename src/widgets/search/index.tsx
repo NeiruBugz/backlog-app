@@ -3,8 +3,6 @@ import { useTranslation } from 'react-i18next';
 
 import type { FC, ChangeEvent } from 'react';
 
-import styles from './styles.module.scss';
-
 interface SearchInputProps {
   onSearch: (searchQuery: string) => void;
 }
@@ -39,13 +37,13 @@ const SearchInput: FC<SearchInputProps> = ({ onSearch }) => {
     <>
       <input
         type="search"
-        className={styles['ba-search__input']}
+        className="input input-bordered input-primary w-full"
         placeholder={t('home.search.inputPlaceholder') || ''}
         value={query}
         onChange={onInputChange}
       />
       <button
-        className={styles['ba-search__button']}
+        className="btn btn-primary"
         onClick={onButtonPress}
         disabled={query.length === 0}
       >

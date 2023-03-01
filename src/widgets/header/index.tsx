@@ -5,8 +5,6 @@ import { getAuthState, getUserInfo, User, logout } from '@entities';
 import { DropdownWidget } from '@widgets';
 import { useAppDispatch, useAppSelector, getLanguageLabel } from '@shared';
 
-import styles from './styles.module.scss';
-
 const LanguageItems = [
   {
     key: 'ru',
@@ -17,6 +15,23 @@ const LanguageItems = [
     label: '🇺🇸',
   },
 ];
+
+const themes = [
+  'light',
+  'dark',
+  'emerald',
+  'corporate',
+  'synthwave',
+  'cyberpunk',
+  'pastel',
+  'fantasy',
+];
+
+const createThemeOptions = (): { key: string; label: string }[] => {
+  const themesOptions: { key: string; label: string }[] = [];
+  themes.map((theme) => themesOptions.push({ key: theme, label: theme }));
+  return themesOptions;
+};
 
 const Header = (): JSX.Element => {
   const { t, i18n } = useTranslation();
@@ -31,6 +46,11 @@ const Header = (): JSX.Element => {
     }
   }, [i18n]);
 
+  const onThemeChange = (key: string) => {
+    document.querySelector('html')?.setAttribute('data-theme', key);
+    localStorage.setItem('theme', key);
+  };
+
   const onLanguageSelect = (key: string) => {
     i18n.changeLanguage(key);
   };
@@ -40,30 +60,60 @@ const Header = (): JSX.Element => {
   };
 
   return (
-    <header className={styles['ba-header']}>
-      <nav className={styles['ba-header__navigation']}>
-        <Link to="/" className={styles['ba-header__navigation-link']}>
-          Backlog App
-        </Link>
-        &nbsp;&nbsp;
-        {authorized ? (
-          <Link to="/list" className={styles['ba-header__navigation-link']}>
-            {t('home.header.navigation.games')}
-          </Link>
-        ) : (
-          <Link to="/auth" className={styles['ba-header__navigation-link']}>
-            {t('home.header.navigation.login')}
-          </Link>
-        )}
+    <header className="flex justify-between mb-6">
+      <nav className="navbar flex items-center">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <label tabIndex={0} className="btn btn-ghost">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-primary-content text-primary"
+            >
+              <li className="hover:bg-primary-focus hover:text-primary-content rounded-none">
+                <Link to="/">
+                  Backlog App
+                </Link>
+              </li>
+              {authorized ? (
+                <li className="hover:bg-primary-focus hover:text-primary-content rounded-none">
+                  <Link to="/list">
+                    {t('home.header.navigation.games')}
+                  </Link>
+                </li>
+              ) : (
+                <li className="hover:bg-primary-focus hover:text-primary-content rounded-none">
+                  <Link to="/auth">
+                    {t('home.header.navigation.login')}
+                  </Link>
+                </li>
+              )}
+            </ul>
+          </div>
+        </div>
       </nav>
-      <div className={styles['ba-header__controls']}>
+      <div className="flex">
         {authorized ? <User {...user} onLogout={onLogout} /> : null}
         <DropdownWidget
           label={getLanguageLabel(i18n.language)}
           items={LanguageItems}
           onClick={onLanguageSelect}
-          classname={styles['ba-header__language-select']}
         />
+        <DropdownWidget label="Theme" items={createThemeOptions()} onClick={onThemeChange} />
       </div>
     </header>
   );

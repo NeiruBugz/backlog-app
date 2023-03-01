@@ -1,5 +1,3 @@
-import { Menu } from '@headlessui/react';
-
 import type { FC } from 'react';
 
 interface DropDownItem {
@@ -9,24 +7,27 @@ interface DropDownItem {
 
 interface DropdownWidgetProps {
   label: string;
-  classname?: string;
   items: DropDownItem[];
   onClick: (key: string) => void;
 }
 
-const DropdownWidget: FC<DropdownWidgetProps> = ({ items, onClick, label, classname }) => (
-  <>
-    <Menu as="div" className={classname}>
-      <Menu.Button>{label}</Menu.Button>
-      <Menu.Items as="div" style={{ position: 'absolute', zIndex: 1 }}>
-        {items?.map((item) => (
-          <Menu.Item as="div" key={item.key} onClick={() => onClick(item.key)}>
-            <button>{item.label}</button>
-          </Menu.Item>
-        ))}
-      </Menu.Items>
-    </Menu>
-  </>
+const DropdownWidget: FC<DropdownWidgetProps> = ({
+  items,
+  onClick,
+  label,
+}) => (
+  <div className="dropdown dropdown-end">
+    <label tabIndex={0} className="btn m-1 bg-neutral-focus">
+      {label}
+    </label>
+    <ul tabIndex={0} className="dropdown-content menu p-2 shadow rounded-box w-max bg-primary-content text-primary">
+      {items?.map((item) => (
+        <li key={item.key} onClick={() => onClick(item.key)} className="hover:bg-primary-focus hover:text-primary-content rounded-none">
+          <button>{item.label}</button>
+        </li>
+      ))}
+    </ul>
+  </div>
 );
 
 export { DropdownWidget };

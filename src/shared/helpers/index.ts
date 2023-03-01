@@ -19,22 +19,22 @@ const capitalize = (value: string): string => `${value[0].toUpperCase()}${value.
 const createPlatformClassName = (platform: string) => {
   const lowercasedPlatform = platform.toLowerCase();
   if (lowercasedPlatform.includes('nintendo') || NINTENDO_PLATFORMS.includes(lowercasedPlatform)) {
-    return 'ba-tag__platform--nintendo';
+    return 'bg-nintendo';
   }
 
   if (lowercasedPlatform.includes('playstation')) {
-    return 'ba-tag__platform--playstation';
+    return 'bg-playstation';
   }
 
   if (lowercasedPlatform.includes('xbox')) {
-    return 'ba-tag__platform--xbox';
+    return 'bg-xbox';
   }
 
   if (lowercasedPlatform.includes('pc')) {
-    return 'ba-tag__platform--pc';
+    return 'bg-pc';
   }
 
-  return 'ba-tag__platform';
+  return 'bg-slate-400';
 };
 
 const filterCallback = (item: Game, filter: Filter, condition?: boolean): boolean => {

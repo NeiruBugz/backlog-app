@@ -3,15 +3,13 @@ import { Tag } from '@widgets';
 import type { FC } from 'react';
 import type { Game as GameProps } from '@entities';
 
-import styles from './styles.module.scss';
-
 const GameCard: FC<GameProps> = ({ title, platform, img }) => (
   <>
-    <div className={styles['ba-card-alt']}>
-      <img src={img} className={styles['ba-card-alt__image']} />
-      <div className={styles['ba-card-alt__info']}>
-        <Tag platform={platform} type="platform" />
-        <h3 className={styles['ba-card-alt__title']}>{title}</h3>
+    <div className="card bg-base-100 shadow-xl image-full rounded-lg w-56 h-56 sm:w-64 sm:h-64 md:w-96 md:h-96">
+      <figure><img src={img} className="w-96 object-fill rounded-lg" /></figure>
+      <div className="card-body flex flex-col">
+        <h2 className="card-title">{title}</h2>
+        <Tag platform={platform} />
       </div>
     </div>
   </>

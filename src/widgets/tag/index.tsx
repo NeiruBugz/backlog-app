@@ -3,27 +3,25 @@ import { createPlatformClassName, preparePlatform } from '@shared';
 
 import type { CSSProperties, ReactNode } from 'react';
 
-import styles from './styles.module.scss';
-
 const Tag = ({
   platform,
   style,
-  type,
   children,
 }: {
-  type: 'platform' | 'common';
   platform?: string;
   style?: CSSProperties;
   children?: ReactNode;
 }) => {
   const platformClassName = createPlatformClassName(platform ?? '');
-  const className =
-    type === 'platform'
-      ? classNames(styles['ba-tag__platform'], styles[platformClassName])
-      : styles['ba-tag__common'];
 
   return (
-    <span style={style} className={className}>
+    <span
+      style={style}
+      className={classNames(
+        'py-2 px-4 h-8 max-h-10 flex justify-center items-center text-white text-md rounded',
+        platformClassName
+      )}
+    >
       {preparePlatform(platform ?? '') || children}
     </span>
   );

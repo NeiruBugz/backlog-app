@@ -28,12 +28,12 @@ const SearchListItem: FC<{ item: HowLongToBeatEntry }> = ({ item }) => {
 
     return (
       <div className={styles['ba-search-result__tags']}>
-        <Text heading level={5}>
+        <Text heading level={5} className="text-xl font-bold">
           {t('games-list.searchResults.playableOn')}
         </Text>
         <div className={styles['ba-search-result__tags-wrapper']}>
           {platforms.map((platform) => (
-            <Tag type="platform" platform={platform} key={`${platform}--${id}`} />
+            <Tag platform={platform} key={`${platform}--${id}`} />
           ))}
         </div>
       </div>
@@ -53,23 +53,23 @@ const SearchListItem: FC<{ item: HowLongToBeatEntry }> = ({ item }) => {
 
     return (
       <div className={styles['ba-search-result__completions']}>
-        <Text heading level={5}>
+        <Text heading level={5} className="text-xl font-bold mb-1">
           {t('games-list.searchResults.completion.completionHours')}
         </Text>
         <div className={styles['ba-search-result__completions-wrapper']}>
-          <Tag type="common">
+          <Tag>
             {t('games-list.searchResults.completion.main')}:{' '}
             {t(`games-list.searchResults.completion.${determinePluralityKey(gameplayMain)}`, {
               count: gameplayMain,
             })}
           </Tag>
-          <Tag type="common">
+          <Tag>
             {t('games-list.searchResults.completion.mainExtra')}:{' '}
             {t(`games-list.searchResults.completion.${determinePluralityKey(gameplayMainExtra)}`, {
               count: gameplayMainExtra,
             })}
           </Tag>
-          <Tag type="common">
+          <Tag>
             {t('games-list.searchResults.completion.completionist')}:{' '}
             {t(
               `games-list.searchResults.completion.${determinePluralityKey(gameplayCompletionist)}`,
@@ -84,16 +84,18 @@ const SearchListItem: FC<{ item: HowLongToBeatEntry }> = ({ item }) => {
   return (
     <div className={styles['ba-search-result']}>
       <img className={styles['ba-search-result__image']} src={imageUrl} alt={`${name}'s image`} />
-      <Text heading level={4} className={styles['ba-search-result__title']}>
+      <Text heading level={4} className="font-bold text-2xl mb-1">
         {name}
       </Text>
       <Tags />
       <Completions />
       <div>
-        <Text heading level={5}>
+        <Text heading level={5} className="text-lg font-bold mb-1">
           Actions
         </Text>
-        <button onClick={onAddClick}>{t('common.addGame')}</button>
+        <button onClick={onAddClick} className="btn btn-primary">
+          {t('common.addGame')}
+        </button>
       </div>
     </div>
   );
@@ -114,7 +116,7 @@ const SearchResultsList: FC<{ results: HowLongToBeatEntry[] }> = ({ results }) =
           height: `${virtualizer.getTotalSize()}px`,
           width: '100%',
           position: 'relative',
-          listStyle: 'none'
+          listStyle: 'none',
         }}
       >
         {virtualizer.getVirtualItems().map((virtualItem) => (

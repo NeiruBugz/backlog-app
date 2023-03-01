@@ -14,12 +14,10 @@ enum FilterKeys {
 interface ListProps {
   listItems: Game[];
   dividerText?: string;
-  listClass?: string;
-  listItemClass?: string;
-};
+}
 
 const EmptyBacklogPropmt = (): JSX.Element => (
-  <Text heading={true} level={4}>
+  <Text heading={true} level={4} className="text-lg sm:text-xl">
     <Translation>{(t) => t('games-list.emptyBacklog')}</Translation>
   </Text>
 );
@@ -28,7 +26,11 @@ const EmptyList: FC<{ text: string }> = ({ text }) => {
   if (text === FilterKeys.BACKLOG) {
     return (
       <>
-        <Divider>{text}</Divider>
+        <Divider>
+          <Text heading={true} level={4} className="text-lg sm:text-xl">
+            {text}
+          </Text>
+        </Divider>
         <EmptyBacklogPropmt />
       </>
     );
@@ -37,17 +39,23 @@ const EmptyList: FC<{ text: string }> = ({ text }) => {
   }
 };
 
-const List: FC<ListProps> = ({ listItems, dividerText, listClass, listItemClass }) => {
+const List: FC<ListProps> = ({ listItems, dividerText }) => {
   if (listItems.length === 0 && dividerText) {
     return <EmptyList text={dividerText} />;
   }
 
   return (
     <>
-      {dividerText ? <Divider >{dividerText}</Divider> : null}
-      <ul className={listClass}>
+      {dividerText ? (
+        <Divider>
+          <Text heading={true} level={4} className="text-lg sm:text-xl">
+            {dividerText}
+          </Text>
+        </Divider>
+      ) : null}
+      <ul className="carousel mt-6">
         {listItems.map((game) => (
-          <li className={listItemClass} key={game.id}>
+          <li className="carousel-item mr-3" key={game.id}>
             <GameCard {...game} />
           </li>
         ))}

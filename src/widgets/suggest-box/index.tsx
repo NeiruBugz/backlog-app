@@ -4,8 +4,7 @@ import { api } from '@shared';
 
 import type { FC } from 'react';
 import type { HowLongToBeatEntry } from 'howlongtobeat';
-
-import styles from './styles.module.scss';
+import { useDebounce } from 'shared/hooks/useDebounce';
 
 interface SuggestBoxProps {
   query: string;
@@ -17,6 +16,7 @@ interface SuggestBoxProps {
 
 const SuggestBox: FC<SuggestBoxProps> = ({ query, onItemClick, width, xPos, yPos }) => {
   const [list, setList] = useState<HowLongToBeatEntry[]>([]);
+  const debouncedQuery = useDebounce(query, 100);
   const parentRef = useRef<HTMLDivElement>(null);
   const virtualizer = useVirtualizer({
     count: list.length,
@@ -29,22 +29,34 @@ const SuggestBox: FC<SuggestBoxProps> = ({ query, onItemClick, width, xPos, yPos
   }, []);
 
   useEffect(() => {
-    api.search(query).then(setList);
+    if (query.length === 0) {
+      setList([]);
+    }
   }, [query]);
+
+  useEffect(() => {
+    api.search(debouncedQuery).then(setList);
+  }, [debouncedQuery]);
 
   return (
     <>
       {list.length ? (
         <div
-          className={styles['ba-suggestbox-list']}
+          className="absolute z-0 w-80 left-1/3 top-3 bg-primary-content rounded-b-lg shadow-md"
           ref={parentRef}
-          style={{ height: 400, overflow: 'auto', width, left: xPos, top: yPos }}
+          style={{
+            height: list.length * 80 > 400 ? 400 : list.length * 80,
+            overflow: 'auto',
+            width,
+            left: xPos,
+            top: yPos,
+          }}
         >
           <ul
+            className="relative list-none"
             style={{
               height: `${virtualizer.getTotalSize()}px`,
               width: '100%',
-              position: 'relative',
             }}
           >
             {virtualizer.getVirtualItems().map((virtualItem, index) => (
@@ -52,18 +64,22 @@ const SuggestBox: FC<SuggestBoxProps> = ({ query, onItemClick, width, xPos, yPos
                 key={virtualItem.key}
                 ref={virtualizer.measureElement}
                 data-index={virtualItem.index}
+                className="absolute top-0 left-0 pl-3 flex gap-3 my-2 justify-start items-center cursor-pointer hover:bg-primary-focus"
                 style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
                   width: '100%',
                   height: `${virtualItem.size}px`,
                   transform: `translateY(${virtualItem.start}px)`,
                 }}
                 onClick={() => onItemClick(list[index])}
               >
-                <img src={list[index].imageUrl} alt={list[index].name} />
-                <span>{list[index].name}</span>
+                <img
+                  className="w-16 max-h-16 object-fill"
+                  src={list[index].imageUrl}
+                  alt={list[index].name}
+                />
+                <span className="text-sm font-bold ml-4 text-primary hover:text-primary-content">
+                  {list[index].name}
+                </span>
               </li>
             ))}
           </ul>
