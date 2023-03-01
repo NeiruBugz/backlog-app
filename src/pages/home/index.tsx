@@ -19,7 +19,7 @@ const Home = (): JSX.Element => {
     if (user) {
       const { uid, photoURL, displayName } = user;
       if (displayName && uid) {
-        dispatch(login({ authorized: true, uid, username: displayName, avatarUrl: photoURL ?? '' }));
+        dispatch(login({ authorized: true, uid: uid, username: displayName, avatarUrl: photoURL ?? '' }));
       }
     }
   }, [user, loading, dispatch]);

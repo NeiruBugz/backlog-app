@@ -24,7 +24,7 @@ const Auth = (): JSX.Element => {
         if (displayName) {
           dispatch(
             login({
-              uid,
+              uid: uid,
               authorized: true,
               username: displayName,
               avatarUrl: photoURL ?? '',
