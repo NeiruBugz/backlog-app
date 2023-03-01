@@ -1,13 +1,10 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import { games, setStatusFilter } from '@entities';
 import { useAppDispatch, useAppSelector } from '@shared';
-import { Filters, ListsBody } from '@widgets';
-
-import styles from './styles.module.scss';
+import { Filters, ListsBody, Text } from '@widgets';
 
 const GamesList = (): JSX.Element => {
   const { t } = useTranslation();
@@ -31,24 +28,24 @@ const GamesList = (): JSX.Element => {
   return (
     <>
       {gamesList.length !== 0 ? (
-        <nav className={styles['ba-gameslist-page__nav']}>
+        <nav className="flex justify-between">
           <Filters onFilter={onFilter} filter={filter} />
           <Link to="/add-game">
-            <Button type="primary">{t('games-list.addButton')}</Button>
+            <button type="button" className="btn btn-primary">{t('games-list.addButton')}</button>
           </Link>
         </nav>
       ) : null}
-      <div>
+      <>
         {gamesList.length === 0 ? (
-          <div className={styles['ba-gameslist--no-games']}>
-            <Typography.Title level={4}>
-              {t('games-list.motto')} <Link to="/add-game">{t('games-list.mottoLink')}</Link>
-            </Typography.Title>
+          <div className="mt-6 text-center">
+            <Text heading level={4} className="text-lg">
+              {t('games-list.motto')} <Link to="/add-game" className="link link-accent">{t('games-list.mottoLink')}</Link>
+            </Text>
           </div>
         ) : (
           <ListsBody games={gamesList} filteredGames={filteredGames} filter={filter} />
         )}
-      </div>
+      </>
     </>
   );
 };

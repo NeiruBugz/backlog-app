@@ -1,17 +1,29 @@
-import { test, expect, Page } from '@playwright/test';
+import { test, expect } from '@playwright/test';
+import type { Page } from '@playwright/test';
 
 const auth = async (page: Page) => {
+  await page.goto('/');
   await page.locator('text="Login"').click();
-  await expect(page).toHaveURL('/auth');
-  const input = page.locator('input');
-  await input.fill('test user');
-  const button = page.locator('text="Sign in"');
-  await button.click();
+  await test.step('input username', async () => {
+    const input = page.locator('input[placeholder="Username"]');
+    await input.click();
+    await input.fill('test user');
+  });
+
+  await test.step('input password', async () => {
+    const input = page.locator('input[placeholder="Password"]');
+    await input.click();
+    await input.fill('password');
+  });
+  
+  await test.step('submit login', async () => {
+    const button = page.locator('text="Sign in"');
+    await button.click();
+  });
 };
 
 test.describe('Add game', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
     await auth(page);
   });
 
@@ -28,16 +40,13 @@ test.describe('Add game', () => {
       expect(await focusedInput.inputValue()).toBe('Test game');
     });
 
-    await test.step('Locate platform select and select "Playstation"', async () => {
-      await page.locator('text="Platform"').click();
-      const focusedInput = page.locator('*:focus');
-      focusedInput.click();
-      await page.locator('text="Playstation"').click();
+    await test.step('Locate platform select and select "PC"', async () => {
+      await page.locator('select[id="Platform"]').click();
+      await page.locator('text="PC"').click();
     });
 
     await test.step('Locate status select and select "In progress"', async () => {
-      await page.locator('text="Status"').click();
-      await page.locator('[title="Backlog"]').click();
+      await page.locator('select[id="Status"]').click();
       await page.locator('[title="In Progress"]').click();
     });
 

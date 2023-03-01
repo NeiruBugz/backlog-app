@@ -1,51 +1,45 @@
-import { message } from 'antd';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from 'react';
 
 import { SearchResultsList, SearchInput } from '@widgets';
-import { api, useAppSelector } from '@shared';
-import { getAuthState } from '@entities';
+import { api } from '@shared';
 
 import type { HowLongToBeatEntry } from 'howlongtobeat';
 
-import styles from './styles.module.scss';
-
 const Home = (): JSX.Element => {
-  const { t } = useTranslation();
-  
-  const [isLoading, setLoading] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<HowLongToBeatEntry[]>([]);
-  const authorized = useAppSelector(getAuthState);
+
+  useEffect(() => {
+    const currentTheme = document.querySelector('html')?.getAttribute('data-theme');
+    const storedTheme = localStorage.getItem('theme') ?? 'light';
+
+    if (currentTheme !== storedTheme) {
+      document.querySelector('html')?.setAttribute('data-theme', storedTheme);
+    }
+  }, []);
 
   const onGameSearch = (value: string) => {
     if (!value.length) {
-      message.info(t('systemMessages.inputParameter'), 1);
       setSearchResults([]);
       return;
     }
-    message.info(`${t('systemMessages.searchingFor')}: ${value}`, 1);
-    setLoading(true);
 
     api
       .search(value)
       .then((result) => {
         setSearchResults(result);
       })
-      .catch(() => {
-        message.error(`${t('systemMessages.searchErorr')} ${value}`, 1);
-      })
-      .finally(() => {
-        setLoading(false);
+      .catch((err) => {
+        console.error(err);
       });
   };
 
   return (
-    <div>
-      <div className={styles['ba-home']}>
-        <SearchInput onSearch={onGameSearch} isLoading={isLoading} disabled={!authorized} />
+    <main>
+      <div className="relative flex justify-center items-center w-full h-full">
+        <SearchInput onSearch={onGameSearch} />
       </div>
       <SearchResultsList results={searchResults} />
-    </div>
+    </main>
   );
 };
 

@@ -11,14 +11,14 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const authorized = useAppSelector(getAuthState);
 
   if (!authorized) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/auth" replace />;
   }
 
   return children;
 };
 
 const Routing = () => (
-  <>
+  <div className="container mx-auto">
     <Header />
     <Routes>
       <Route path="/" element={<Home />} />
@@ -41,7 +41,6 @@ const Routing = () => (
       />
       <Route path="*" element={<p>There&apos;s nothing here: 404!</p>} />
     </Routes>
-  </>
+  </div>
 );
-
 export { Routing };

@@ -3,8 +3,6 @@ import { filterCriteria, filterCallback, capitalize } from '@shared';
 
 import type { Game } from '@entities';
 
-import styles from './styles.module.scss';
-
 const ListsBody = ({
   games,
   filter,
@@ -22,16 +20,12 @@ const ListsBody = ({
             listItems={games.filter((game) => filterCallback(game, criteria, filter === 'all'))}
             dividerText={capitalize(criteria)}
             key={criteria}
-            listClass={styles['ba-gameslist']}
-            listItemClass={styles['ba-gameslist__item']}
           />
         ))}
       </>
     ) : (
       <List
         listItems={filteredGames}
-        listClass={styles['ba-gameslist']}
-        listItemClass={styles['ba-gameslist__item']}
       />
     )}
   </>

@@ -1,68 +1,89 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Avatar, List } from 'antd';
-import VirtualList from 'rc-virtual-list';
+import { useEffect, useRef, useState } from 'react';
+import { useVirtualizer } from '@tanstack/react-virtual';
 import { api } from '@shared';
 
+import type { FC } from 'react';
 import type { HowLongToBeatEntry } from 'howlongtobeat';
+import { useDebounce } from 'shared/hooks/useDebounce';
 
-import styles from './styles.module.scss';
-
-const LIST_ITEM_HEIGHT = 72;
-
-const SuggestBox = ({
-  query,
-  onItemClick,
-  width,
-  xPos,
-  yPos,
-}: {
+interface SuggestBoxProps {
   query: string;
   onItemClick: (item: HowLongToBeatEntry) => void;
-  width?: number;
-  xPos?: number;
-  yPos?: number;
-}): JSX.Element => {
+  width: number;
+  xPos: number;
+  yPos: number;
+}
+
+const SuggestBox: FC<SuggestBoxProps> = ({ query, onItemClick, width, xPos, yPos }) => {
   const [list, setList] = useState<HowLongToBeatEntry[]>([]);
+  const debouncedQuery = useDebounce(query, 100);
+  const parentRef = useRef<HTMLDivElement>(null);
+  const virtualizer = useVirtualizer({
+    count: list.length,
+    getScrollElement: () => parentRef?.current,
+    estimateSize: () => 72,
+  });
 
   useEffect(() => {
-    api.search(query).then(setList);
+    parentRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    if (query.length === 0) {
+      setList([]);
+    }
   }, [query]);
 
-  const onClick = (entry: HowLongToBeatEntry) => {
-    if (onItemClick) {
-      onItemClick(entry);
-    }
-  };
-
-  const listHeight = useMemo(() => {
-    if (list.length < 5) {
-      return LIST_ITEM_HEIGHT * list.length;
-    }
-
-    return LIST_ITEM_HEIGHT * 5;
-  }, [list]);
+  useEffect(() => {
+    api.search(debouncedQuery).then(setList);
+  }, [debouncedQuery]);
 
   return (
     <>
       {list.length ? (
-        <List
-          className={styles['ba-suggestbox-list']}
-          bordered
-          style={{ width, left: xPos, top: yPos }}
+        <div
+          className="absolute z-0 w-80 left-1/3 top-3 bg-primary-content rounded-b-lg shadow-md"
+          ref={parentRef}
+          style={{
+            height: list.length * 80 > 400 ? 400 : list.length * 80,
+            overflow: 'auto',
+            width,
+            left: xPos,
+            top: yPos,
+          }}
         >
-          <VirtualList
-            data={list}
-            itemKey={(item) => `${item.name}--${item.id}`}
-            itemHeight={LIST_ITEM_HEIGHT}
-            height={listHeight}
+          <ul
+            className="relative list-none"
+            style={{
+              height: `${virtualizer.getTotalSize()}px`,
+              width: '100%',
+            }}
           >
-            {(item) => (
-              <List.Item onClick={() => onClick(item)} style={{ cursor: 'pointer' }}>
-                <List.Item.Meta avatar={<Avatar src={item.imageUrl} />} title={item.name} />
-              </List.Item>
-            )}
-          </VirtualList>
-        </List>
+            {virtualizer.getVirtualItems().map((virtualItem, index) => (
+              <li
+                key={virtualItem.key}
+                ref={virtualizer.measureElement}
+                data-index={virtualItem.index}
+                className="absolute top-0 left-0 pl-3 flex gap-3 my-2 justify-start items-center cursor-pointer hover:bg-primary-focus"
+                style={{
+                  width: '100%',
+                  height: `${virtualItem.size}px`,
+                  transform: `translateY(${virtualItem.start}px)`,
+                }}
+                onClick={() => onItemClick(list[index])}
+              >
+                <img
+                  className="w-16 max-h-16 object-fill"
+                  src={list[index].imageUrl}
+                  alt={list[index].name}
+                />
+                <span className="text-sm font-bold ml-4 text-primary hover:text-primary-content">
+                  {list[index].name}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       ) : null}
     </>
   );

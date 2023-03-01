@@ -1,7 +1,8 @@
-import { Divider, Typography } from 'antd';
 import { Translation } from 'react-i18next';
 import { GameCard } from '@entities';
+import { Divider, Text } from '@widgets';
 
+import type { FC } from 'react';
 import type { Game } from '@entities';
 
 enum FilterKeys {
@@ -13,21 +14,23 @@ enum FilterKeys {
 interface ListProps {
   listItems: Game[];
   dividerText?: string;
-  listClass?: string;
-  listItemClass?: string;
-};
+}
 
-const EmptyBacklogPropmt = () => (
-  <Typography.Title level={4}>
+const EmptyBacklogPropmt = (): JSX.Element => (
+  <Text heading={true} level={4} className="text-lg sm:text-xl">
     <Translation>{(t) => t('games-list.emptyBacklog')}</Translation>
-  </Typography.Title>
+  </Text>
 );
 
-const EmptyList = ({ text }: { text: string }) => {
+const EmptyList: FC<{ text: string }> = ({ text }) => {
   if (text === FilterKeys.BACKLOG) {
     return (
       <>
-        <Divider>{text}</Divider>
+        <Divider>
+          <Text heading={true} level={4} className="text-lg sm:text-xl">
+            {text}
+          </Text>
+        </Divider>
         <EmptyBacklogPropmt />
       </>
     );
@@ -36,17 +39,23 @@ const EmptyList = ({ text }: { text: string }) => {
   }
 };
 
-const List = ({ listItems, dividerText, listClass, listItemClass }: ListProps): JSX.Element => {
+const List: FC<ListProps> = ({ listItems, dividerText }) => {
   if (listItems.length === 0 && dividerText) {
     return <EmptyList text={dividerText} />;
   }
 
   return (
     <>
-      {dividerText ? <Divider >{dividerText}</Divider> : null}
-      <ul className={listClass}>
+      {dividerText ? (
+        <Divider>
+          <Text heading={true} level={4} className="text-lg sm:text-xl">
+            {dividerText}
+          </Text>
+        </Divider>
+      ) : null}
+      <ul className="carousel mt-6">
         {listItems.map((game) => (
-          <li className={listItemClass} key={game.id}>
+          <li className="carousel-item mr-3" key={game.id}>
             <GameCard {...game} />
           </li>
         ))}
