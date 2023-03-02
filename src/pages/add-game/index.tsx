@@ -22,13 +22,13 @@ const AddGame = (): JSX.Element => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { uid } = useAppSelector(getUserInfo);
+  const { name, imageUrl } = useSelector((state: RootState) => state.searchReducer);
   const { register, handleSubmit, control } = useForm<AddGameInputs>({
     defaultValues: {
       title: '',
     },
   });
 
-  const payload = useSelector((state: RootState) => state.searchReducer);
 
   const [inputValue, setInputValue] = useState<string>('');
   const [query, setQuery] = useState<string>('');
@@ -46,14 +46,15 @@ const AddGame = (): JSX.Element => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (payload && 'name' in payload) {
-      setInputValue(payload);
+    if (name) {
+      setInputValue(name);
+      setEntryValues({ imageUrl, id: '' });
     }
 
     return () => {
       setInputValue('');
     };
-  }, [payload]);
+  }, [name, imageUrl]);
 
   useLayoutEffect(() => {
     if (inputRef.current) {
