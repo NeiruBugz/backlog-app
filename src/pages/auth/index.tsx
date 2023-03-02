@@ -5,8 +5,10 @@ import { firebaseAuth } from '@shared';
 
 import type { MouseEventHandler } from 'react';
 import { setUser } from 'entities/user/slice/index';
+import { useTranslation } from 'react-i18next';
 
 const Auth = (): JSX.Element => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [signInWithGoogle] = useSignInWithGoogle(firebaseAuth);
 
@@ -62,7 +64,7 @@ const Auth = (): JSX.Element => {
           </button>
         </div> */}
         <button type="button" className="btn btn-accent my-3" onClick={onGoogleLogin}>
-          Sign in with Google
+          {t('auth.googleSignIn')}
         </button>
       </form>
     </main>

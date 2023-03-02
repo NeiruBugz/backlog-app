@@ -99,6 +99,7 @@
   },
   "auth": {
     "label": "Пользователь",
-    "submit": "Войти"
+    "submit": "Войти",
+    "googleSignIn": "Войти с помощью Google"
   }
 }

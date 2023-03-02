@@ -99,6 +99,7 @@
   },
   "auth": {
     "label": "Username",
-    "submit": "Sign in"
+    "submit": "Sign in",
+    "googleSignIn": "Sign in with Google"
   }
 }
