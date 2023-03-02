@@ -2,8 +2,10 @@ import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useCallback, useRef } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
+
 import { changePayload } from '@entities';
 import { Text, Tag } from '@widgets';
+import { useAppDispatch } from '@shared';
 
 import type { FC } from 'react';
 import type { HowLongToBeatEntry } from 'howlongtobeat';
@@ -15,9 +17,10 @@ const SearchListItem: FC<{ item: HowLongToBeatEntry }> = ({ item }) => {
     item;
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const onAddClick = () => {
-    changePayload(item);
+    dispatch(changePayload({ name, imageUrl }));
     navigate('/add-game');
   };
 

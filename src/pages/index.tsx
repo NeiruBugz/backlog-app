@@ -11,7 +11,7 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const authorized = useAppSelector(getAuthState);
 
   if (!authorized) {
-    return <Navigate to="/auth" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return children;

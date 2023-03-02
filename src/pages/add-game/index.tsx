@@ -3,11 +3,10 @@ import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { v4 } from 'uuid';
 
-import { SuggestBox } from '@widgets';
-import { useAppDispatch } from '@shared';
-import { addGame } from '@entities';
+import { SuggestBox, Loader } from '@widgets';
+import { useAppSelector, addDocument } from '@shared';
+import { getUserInfo } from '@entities';
 
 import type { ChangeEvent } from 'react';
 import type { HowLongToBeatEntry } from 'howlongtobeat';
@@ -22,15 +21,18 @@ type AddGameInputs = Pick<Game, 'title' | 'platform' | 'status'>;
 const AddGame = (): JSX.Element => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { uid } = useAppSelector(getUserInfo);
+  const { name, imageUrl } = useSelector((state: RootState) => state.searchReducer);
   const { register, handleSubmit, control } = useForm<AddGameInputs>({
     defaultValues: {
       title: '',
     },
   });
-  const payload = useSelector((state: RootState) => state.searchReducer);
+
 
   const [inputValue, setInputValue] = useState<string>('');
   const [query, setQuery] = useState<string>('');
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [entryValues, setEntryValues] = useState<Pick<HowLongToBeatEntry, 'imageUrl' | 'id'>>({
     imageUrl: '',
     id: '',
@@ -43,17 +45,16 @@ const AddGame = (): JSX.Element => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const dispatch = useAppDispatch();
-
   useEffect(() => {
-    if (payload && 'name' in payload) {
-      setInputValue(payload);
+    if (name) {
+      setInputValue(name);
+      setEntryValues({ imageUrl, id: '' });
     }
 
     return () => {
       setInputValue('');
     };
-  }, [payload]);
+  }, [name, imageUrl]);
 
   useLayoutEffect(() => {
     if (inputRef.current) {
@@ -78,17 +79,21 @@ const AddGame = (): JSX.Element => {
   };
 
   const onFinish: SubmitHandler<AddGameInputs> = (values) => {
-    const { id, imageUrl } = entryValues;
-    dispatch(
-      addGame({
-        ...values,
-        title: inputValue,
-        id: id || v4(),
-        img: imageUrl,
-        createdAt: Date.now(),
-      })
-    );
-    navigate('/list');
+    setLoading(true);
+    const { imageUrl } = entryValues;
+    const gameData: Omit<Game, 'id'> = {
+      ...values,
+      title: inputValue,
+      img: imageUrl,
+      createdAt: Date.now(),
+      review: '',
+      rating: 0,
+    };
+    addDocument({ ...gameData, user: uid }, 'games')
+      .then(() => {
+        setLoading(false);
+        navigate('/list');
+      });
   };
 
   const statuses = useMemo(() => STATUS_OPTIONS.map((item) => translateStatus(item, t)), [t]);
@@ -97,7 +102,7 @@ const AddGame = (): JSX.Element => {
 
   return (
     <main className="flex justify-center items-center">
-      <form onSubmit={handleSubmit(onFinish)} className="form-control w-full max-w-md">
+      {isLoading ? <Loader /> : <form onSubmit={handleSubmit(onFinish)} className="form-control w-full max-w-md">
         <label htmlFor="title" className="label">
           <span className="label-text text-lg">{t('add-game.labels.title')}</span>
           <Controller
@@ -154,8 +159,10 @@ const AddGame = (): JSX.Element => {
             ))}
           </select>
         </label>
-        <button type="submit" className="btn btn-primary">Submit</button>
-      </form>
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </form>}
     </main>
   );
 };

@@ -18,10 +18,11 @@ So, this is my attempt to organize my gaming backlog as a pet-project
 * React
 * TypeScript
 * RTK
-* Scss modules
-* Antd Components
+* TailwindCSS
+* DaisyUI
 * FSD-architecture
-* [howlongtobeat package](https://github.com/ckatzorke/howlongtobeat)
-* Playwright for e2e-tests
+* [howlongtobeat package](https://github.com/ckatzorke/howlongtobeat) as types on a client application
 * Vitest for unit-tests
 * react-i18next
+* Firebase Auth & Firebase Firestore
+* Simple NestJS app for search api proxy
