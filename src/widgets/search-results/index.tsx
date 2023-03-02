@@ -91,9 +91,11 @@ const SearchListItem: FC<{ item: HowLongToBeatEntry }> = ({ item }) => {
       </Text>
       <Tags />
       <Completions />
-      <button onClick={onAddClick} className="btn btn-primary">
-        {t('common.addGame')}
-      </button>
+      <div>
+        <button onClick={onAddClick} className="btn btn-primary">
+          {t('common.addGame')}
+        </button>
+      </div>
     </div>
   );
 };
