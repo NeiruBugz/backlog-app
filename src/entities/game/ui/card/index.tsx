@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 import { Divider, Tag } from '@widgets';
-import { deleteGame, updateGame } from '@entities';
-import { useAppDispatch, deleteGameDocument, updateGameDocument } from '@shared';
+import { deleteGameDocument, updateGameDocument } from '@shared';
 
 import type { FC, MouseEventHandler } from 'react';
 import type { Game as GameProps } from '@entities';
+import { nanoDelete, nanoUpdate } from 'entities/game/slices/nano-games';
 
 const MENU_OPTIONS = [
   {
@@ -24,14 +24,13 @@ const MENU_OPTIONS = [
 
 const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
   const [showDeleteAlert, setShowAlert] = useState<boolean>(false);
-  const dispatch = useAppDispatch();
 
   const onAlertClick: MouseEventHandler<HTMLButtonElement> = (event) => {
     const { action } = event.currentTarget.dataset;
 
     if (action === 'submit') {
       deleteGameDocument(id, 'games').then(() =>
-        dispatch(deleteGame(id))
+        nanoDelete(id)
       );
     }
 
@@ -42,7 +41,7 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
     const { key } = event.currentTarget.dataset;
     if (key) {
       updateGameDocument({ id, field: { key: 'status', value: key } }, 'games').then(() => {
-        dispatch(updateGame({ id, field: { key: 'status', value: key } }));
+        nanoUpdate({ id, field: { key: 'status', value: key } });
       });
     }
   };

@@ -2,25 +2,24 @@ import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { SearchResultsList, SearchInput, Loader } from '@widgets';
-import { api, useAppDispatch, firebaseAuth } from '@shared';
+import { api, firebaseAuth } from '@shared';
 
 import type { HowLongToBeatEntry } from 'howlongtobeat';
-import { login } from '@entities';
+import { setUser } from 'entities/user/slice/index';
 
 const Home = (): JSX.Element => {
   const [user, loading] = useAuthState(firebaseAuth);
 
-  const dispatch = useAppDispatch();
   const [searchResults, setSearchResults] = useState<HowLongToBeatEntry[]>([]);
 
   useEffect(() => {
     if (user) {
       const { uid, photoURL, displayName } = user;
       if (displayName && uid) {
-        dispatch(login({ authorized: true, uid: uid, username: displayName, avatarUrl: photoURL ?? '' }));
+        setUser({ authorized: true, uid: uid, username: displayName, avatarUrl: photoURL ?? '' });
       }
     }
-  }, [user, loading, dispatch]);
+  }, [user, loading]);
 
   useEffect(() => {
     const currentTheme = document.querySelector('html')?.getAttribute('data-theme');

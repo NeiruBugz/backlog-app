@@ -2,10 +2,12 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSignOut } from 'react-firebase-hooks/auth';
+import { useStore } from '@nanostores/react';
 
-import { getAuthState, getUserInfo, User, logout } from '@entities';
+import { User } from '@entities';
 import { DropdownWidget } from '@widgets';
-import { useAppDispatch, useAppSelector, getLanguageLabel, firebaseAuth } from '@shared';
+import { getLanguageLabel, firebaseAuth } from '@shared';
+import { nanoLogout, nanoUser } from 'entities/user/slice/index';
 
 const LanguageItems = [
   {
@@ -38,10 +40,7 @@ const createThemeOptions = (): { key: string; label: string }[] => {
 const Header = (): JSX.Element => {
   const { t, i18n } = useTranslation();
   const [signOut, error] = useSignOut(firebaseAuth);
-
-  const dispatch = useAppDispatch();
-  const authorized = useAppSelector(getAuthState);
-  const user = useAppSelector(getUserInfo);
+  const user = useStore(nanoUser);
 
   useEffect(() => {
     if ('navigator' in window) {
@@ -62,7 +61,7 @@ const Header = (): JSX.Element => {
   const onLogout = async () => {
     signOut().then((result) => {
       if (result) {
-        dispatch(logout());
+        nanoLogout();
       } else {
         alert(error);
       }
@@ -99,7 +98,7 @@ const Header = (): JSX.Element => {
                   Backlog App
                 </Link>
               </li>
-              {authorized ? (
+              {user.authorized ? (
                 <li className="hover:bg-primary-focus hover:text-primary-content rounded-none">
                   <Link to="/list">
                     {t('home.header.navigation.games')}
@@ -117,7 +116,7 @@ const Header = (): JSX.Element => {
         </div>
       </nav>
       <div className="flex">
-        {authorized ? <User {...user} onLogout={onLogout} /> : null}
+        {user.authorized ? <User {...user} onLogout={onLogout} /> : null}
         <DropdownWidget
           label={getLanguageLabel(i18n.language)}
           items={LanguageItems}

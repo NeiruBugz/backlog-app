@@ -1,16 +1,13 @@
 import { useNavigate } from 'react-router';
-import {
-  useSignInWithGoogle,
-} from 'react-firebase-hooks/auth';
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 
-import { login } from '@entities';
-import { useAppDispatch, firebaseAuth } from '@shared';
+import { firebaseAuth } from '@shared';
 
 import type { MouseEventHandler } from 'react';
+import { setUser } from 'entities/user/slice/index';
 
 const Auth = (): JSX.Element => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const [signInWithGoogle] = useSignInWithGoogle(firebaseAuth);
 
   const onGoogleLogin: MouseEventHandler<HTMLButtonElement> = (event) => {
@@ -21,14 +18,12 @@ const Auth = (): JSX.Element => {
           user: { displayName, photoURL, uid },
         } = res;
         if (displayName) {
-          dispatch(
-            login({
-              uid: uid,
-              authorized: true,
-              username: displayName,
-              avatarUrl: photoURL ?? '',
-            })
-          );
+          setUser({
+            uid: uid,
+            authorized: true,
+            username: displayName,
+            avatarUrl: photoURL ?? '',
+          });
           navigate('/list');
         }
       }
