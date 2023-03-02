@@ -1,9 +1,9 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 
 import type { FirebaseOptions } from 'firebase/app';
-import type { Game } from '@entities';
+import type { Game, UpdateGamePayload } from '@entities';
 
 interface FirebaseAddGamePayload extends Omit<Game, 'id'> {
   user: string;
@@ -23,11 +23,23 @@ const firebaseApp = initializeApp(firebaseConfig);
 const firebaseAuth = getAuth(firebaseApp);
 const firebaseStore = getFirestore(firebaseApp);
 
-const addDocument = async (data: FirebaseAddGamePayload, collectionName: string) => 
+const addGame = async (data: FirebaseAddGamePayload, collectionName: string) => 
   await addDoc(collection(firebaseStore, collectionName), { ...data });
+
+const deleteGameDocument = async (id: string, collectionName: string) =>
+  await deleteDoc(doc(firebaseStore, collectionName, id));
+
+const updateGameDocument = async (payload: UpdateGamePayload, collectionName: string) => {
+  const docRef = doc(firebaseStore, collectionName, payload.id);
+  await updateDoc(docRef, {
+    [payload.field.key]: payload.field.value,
+  });
+};
 
 export {
   firebaseAuth,
   firebaseStore,
-  addDocument,
+  addGame as addDocument,
+  deleteGameDocument,
+  updateGameDocument,
 };

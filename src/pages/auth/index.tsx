@@ -4,8 +4,7 @@ import {
 } from 'react-firebase-hooks/auth';
 
 import { login } from '@entities';
-import { useAppDispatch } from '@shared';
-import { firebaseAuth } from 'shared/api/firebase';
+import { useAppDispatch, firebaseAuth } from '@shared';
 
 import type { MouseEventHandler } from 'react';
 

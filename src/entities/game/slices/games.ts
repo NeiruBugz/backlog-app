@@ -12,14 +12,7 @@ const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    setGames: (state, action: PayloadAction<Game[]>) => {
-      const { payload } = action;
-      payload.map((game) => {
-        if (state.length === 0 || state.findIndex((stateGame) => stateGame.id === game.id) === -1) {
-          state.push(game);
-        }
-      });
-    },
+    setGames: (state, action: PayloadAction<Game[]>) => action.payload,
     addGame: (state, action: PayloadAction<Game>) => {
       state.push(action.payload);
     },
@@ -32,10 +25,10 @@ const gameSlice = createSlice({
         game[key] = value;
         state[gameIndex] = game;
       }
+
+      return state;
     },
-    deleteGame: (state, action: PayloadAction<Pick<Game, 'id'>>) => {
-      state = state.filter((game) => game.id !== action.payload.id);
-    },
+    deleteGame: (state, action: PayloadAction<string>) => state.filter((game) => game.id !== action.payload),
   },
 });
 

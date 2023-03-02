@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { SearchResultsList, SearchInput } from '@widgets';
-import { api, useAppDispatch } from '@shared';
+import { SearchResultsList, SearchInput, Loader } from '@widgets';
+import { api, useAppDispatch, firebaseAuth } from '@shared';
 
 import type { HowLongToBeatEntry } from 'howlongtobeat';
-import { firebaseAuth } from 'shared/api/firebase';
-import { Loader } from 'widgets/loader';
 import { login } from '@entities';
 
 const Home = (): JSX.Element => {

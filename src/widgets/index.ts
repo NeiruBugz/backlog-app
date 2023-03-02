@@ -8,3 +8,4 @@ export * from './list';
 export * from './filters';
 export * from './typography';
 export * from './divider';
+export * from './loader';

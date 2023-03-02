@@ -5,8 +5,7 @@ import { useSignOut } from 'react-firebase-hooks/auth';
 
 import { getAuthState, getUserInfo, User, logout } from '@entities';
 import { DropdownWidget } from '@widgets';
-import { useAppDispatch, useAppSelector, getLanguageLabel } from '@shared';
-import { firebaseAuth } from 'shared/api/firebase';
+import { useAppDispatch, useAppSelector, getLanguageLabel, firebaseAuth } from '@shared';
 
 const LanguageItems = [
   {

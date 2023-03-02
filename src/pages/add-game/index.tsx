@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
-import { SuggestBox } from '@widgets';
-import { useAppSelector } from '@shared';
+import { SuggestBox, Loader } from '@widgets';
+import { useAppSelector, addDocument } from '@shared';
 import { getUserInfo } from '@entities';
 
 import type { ChangeEvent } from 'react';
@@ -15,8 +15,6 @@ import type { RootState } from '@shared';
 import type { Game } from '@entities';
 
 import { PLATFORM_OPTIONS, STATUS_OPTIONS, translateStatus } from './constants';
-import { addDocument } from 'shared/api/firebase';
-import { Loader } from 'widgets/loader';
 
 type AddGameInputs = Pick<Game, 'title' | 'platform' | 'status'>;
 

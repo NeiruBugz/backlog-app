@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { api } from '@shared';
+import { api, useDebounce } from '@shared';
 
 import type { FC } from 'react';
 import type { HowLongToBeatEntry } from 'howlongtobeat';
-import { useDebounce } from 'shared/hooks/useDebounce';
 
 interface SuggestBoxProps {
   query: string;

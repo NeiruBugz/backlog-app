@@ -2,16 +2,14 @@ import { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { collection, query, where, Timestamp } from 'firebase/firestore';
+import { collection, query, where } from 'firebase/firestore';
 
 import { games, getUserInfo, setGames, setStatusFilter } from '@entities';
-import { useAppDispatch, useAppSelector } from '@shared';
-import { Filters, ListsBody, Text } from '@widgets';
-import { firebaseStore } from 'shared/api/firebase';
+import { useAppDispatch, useAppSelector, firebaseStore } from '@shared';
+import { Filters, ListsBody, Text, Loader } from '@widgets';
 
 import type { DocumentData } from 'firebase/firestore';
 import type { Game } from '@entities';
-import { Loader } from 'widgets/loader';
 
 const gamesConverter = (doc: DocumentData, id: string): Game => {
   const game = {
@@ -64,7 +62,9 @@ const GamesList = (): JSX.Element => {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center"><Loader /></div>
+        <div className="flex justify-center items-center">
+          <Loader />
+        </div>
       ) : (
         <>
           {gamesList.length === 0 ? (
