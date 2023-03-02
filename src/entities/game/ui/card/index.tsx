@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Divider, Tag } from '@widgets';
 import { deleteGameDocument, updateGameDocument } from '@shared';
@@ -23,6 +24,7 @@ const MENU_OPTIONS = [
 ];
 
 const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
+  const { t } = useTranslation();
   const [showDeleteAlert, setShowAlert] = useState<boolean>(false);
 
   const onAlertClick: MouseEventHandler<HTMLButtonElement> = (event) => {
@@ -71,7 +73,7 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span>Are you sure about that?</span>
+                <span>{t('games-list.cardMenu.deleteAlertText')}</span>
               </div>
               <div className="flex-none">
                 <button
@@ -79,14 +81,14 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
                   data-action="cancel"
                   onClick={onAlertClick}
                 >
-                  Cancel
+                  {t('games-list.cardMenu.cancelDelete')}
                 </button>
                 <button
                   className="btn btn-sm btn-primary"
                   data-action="submit"
                   onClick={onAlertClick}
                 >
-                  I really want to delete it
+                  {t('games-list.cardMenu.confirmDelete')}
                 </button>
               </div>
             </div>
@@ -118,7 +120,7 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow w-52 bg-primary-content text-primary"
             >
-              <Divider>Statuses</Divider>
+              <Divider>{t('games-list.cardMenu.statuses')}</Divider>
               {MENU_OPTIONS.filter((option) => option.key !== status).map((option) => (
                 <li
                   key={option.key}
@@ -126,19 +128,21 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
                   onClick={onStatusChange}
                   className="hover:bg-primary-focus hover:text-primary-content rounded-none bg-primary-content p-2"
                 >
-                  {option.label}
+                  {t(`games-list.cardMenu.${option.key}`)}
                 </li>
               ))}
-              <Divider>Actions</Divider>
+              <Divider>{t('games-list.cardMenu.actions')}</Divider>
               <li>
                 <button className="btn btn-warning" onClick={onDeleteClick}>
-                  Delete
+                  {t('games-list.cardMenu.delete')}
                 </button>
               </li>
             </ul>
           </div>
-          <h2 className="card-title">{title}</h2>
-          <Tag platform={platform} />
+          <div className="absolute left-4 bottom-6">
+            <h2 className="card-title mb-2">{title}</h2>
+            <Tag platform={platform} />
+          </div>
         </div>
       </div>
     </>

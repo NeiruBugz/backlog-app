@@ -112,7 +112,7 @@ const AddGame = (): JSX.Element => {
               <input
                 {...field}
                 id="title"
-                placeholder="Enter game title"
+                placeholder={t('add-game.titlePlaceholder') ?? ''}
                 autoComplete="off"
                 value={inputValue}
                 onChange={onInputChange}

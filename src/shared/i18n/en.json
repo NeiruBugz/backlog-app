@@ -1,9 +1,20 @@
 {
+  "themes": {
+    "light": "light",
+    "dark": "dark",
+    "emerald": "emerald",
+    "corporate": "corporate",
+    "synthwave": "synthwave",
+    "cyberpunk": "cyberpunk",
+    "pastel": "pastel",
+    "fantasy": "fantasy"
+  },
   "common": {
     "backlog": "Backlog",
-    "inProgress": "In Progress",
+    "in-progress": "In Progress",
     "completed": "Completed",
-    "addGame": "Add Game"
+    "addGame": "Add Game",
+    "theme": "Theme"
   },
   "validation": {
     "gameTitle": "Please input game title!",
@@ -43,7 +54,8 @@
       "title": "Game title",
       "platform": "Platform",
       "status": "Status"
-    }
+    },
+    "titlePlaceholder": "Enter game title"
   },
   "games-list": {
     "motto": "There are no games",
@@ -72,6 +84,17 @@
         "hours_few": "{{count}} hours",
         "hours_many": "{{count}} hours"
       }
+    },
+    "cardMenu": {
+      "statuses": "Statuses",
+      "toBacklog": "To Backlog",
+      "in-progress": "Start",
+      "completed": "Complete",
+      "actions": "Actions",
+      "delete": "Delete",
+      "deleteAlertText": "Are you sure about that?",
+      "cancelDelete": "Cancel",
+      "confirmDelete": "Delete"
     }
   },
   "auth": {

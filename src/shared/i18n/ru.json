@@ -1,9 +1,20 @@
 {
+  "themes": {
+    "light": "Светлая",
+    "dark": "Темная",
+    "emerald": "Изумруд",
+    "corporate": "Корпо",
+    "synthwave": "Синтвейв",
+    "cyberpunk": "Киберпанк",
+    "pastel": "Пастель",
+    "fantasy": "Фентези"
+  },
   "common": {
     "backlog": "Бэклог",
-    "inProgress": "В процессе",
+    "in-progress": "В процессе",
     "completed": "Пройдено",
-    "addGame": "Добавить игру"
+    "addGame": "Добавить игру",
+    "theme": "Тема"
   },
   "validation": {
     "gameTitle": "Пожалуйста, введите название игры",
@@ -43,7 +54,8 @@
       "title": "Название игры",
       "platform": "Платформа",
       "status": "Статус"
-    }
+    },
+    "titlePlaceholder": "Введите название игры"
   },
   "games-list": {
     "motto": "Игр не найдено",
@@ -72,6 +84,17 @@
         "hours_few": "{{count}} ч",
         "hours_many": "{{count}} ч"
       }
+    },
+    "cardMenu": {
+      "statuses": "Статусы",
+      "backlog": "В бэклог",
+      "in-progress": "Начать",
+      "completed": "Пройдено",
+      "actions": "Действия",
+      "delete": "Удалить",
+      "deleteAlertText": "Вы уверены?",
+      "cancelDelete": "Отмена",
+      "confirmDelete": "Удалить"
     }
   },
   "auth": {
