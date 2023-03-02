@@ -23,6 +23,14 @@ const gamesConverter = (doc: DocumentData, id: string): Game => {
   return game;
 };
 
+const dateComparator = (first: Game, second: Game) => {
+  if (second.createdAt && first.createdAt) {
+    return second?.createdAt - first?.createdAt;
+  }
+
+  return 0;
+};
+
 const GamesList = (): JSX.Element => {
   const { t } = useTranslation();
   const { uid } = useStore(nanoUser);
@@ -35,7 +43,6 @@ const GamesList = (): JSX.Element => {
       snapshotListenOptions: { includeMetadataChanges: true },
     }
   );
-
 
   useEffect(() => {
     if (!loading) {
@@ -56,10 +63,12 @@ const GamesList = (): JSX.Element => {
 
   const filteredGames = useMemo(() => {
     if (status === 'all') {
-      return nanoList;
+      return nanoList.sort(dateComparator);
     }
 
-    return nanoList.filter((game) => game.status === status);
+    return nanoList
+      .filter((game) => game.status === status)
+      .sort(dateComparator);
   }, [nanoList, status]);
 
   return (
