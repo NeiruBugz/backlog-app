@@ -1,34 +1,33 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { useStore } from '@nanostores/react';
 
 import { SuggestBox, Loader } from '@widgets';
-import { useAppSelector, addDocument } from '@shared';
-import { getUserInfo } from '@entities';
+import { addDocument } from '@shared';
+import { nanoUser } from 'entities/user/slice/index';
 
 import type { ChangeEvent } from 'react';
 import type { HowLongToBeatEntry } from 'howlongtobeat';
 import type { SubmitHandler } from 'react-hook-form';
-import type { RootState } from '@shared';
 import type { Game } from '@entities';
 
 import { PLATFORM_OPTIONS, STATUS_OPTIONS, translateStatus } from './constants';
+import { resetPayload, search } from 'entities/game/slices/nano-search';
 
 type AddGameInputs = Pick<Game, 'title' | 'platform' | 'status'>;
 
 const AddGame = (): JSX.Element => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { uid } = useAppSelector(getUserInfo);
-  const { name, imageUrl } = useSelector((state: RootState) => state.searchReducer);
+  const { uid } = useStore(nanoUser);
+  const { name, imageUrl } = useStore(search);
   const { register, handleSubmit, control } = useForm<AddGameInputs>({
     defaultValues: {
       title: '',
     },
   });
-
 
   const [inputValue, setInputValue] = useState<string>('');
   const [query, setQuery] = useState<string>('');
@@ -53,6 +52,7 @@ const AddGame = (): JSX.Element => {
 
     return () => {
       setInputValue('');
+      resetPayload();
     };
   }, [name, imageUrl]);
 

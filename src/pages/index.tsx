@@ -1,14 +1,14 @@
 import { Navigate, Route, Routes } from 'react-router';
+import { useStore } from '@nanostores/react';
 import { Home } from './home';
 import { Auth } from './auth';
 import { AddGame } from './add-game';
 import { GamesList } from './games-list';
 import { Header } from '@widgets';
-import { useAppSelector } from '@shared';
-import { getAuthState } from '@entities';
+import { nanoUser } from 'entities/user/slice/index';
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  const authorized = useAppSelector(getAuthState);
+  const { authorized } = useStore(nanoUser);
 
   if (!authorized) {
     return <Navigate to="/" replace />;
