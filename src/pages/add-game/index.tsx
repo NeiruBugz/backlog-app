@@ -167,4 +167,6 @@ const AddGame = (): JSX.Element => {
   );
 };
 
-export { AddGame };
+// export { AddGame };
+
+export default AddGame;

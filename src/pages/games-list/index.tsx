@@ -107,4 +107,6 @@ const GamesList = (): JSX.Element => {
   );
 };
 
-export { GamesList };
+// export { GamesList };
+
+export default GamesList;

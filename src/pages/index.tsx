@@ -1,11 +1,13 @@
+import { lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router';
 import { useStore } from '@nanostores/react';
-import { Home } from './home';
-import { Auth } from './auth';
-import { AddGame } from './add-game';
-import { GamesList } from './games-list';
 import { Header } from '@widgets';
 import { nanoUser } from 'entities/user/slice/index';
+
+const Home = lazy(() => import('./home/index'));
+const Auth = lazy(() => import('./auth/index'));
+const GamesList = lazy(() => import('./games-list/index'));
+const AddGame = lazy(() => import('./add-game/index'));
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const { authorized } = useStore(nanoUser);
