@@ -1,5 +1,5 @@
 import { List } from '@entities';
-import { filterCriteria, filterCallback, capitalize } from '@shared';
+import { filterCriteria, filterCallback } from '@shared';
 
 import type { Game } from '@entities';
 import { useTranslation } from 'react-i18next';

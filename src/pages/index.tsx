@@ -1,8 +1,9 @@
 import { lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router';
 import { useStore } from '@nanostores/react';
+
 import { Header } from '@widgets';
-import { nanoUser } from 'entities/user/slice/index';
+import { nanoUser } from '@entities';
 
 const Home = lazy(() => import('./home/index'));
 const Auth = lazy(() => import('./auth/index'));

@@ -3,10 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { useSignOut } from 'react-firebase-hooks/auth';
 import { useStore } from '@nanostores/react';
 
-import { User } from '@entities';
+import { User, nanoLogout, nanoUser } from '@entities';
 import { DropdownWidget } from '@widgets';
 import { getLanguageLabel, firebaseAuth, capitalize } from '@shared';
-import { nanoLogout, nanoUser } from 'entities/user/slice/index';
 import { Navbar } from './navbar';
 
 const LanguageItems = [

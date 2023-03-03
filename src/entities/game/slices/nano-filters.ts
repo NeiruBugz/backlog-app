@@ -11,7 +11,12 @@ const filterByStatus = function filterByStatus(filterCriteria: string) {
   filters.set({ ...filters.get(), status: filterCriteria });
 };
 
+const filterByPlatform = function filterByPlatform(filterCriteria: string) {
+  filters.set({ ...filters.get(), platform: filterCriteria });
+};
+
 export {
   filters as nanoFilters,
   filterByStatus,
+  filterByPlatform,
 };

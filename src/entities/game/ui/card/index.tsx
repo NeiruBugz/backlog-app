@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Divider, Tag } from '@widgets';
+import { nanoDelete, nanoUpdate } from '@entities';
 import { deleteGameDocument, updateGameDocument } from '@shared';
 
 import type { FC, MouseEventHandler } from 'react';
 import type { Game as GameProps } from '@entities';
-import { nanoDelete, nanoUpdate } from 'entities/game/slices/nano-games';
 
 const MENU_OPTIONS = [
   {

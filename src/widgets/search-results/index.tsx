@@ -2,15 +2,14 @@ import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useCallback, useRef } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import {} from '@nanostores/react';
 
+import { savePayload } from '@entities';
 import { Text, Tag } from '@widgets';
 
 import type { FC } from 'react';
 import type { HowLongToBeatEntry } from 'howlongtobeat';
 
 import styles from './styles.module.scss';
-import { savePayload } from 'entities/game/slices/nano-search';
 
 const SearchListItem: FC<{ item: HowLongToBeatEntry }> = ({ item }) => {
   const { name, platforms, imageUrl, id, gameplayMain, gameplayMainExtra, gameplayCompletionist } =

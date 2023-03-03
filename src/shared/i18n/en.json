@@ -87,7 +87,7 @@
     },
     "cardMenu": {
       "statuses": "Statuses",
-      "toBacklog": "To Backlog",
+      "backlog": "To Backlog",
       "in-progress": "Start",
       "completed": "Complete",
       "actions": "Actions",
