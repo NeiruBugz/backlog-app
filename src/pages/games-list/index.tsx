@@ -76,10 +76,7 @@ const GamesList = (): JSX.Element => {
   };
 
   const filteredGames = useMemo(() => {
-    console.log(status, platform);
-
     let result: Game[] = [];
-    console.log('beforeFiltering: ', result);
 
     if (status === 'all') {
       result = [...nanoList];
@@ -95,8 +92,6 @@ const GamesList = (): JSX.Element => {
 
     return result.sort(dateComparator);
   }, [nanoList, status, platform]);
-
-  console.log('memo: ', filteredGames);
 
   return (
     <>
