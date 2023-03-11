@@ -61,6 +61,8 @@
   "games-list": {
     "motto": "There are no games",
     "mottoLink": "Let's add the first one!",
+    "statusFilter": "Status",
+    "platformFilter": "Platform",
     "filters": {
       "label": "Filters",
       "backlog": "Backlog",

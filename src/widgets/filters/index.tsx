@@ -35,7 +35,9 @@ const Filters = ({
 
   return (
     <div>
-      <div className="tabs">
+      <h4 className="text-xl">{t('games-list.filters.label')}</h4>
+      <div className="tabs items-center">
+        <label className="text-lg">{t('games-list.statusFilter')}: </label>
         {FILTERS.map((filterType) => (
           <button
             key={filterType}
@@ -48,7 +50,8 @@ const Filters = ({
           </button>
         ))}
       </div>
-      <div className="tabs">
+      <div className="tabs items-center">
+        <label className="text-lg">{t('games-list.platformFilter')}: </label>
         <button
           key="all"
           data-field="platform"

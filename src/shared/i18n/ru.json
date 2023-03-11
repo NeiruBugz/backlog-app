@@ -61,6 +61,8 @@
   "games-list": {
     "motto": "Игр не найдено",
     "mottoLink": "Давай добавим первую!",
+    "statusFilter": "Статус",
+    "platformFilter": "Платформа",
     "filters": {
       "label": "Фильтры",
       "backlog": "Бэклог",
