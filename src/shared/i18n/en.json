@@ -31,7 +31,8 @@
     "header": {
       "navigation": {
         "login": "Login",
-        "games": "Games"
+        "games": "Games",
+        "main": "Home"
       },
       "user": {
         "dropdown": {

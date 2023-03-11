@@ -30,7 +30,7 @@ const Navbar: FC<{ authorized: boolean }> = ({ authorized }) => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-primary-content text-primary"
           >
             <li className="hover:bg-primary-focus hover:text-primary-content rounded-none">
-              <Link to="/">Backlog App</Link>
+              <Link to="/">{t('home.header.navigation.main')}</Link>
             </li>
             {authorized ? (
               <li className="hover:bg-primary-focus hover:text-primary-content rounded-none">
