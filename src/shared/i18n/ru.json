@@ -56,7 +56,8 @@
       "platform": "Платформа",
       "status": "Статус"
     },
-    "titlePlaceholder": "Введите название игры"
+    "titlePlaceholder": "Введите название игры",
+    "submitButton": "Добавить"
   },
   "games-list": {
     "motto": "Игр не найдено",

@@ -56,7 +56,8 @@
       "platform": "Platform",
       "status": "Status"
     },
-    "titlePlaceholder": "Enter game title"
+    "titlePlaceholder": "Enter game title",
+    "submitButton": "Add"
   },
   "games-list": {
     "motto": "There are no games",

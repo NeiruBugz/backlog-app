@@ -159,7 +159,7 @@ const AddGame = (): JSX.Element => {
           </select>
         </label>
         <button type="submit" className="btn btn-primary">
-          Submit
+          {t('add-game.submitButton')}
         </button>
       </form>}
     </main>
