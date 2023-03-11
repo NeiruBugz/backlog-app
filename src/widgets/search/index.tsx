@@ -37,7 +37,7 @@ const SearchInput: FC<SearchInputProps> = ({ onSearch }) => {
     <>
       <input
         type="search"
-        className="input input-bordered input-primary w-full"
+        className="input input-bordered input-primary w-full mr-2"
         placeholder={t('home.search.inputPlaceholder') || ''}
         value={query}
         onChange={onInputChange}
