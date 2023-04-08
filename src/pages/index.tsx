@@ -5,6 +5,7 @@ import { useStore } from '@nanostores/react';
 import { Header } from '@widgets';
 import { nanoUser } from '@entities';
 
+const Landing = lazy(() => import('./landing/index'));
 const Home = lazy(() => import('./home/index'));
 const Auth = lazy(() => import('./auth/index'));
 const GamesList = lazy(() => import('./games-list/index'));
@@ -17,17 +18,31 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     return <Navigate to="/" replace />;
   }
 
-  return children;
+  return <RouteWithHeader>{children}</RouteWithHeader>;
 };
+
+const RouteWithHeader = ({ children }: { children: JSX.Element }) => (
+  <>
+    <Header />
+    {children}
+  </>
+);
 
 const Routing = () => (
   <div className="container mx-auto">
-    <Header />
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Landing />} />
       <Route path="/auth" element={<Auth />} />
       <Route
-        path="/list"
+        path="/search"
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/library"
         element={
           <ProtectedRoute>
             <GamesList />
