@@ -1,7 +1,8 @@
 import { List } from '@entities';
-import { filterCriteria, filterCallback, capitalize } from '@shared';
+import { filterCriteria, filterCallback } from '@shared';
 
 import type { Game } from '@entities';
+import { useTranslation } from 'react-i18next';
 
 const ListsBody = ({
   games,
@@ -11,24 +12,26 @@ const ListsBody = ({
   games: Game[];
   filter: string;
   filteredGames: Game[];
-}) => (
-  <>
-    {filter === 'all' ? (
-      <>
-        {filterCriteria.map((criteria) => (
-          <List
-            listItems={games.filter((game) => filterCallback(game, criteria, filter === 'all'))}
-            dividerText={capitalize(criteria)}
-            key={criteria}
-          />
-        ))}
-      </>
-    ) : (
-      <List
-        listItems={filteredGames}
-      />
-    )}
-  </>
-);
+}) => { 
+  const { t } = useTranslation();
+  return (
+    <>
+      {filter === 'all' ? (
+        <>
+          {filterCriteria.map((criteria) => (
+            <List
+              listItems={games.filter((game) => filterCallback(game, criteria, filter === 'all'))}
+              dividerText={t(`common.${criteria}`) ?? ''}
+              key={criteria}
+            />
+          ))}
+        </>
+      ) : (
+        <List
+          listItems={filteredGames}
+        />
+      )}
+    </>
+  );};
 
 export { ListsBody };

@@ -6,13 +6,19 @@ import { collection, query, where } from 'firebase/firestore';
 import { useStore } from '@nanostores/react';
 
 import { firebaseStore } from '@shared';
+import {
+  nanoGames,
+  nanoSet,
+  nanoFilters,
+  nanoUser,
+  filterByPlatform,
+  filterByStatus,
+} from '@entities';
 import { Filters, ListsBody, Text, Loader } from '@widgets';
 
+import type { MouseEventHandler } from 'react';
 import type { DocumentData } from 'firebase/firestore';
 import type { Game } from '@entities';
-import { nanoGames, nanoSet } from 'entities/game/slices/nano-games';
-import { nanoUser } from 'entities/user/slice/index';
-import { filterByStatus, nanoFilters } from 'entities/game/slices/nano-filters';
 
 const gamesConverter = (doc: DocumentData, id: string): Game => {
   const game = {
@@ -23,10 +29,18 @@ const gamesConverter = (doc: DocumentData, id: string): Game => {
   return game;
 };
 
+const dateComparator = (first: Game, second: Game) => {
+  if (second.createdAt && first.createdAt) {
+    return second?.createdAt - first?.createdAt;
+  }
+
+  return 0;
+};
+
 const GamesList = (): JSX.Element => {
   const { t } = useTranslation();
   const { uid } = useStore(nanoUser);
-  const { status } = useStore(nanoFilters);
+  const { status, platform } = useStore(nanoFilters);
   const nanoList = useStore(nanoGames);
 
   const [value, loading, error] = useCollection(
@@ -35,7 +49,6 @@ const GamesList = (): JSX.Element => {
       snapshotListenOptions: { includeMetadataChanges: true },
     }
   );
-
 
   useEffect(() => {
     if (!loading) {
@@ -50,17 +63,35 @@ const GamesList = (): JSX.Element => {
     }
   }, [value, loading, error]);
 
-  const onFilter = (filterType: string) => {
-    filterByStatus(filterType);
+  const onFilter: MouseEventHandler<HTMLButtonElement> = (event) => {
+    const { field, value } = event.currentTarget.dataset;
+
+    if (value) {
+      if (field === 'platform') {
+        filterByPlatform(value);
+      } else if (field === 'status') {
+        filterByStatus(value);
+      }
+    }
   };
 
   const filteredGames = useMemo(() => {
+    let result: Game[] = [];
+
     if (status === 'all') {
-      return nanoList;
+      result = [...nanoList];
+    } else {
+      result = nanoList.filter((game) => game.status === status);
     }
 
-    return nanoList.filter((game) => game.status === status);
-  }, [nanoList, status]);
+    if (platform === 'all') {
+      result = [...result];
+    } else {
+      result = result.filter((game) => game.platform === platform);
+    }
+
+    return result.sort(dateComparator);
+  }, [nanoList, status, platform]);
 
   return (
     <>
@@ -82,14 +113,14 @@ const GamesList = (): JSX.Element => {
           ) : (
             <>
               <nav className="flex justify-between">
-                <Filters onFilter={onFilter} filter={status} />
+                <Filters onFilter={onFilter} statusFilter={status} platformFilter={platform} />
                 <Link to="/add-game">
                   <button type="button" className="btn btn-primary">
                     {t('games-list.addButton')}
                   </button>
                 </Link>
               </nav>
-              <ListsBody games={nanoList} filteredGames={filteredGames} filter={status} />
+              <ListsBody games={filteredGames} filteredGames={filteredGames} filter={status} />
             </>
           )}
         </>
@@ -98,4 +129,6 @@ const GamesList = (): JSX.Element => {
   );
 };
 
-export { GamesList };
+// export { GamesList };
+
+export default GamesList;

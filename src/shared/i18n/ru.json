@@ -1,9 +1,20 @@
 {
+  "themes": {
+    "light": "Светлая",
+    "dark": "Темная",
+    "emerald": "Изумруд",
+    "corporate": "Корпо",
+    "synthwave": "Синтвейв",
+    "cyberpunk": "Киберпанк",
+    "pastel": "Пастель",
+    "fantasy": "Фентези"
+  },
   "common": {
     "backlog": "Бэклог",
-    "inProgress": "В процессе",
+    "in-progress": "В процессе",
     "completed": "Пройдено",
-    "addGame": "Добавить игру"
+    "addGame": "Добавить игру",
+    "theme": "Тема"
   },
   "validation": {
     "gameTitle": "Пожалуйста, введите название игры",
@@ -13,14 +24,15 @@
   "systemMessages": {
     "inputParameter": "Пожалуйста, введите поисковый запрос",
     "searchingFor": "Ищем",
-    "searchErorr": "Произошла ошибка во время поиска",
-    "searchUnavailiable": "Нужно авторизоваться, чтобы воспользоваться поиском"
+    "searchError": "Произошла ошибка во время поиска",
+    "searchUnavailable": "Нужно авторизоваться, чтобы воспользоваться поиском"
   },
   "home": {
     "header": {
       "navigation": {
         "login": "Логин",
-        "games": "Игры"
+        "games": "Игры",
+        "main": "Главная"
       },
       "user": {
         "dropdown": {
@@ -43,17 +55,22 @@
       "title": "Название игры",
       "platform": "Платформа",
       "status": "Статус"
-    }
+    },
+    "titlePlaceholder": "Введите название игры",
+    "submitButton": "Добавить"
   },
   "games-list": {
     "motto": "Игр не найдено",
     "mottoLink": "Давай добавим первую!",
+    "statusFilter": "Статус",
+    "platformFilter": "Платформа",
     "filters": {
       "label": "Фильтры",
       "backlog": "Бэклог",
       "inProgress": "В процессе",
       "completed": "Пройдено",
-      "all": "Все"
+      "all": "Все",
+      "abandoned": "Заброшено"
     },
     "addButton": "Добавить игру",
     "emptyBacklog": "Отлично! Твой бэклог пуст, так держать!",
@@ -72,10 +89,23 @@
         "hours_few": "{{count}} ч",
         "hours_many": "{{count}} ч"
       }
+    },
+    "cardMenu": {
+      "statuses": "Статусы",
+      "backlog": "В бэклог",
+      "in-progress": "Начать",
+      "completed": "Пройдено",
+      "abandoned": "Забросить",
+      "actions": "Действия",
+      "delete": "Удалить",
+      "deleteAlertText": "Вы уверены?",
+      "cancelDelete": "Отмена",
+      "confirmDelete": "Удалить"
     }
   },
   "auth": {
     "label": "Пользователь",
-    "submit": "Войти"
+    "submit": "Войти",
+    "googleSignIn": "Войти с помощью Google"
   }
 }

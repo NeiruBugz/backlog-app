@@ -1,6 +1,4 @@
 .loader {
-  --path: #2f3545;
-  --dot: #5628ee;
   --duration: 3s;
   width: 44px;
   height: 44px;
@@ -12,7 +10,6 @@
     border-radius: 50%;
     position: absolute;
     display: block;
-    background: var(--dot);
     top: 37px;
     left: 19px;
     transform: translate(-18px, -18px);
@@ -26,7 +23,6 @@
     polygon,
     circle {
       fill: none;
-      stroke: var(--path);
       stroke-width: 10px;
       stroke-linejoin: round;
       stroke-linecap: round;

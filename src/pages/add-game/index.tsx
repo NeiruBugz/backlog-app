@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router';
 import { useStore } from '@nanostores/react';
 
 import { SuggestBox, Loader } from '@widgets';
+import { nanoUser,  resetPayload, search } from '@entities';
 import { addDocument } from '@shared';
-import { nanoUser } from 'entities/user/slice/index';
 
 import type { ChangeEvent } from 'react';
 import type { HowLongToBeatEntry } from 'howlongtobeat';
@@ -14,7 +14,6 @@ import type { SubmitHandler } from 'react-hook-form';
 import type { Game } from '@entities';
 
 import { PLATFORM_OPTIONS, STATUS_OPTIONS, translateStatus } from './constants';
-import { resetPayload, search } from 'entities/game/slices/nano-search';
 
 type AddGameInputs = Pick<Game, 'title' | 'platform' | 'status'>;
 
@@ -112,7 +111,7 @@ const AddGame = (): JSX.Element => {
               <input
                 {...field}
                 id="title"
-                placeholder="Enter game title"
+                placeholder={t('add-game.titlePlaceholder') ?? ''}
                 autoComplete="off"
                 value={inputValue}
                 onChange={onInputChange}
@@ -160,11 +159,13 @@ const AddGame = (): JSX.Element => {
           </select>
         </label>
         <button type="submit" className="btn btn-primary">
-          Submit
+          {t('add-game.submitButton')}
         </button>
       </form>}
     </main>
   );
 };
 
-export { AddGame };
+// export { AddGame };
+
+export default AddGame;
