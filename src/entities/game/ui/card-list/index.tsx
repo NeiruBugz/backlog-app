@@ -1,4 +1,6 @@
+import { useRef } from 'react';
 import { Translation } from 'react-i18next';
+import { useVirtualizer } from '@tanstack/react-virtual';
 import { GameCard } from '@entities';
 import { Divider, Text } from '@widgets';
 
@@ -16,7 +18,7 @@ interface ListProps {
   dividerText?: string;
 }
 
-const EmptyBacklogPropmt = (): JSX.Element => (
+const EmptyBacklogPrompt = (): JSX.Element => (
   <Text heading={true} level={4} className="text-lg sm:text-xl">
     <Translation>{(t) => t('games-list.emptyBacklog')}</Translation>
   </Text>
@@ -31,7 +33,7 @@ const EmptyList: FC<{ text: string }> = ({ text }) => {
             {text}
           </Text>
         </Divider>
-        <EmptyBacklogPropmt />
+        <EmptyBacklogPrompt />
       </>
     );
   } else {
@@ -40,6 +42,12 @@ const EmptyList: FC<{ text: string }> = ({ text }) => {
 };
 
 const List: FC<ListProps> = ({ listItems, dividerText }) => {
+  const parentRef = useRef<HTMLUListElement>(null);
+  const virtualizer = useVirtualizer({
+    count: listItems.length,
+    getScrollElement: () => parentRef?.current,
+    estimateSize: () => 300,
+  });
   if (listItems.length === 0 && dividerText) {
     return <EmptyList text={dividerText} />;
   }
@@ -53,12 +61,23 @@ const List: FC<ListProps> = ({ listItems, dividerText }) => {
           </Text>
         </Divider>
       ) : null}
-      <ul className="carousel mt-6">
-        {listItems.map((game) => (
-          <li className="carousel-item mr-3" key={game.id}>
-            <GameCard {...game} />
-          </li>
-        ))}
+      <ul
+        ref={parentRef}
+        className="mt-6 flex flex-wrap gap-2"
+        style={{ height: '100%', width: '100%' }}
+      >
+        {virtualizer.getVirtualItems().map((virtualItem) => {
+          console.log(virtualItem);
+          return (
+            <li
+              key={virtualItem.key}
+              ref={virtualizer.measureElement}
+              data-index={virtualItem.index}
+            >
+              <GameCard {...listItems[virtualItem.index]} />
+            </li>
+          );
+        })}
       </ul>
     </>
   );

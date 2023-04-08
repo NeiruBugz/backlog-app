@@ -52,7 +52,7 @@ test.describe('Add game', () => {
 
     await test.step('Locate submit button and click it', async () => {
       await page.locator('button', { hasText: 'Submit' }).click();
-      expect(page).toHaveURL('/list');
+      expect(page).toHaveURL('/library');
     });
   });
 });

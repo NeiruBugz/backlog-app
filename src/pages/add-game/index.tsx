@@ -91,7 +91,7 @@ const AddGame = (): JSX.Element => {
     addDocument({ ...gameData, user: uid }, 'games')
       .then(() => {
         setLoading(false);
-        navigate('/list');
+        navigate('/library');
       });
   };
 

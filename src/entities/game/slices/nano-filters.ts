@@ -1,7 +1,7 @@
 import { atom } from 'nanostores';
 
 const initialValue = {
-  status: 'all',
+  status: 'backlog',
   platform: 'all',
 };
 

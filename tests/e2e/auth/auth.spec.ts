@@ -29,7 +29,7 @@ test.describe('App auth', () => {
     });
 
     await test.step('go to list route on successfull auth', async () => {
-      await expect(page).toHaveURL('/list');
+      await expect(page).toHaveURL('/library');
     });
   });
 });

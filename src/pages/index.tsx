@@ -18,7 +18,7 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     return <Navigate to="/" replace />;
   }
 
-  return <RouteWithHeader>{children}</RouteWithHeader>;
+  return children;
 };
 
 const RouteWithHeader = ({ children }: { children: JSX.Element }) => (
@@ -29,36 +29,34 @@ const RouteWithHeader = ({ children }: { children: JSX.Element }) => (
 );
 
 const Routing = () => (
-  <div className="container mx-auto">
-    <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="/auth" element={<Auth />} />
-      <Route
-        path="/search"
-        element={
-          <ProtectedRoute>
-            <Home />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/library"
-        element={
-          <ProtectedRoute>
-            <GamesList />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/add-game"
-        element={
-          <ProtectedRoute>
-            <AddGame />
-          </ProtectedRoute>
-        }
-      />
-      <Route path="*" element={<p>There&apos;s nothing here: 404!</p>} />
-    </Routes>
-  </div>
+  <Routes>
+    <Route path="/" element={<Landing />} />
+    <Route path="/auth" element={<Auth />} />
+    <Route
+      path="/search"
+      element={
+        <ProtectedRoute>
+          <Home />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/library"
+      element={
+        <ProtectedRoute>
+          <GamesList />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/add-game"
+      element={
+        <ProtectedRoute>
+          <AddGame />
+        </ProtectedRoute>
+      }
+    />
+    <Route path="*" element={<p>There&apos;s nothing here: 404!</p>} />
+  </Routes>
 );
 export { Routing };

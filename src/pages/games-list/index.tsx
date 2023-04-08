@@ -94,38 +94,26 @@ const GamesList = (): JSX.Element => {
   }, [nanoList, status, platform]);
 
   return (
-    <>
-      {loading ? (
-        <div className="flex justify-center items-center">
-          <Loader />
-        </div>
-      ) : (
-        <>
-          {nanoList.length === 0 ? (
-            <div className="mt-6 text-center">
-              <Text heading level={4} className="text-lg">
-                {t('games-list.motto')}{' '}
-                <Link to="/add-game" className="link link-accent">
-                  {t('games-list.mottoLink')}
-                </Link>
-              </Text>
-            </div>
-          ) : (
-            <>
-              <nav className="flex justify-between">
-                <Filters onFilter={onFilter} statusFilter={status} platformFilter={platform} />
-                <Link to="/add-game">
-                  <button type="button" className="btn btn-primary">
-                    {t('games-list.addButton')}
-                  </button>
-                </Link>
-              </nav>
-              <ListsBody games={filteredGames} filteredGames={filteredGames} filter={status} />
-            </>
-          )}
-        </>
-      )}
-    </>
+    <main className="flex w-full h-full">
+      <aside className="w-96 p-3 box-border">
+        <h4 className="text-xl mb-4">PlayLater</h4>
+        <ul>
+          <li className="font-medium text-md">
+            <Link to="/library">Library</Link>
+          </li>
+          <ul className="ml-2">
+            <li>Backlog</li>
+            <li>In Progress</li>
+            <li>Completed</li>
+            <li>Abandoned</li>
+          </ul>
+        </ul>
+      </aside>
+      <section className="container mx-auto w-full h-full p-4 bg-current">
+        <h3 className="font-bold text-[3rem] text-accent">{status}</h3>
+        <ListsBody games={filteredGames} filter={status} filteredGames={filteredGames} />
+      </section>
+    </main>
   );
 };
 

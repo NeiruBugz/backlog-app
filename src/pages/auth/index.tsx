@@ -26,7 +26,7 @@ const Auth = (): JSX.Element => {
             username: displayName,
             avatarUrl: photoURL ?? '',
           });
-          navigate('/list');
+          navigate('/library');
         }
       }
     });
