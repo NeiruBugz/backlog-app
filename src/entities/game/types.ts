@@ -1,4 +1,4 @@
-export type GameStatus = 'backlog' | 'in-progress' | 'completed';
+export type GameStatus = 'backlog' | 'in-progress' | 'completed' | 'abandoned';
 export type EditableGameKeys = 'platform' | 'status' | 'review' | 'rating';
 export type Filter = GameStatus | 'all';
 

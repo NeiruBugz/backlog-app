@@ -24,8 +24,8 @@
   "systemMessages": {
     "inputParameter": "Пожалуйста, введите поисковый запрос",
     "searchingFor": "Ищем",
-    "searchErorr": "Произошла ошибка во время поиска",
-    "searchUnavailiable": "Нужно авторизоваться, чтобы воспользоваться поиском"
+    "searchError": "Произошла ошибка во время поиска",
+    "searchUnavailable": "Нужно авторизоваться, чтобы воспользоваться поиском"
   },
   "home": {
     "header": {
@@ -69,7 +69,8 @@
       "backlog": "Бэклог",
       "inProgress": "В процессе",
       "completed": "Пройдено",
-      "all": "Все"
+      "all": "Все",
+      "abandoned": "Заброшено"
     },
     "addButton": "Добавить игру",
     "emptyBacklog": "Отлично! Твой бэклог пуст, так держать!",
@@ -94,6 +95,7 @@
       "backlog": "В бэклог",
       "in-progress": "Начать",
       "completed": "Пройдено",
+      "abandoned": "Забросить",
       "actions": "Действия",
       "delete": "Удалить",
       "deleteAlertText": "Вы уверены?",

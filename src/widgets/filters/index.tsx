@@ -5,7 +5,7 @@ import { PLATFORM_OPTIONS } from 'pages/add-game/constants';
 
 import type { MouseEvent } from 'react';
 
-const FILTERS = ['all', 'backlog', 'in-progress', 'completed'];
+const FILTERS = ['all', 'backlog', 'in-progress', 'completed', 'abandoned'];
 
 const translatableString = (filter: string): string => {
   switch (filter) {
@@ -17,6 +17,8 @@ const translatableString = (filter: string): string => {
     return 'games-list.filters.inProgress';
   case 'completed':
     return 'games-list.filters.completed';
+  case 'abandoned':
+    return 'games-list.filters.abandoned';
   default:
     return '';
   }

@@ -21,6 +21,10 @@ const MENU_OPTIONS = [
     label: 'Complete',
     key: 'completed',
   },
+  {
+    label: 'Abandon',
+    key: 'abandoned',
+  }
 ];
 
 const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {

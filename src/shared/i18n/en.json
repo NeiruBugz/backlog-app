@@ -24,8 +24,8 @@
   "systemMessages": {
     "inputParameter": "Please, input search parameter",
     "searchingFor": "Searching for",
-    "searchErorr": "Error while searching",
-    "searchUnavailiable": "You should be logged in to use search"
+    "searchError": "Error while searching",
+    "searchUnavailable": "You should be logged in to use search"
   },
   "home": {
     "header": {
@@ -69,7 +69,8 @@
       "backlog": "Backlog",
       "inProgress": "In Progress",
       "completed": "Completed",
-      "all": "All"
+      "all": "All",
+      "abandoned": "Abandoned"
     },
     "addButton": "Add Game",
     "emptyBacklog": "Great! Your backlog is empty, keep it clean!",
@@ -94,6 +95,7 @@
       "backlog": "To Backlog",
       "in-progress": "Start",
       "completed": "Complete",
+      "abandoned": "Abandon",
       "actions": "Actions",
       "delete": "Delete",
       "deleteAlertText": "Are you sure about that?",
