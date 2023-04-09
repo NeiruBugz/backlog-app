@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useSignOut } from 'react-firebase-hooks/auth';
 import { useStore } from '@nanostores/react';
 
-import { User, nanoLogout, nanoUser } from '@entities';
+import { User, nanoLogout, user } from '@entities';
 import { DropdownWidget } from '@widgets';
 import { getLanguageLabel, firebaseAuth, capitalize } from '@shared';
 import { Navbar } from './navbar';
@@ -43,7 +43,7 @@ const createThemeOptions = (
 const Header = (): JSX.Element => {
   const { t, i18n } = useTranslation();
   const [signOut, error] = useSignOut(firebaseAuth);
-  const user = useStore(nanoUser);
+  const currentUser = useStore(user);
 
   useEffect(() => {
     if ('navigator' in window) {
@@ -73,9 +73,9 @@ const Header = (): JSX.Element => {
 
   return (
     <header className="flex justify-between mb-6">
-      <Navbar authorized={user.authorized} />
+      <Navbar authorized={currentUser.authorized} />
       <div className="flex">
-        {user.authorized ? <User {...user} onLogout={onLogout} /> : null}
+        {currentUser.authorized ? <User {...currentUser} onLogout={onLogout} /> : null}
         <DropdownWidget
           label={getLanguageLabel(i18n.language)}
           items={LanguageItems}

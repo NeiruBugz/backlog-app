@@ -10,6 +10,7 @@ import type { FC } from 'react';
 import type { HowLongToBeatEntry } from 'howlongtobeat';
 
 import styles from './styles.module.scss';
+import classnames from 'classnames';
 
 const SearchListItem: FC<{ item: HowLongToBeatEntry }> = ({ item }) => {
   const { name, platforms, imageUrl, id, gameplayMain, gameplayMainExtra, gameplayCompletionist } =
@@ -83,7 +84,7 @@ const SearchListItem: FC<{ item: HowLongToBeatEntry }> = ({ item }) => {
   };
 
   return (
-    <div className={styles['ba-search-result']}>
+    <div className={classnames(styles['ba-search-result'], 'rounded-box bg-white')}>
       <img className={styles['ba-search-result__image']} src={imageUrl} alt={`${name}'s image`} />
       <Text heading level={4} className="font-bold text-2xl mb-1">
         {name}

@@ -4,15 +4,8 @@ import { collection, query, where } from 'firebase/firestore';
 import { useStore } from '@nanostores/react';
 
 import { firebaseStore } from '@shared';
-import {
-  nanoGames,
-  nanoSet,
-  nanoFilters,
-  nanoUser,
-  filterByPlatform,
-  filterByStatus,
-} from '@entities';
-import { Filters, ListsBody, Loader, Sidebar } from '@widgets';
+import { nanoGames, nanoSet, nanoFilters, user, filterByPlatform, filterByStatus } from '@entities';
+import { Filters, ListsBody, Loader } from '@widgets';
 
 import type { MouseEventHandler } from 'react';
 import type { DocumentData } from 'firebase/firestore';
@@ -36,7 +29,7 @@ const dateComparator = (first: Game, second: Game) => {
 };
 
 const GamesList = (): JSX.Element => {
-  const { uid } = useStore(nanoUser);
+  const { uid } = useStore(user);
   const { status, platform } = useStore(nanoFilters);
   const nanoList = useStore(nanoGames);
 
@@ -91,25 +84,20 @@ const GamesList = (): JSX.Element => {
   }, [nanoList, status, platform]);
 
   return (
-    <main className="flex w-full h-full">
-      <Sidebar status={status} onFilter={onFilter} />
-      <section className="container mx-auto w-full h-full p-4 bg-current relative">
-        {nanoList.length !== 0 ? (
-          <>
-            <header className="sticky">
-              <h3 className="font-bold text-[3rem] text-accent capitalize">{status}</h3>
-              <Filters platformFilter={platform} onFilter={onFilter} />
-            </header>
-            <ListsBody games={filteredGames} filter={status} filteredGames={filteredGames} />
-          </>
-        ) : (
-          <Loader />
-        )}
-      </section>
-    </main>
+    <>
+      {nanoList.length !== 0 ? (
+        <>
+          <header className="sticky">
+            <h3 className="font-bold text-[3rem] text-accent capitalize">{status}</h3>
+            <Filters platformFilter={platform} onFilter={onFilter} />
+          </header>
+          <ListsBody games={filteredGames} filter={status} filteredGames={filteredGames} />
+        </>
+      ) : (
+        <Loader />
+      )}
+    </>
   );
 };
-
-// export { GamesList };
 
 export default GamesList;

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import { useStore } from '@nanostores/react';
 
 import { SuggestBox, Loader } from '@widgets';
-import { nanoUser, resetPayload, search } from '@entities';
+import { user, resetPayload, search } from '@entities';
 import { addDocument } from '@shared';
 
 import type { ChangeEvent } from 'react';
@@ -20,7 +20,7 @@ type AddGameInputs = Pick<Game, 'title' | 'platform' | 'status'>;
 const AddGame = (): JSX.Element => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { uid } = useStore(nanoUser);
+  const { uid } = useStore(user);
   const { name, imageUrl } = useStore(search);
   const { register, handleSubmit, control } = useForm<AddGameInputs>({
     defaultValues: {
@@ -105,7 +105,9 @@ const AddGame = (): JSX.Element => {
       ) : (
         <form onSubmit={handleSubmit(onFinish)} className="form-control w-full max-w-md">
           <label htmlFor="title" className="label">
-            <span className="label-text text-lg">{t('add-game.labels.title')}</span>
+            <span className="label-text text-lg text-primary-content">
+              {t('add-game.labels.title')}
+            </span>
             <Controller
               name="title"
               control={control}
@@ -133,7 +135,9 @@ const AddGame = (): JSX.Element => {
             ) : null}
           </label>
           <label htmlFor="platform" className="label">
-            <span className="label-text text-lg">{t('add-game.labels.platform')}</span>
+            <span className="label-text text-lg text-primary-content">
+              {t('add-game.labels.platform')}
+            </span>
             <select
               id="platform"
               className="select select-bordered"
@@ -147,7 +151,9 @@ const AddGame = (): JSX.Element => {
             </select>
           </label>
           <label htmlFor="status" className="label">
-            <span className="label-text text-lg">{t('add-game.labels.status')}</span>
+            <span className="label-text text-lg text-primary-content">
+              {t('add-game.labels.status')}
+            </span>
             <select
               id="status"
               className="select select-bordered"

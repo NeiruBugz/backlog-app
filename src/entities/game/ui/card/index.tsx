@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Divider, Tag } from '@widgets';
+import { Alert, Divider, Tag } from '@widgets';
 import { nanoDelete, nanoUpdate } from '@entities';
 import { deleteGameDocument, updateGameDocument } from '@shared';
 
@@ -59,42 +59,7 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
     <>
       <div className="card image-full w-56 h-56 sm:w-64 sm:h-64 md:w-96 md:h-96">
         {showDeleteAlert ? (
-          <div className="h-full w-full z-50 absolute flex justify-center items-center p-3">
-            <div className="alert shadow-lg flex flex-col w-full">
-              <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  className="stroke-info flex-shrink-0 w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <span>{t('games-list.cardMenu.deleteAlertText')}</span>
-              </div>
-              <div className="flex-none">
-                <button
-                  className="btn btn-sm btn-ghost"
-                  data-action="cancel"
-                  onClick={onAlertClick}
-                >
-                  {t('games-list.cardMenu.cancelDelete')}
-                </button>
-                <button
-                  className="btn btn-sm btn-primary"
-                  data-action="submit"
-                  onClick={onAlertClick}
-                >
-                  {t('games-list.cardMenu.confirmDelete')}
-                </button>
-              </div>
-            </div>
-          </div>
+          <Alert t={t} onClick={onAlertClick} />
         ) : null}
         <figure>
           <img
@@ -141,7 +106,7 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
               </li>
             </ul>
           </div>
-          <div className="absolute left-0 bottom-0 h-1/3 w-full bg-gradient-to-r from-[#330000] to-transparent rounded-bl-[1rem] rounded-br-[1rem] pt-4 pl-6">
+          <div className="absolute left-0 bottom-0 h-1/3 w-full bg-gradient-to-r from-[#2d2d2d] to-transparent rounded-bl-[1rem] rounded-br-[1rem] pt-4 pl-6">
             <h2 className="card-title mb-2 text-[1.2em] text-primary-content">{title}</h2>
             <Tag platform={platform} />
           </div>

@@ -16,12 +16,6 @@ module.exports = {
     themes: [
       'light',
       'dark',
-      'emerald',
-      'corporate',
-      'synthwave',
-      'cyberpunk',
-      'pastel',
-      'fantasy',
     ],
   },
 };

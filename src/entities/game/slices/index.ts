@@ -1,3 +1,3 @@
-export * from './nano-filters';
-export * from './nano-games';
-export * from './nano-search';
+export * from './filters';
+export * from './games';
+export * from './search';

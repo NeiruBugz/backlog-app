@@ -3,29 +3,15 @@ import { capitalize } from '@shared';
 const LANGUAGE_ITEMS = [
   {
     key: 'ru',
-    label: '🇷🇺',
+    label: 'Russian',
   },
   {
     key: 'en',
-    label: '🇺🇸',
+    label: 'English',
   },
 ];
 
-const LANGUAGE_OPTIONS = [
-  { id: 1, name: '🇷🇺', unavailiable: false },
-  { id: 2, name: '🇺🇸', unavailiable: false },
-];
-
-const THEMES = [
-  'light',
-  'dark',
-  'emerald',
-  'corporate',
-  'synthwave',
-  'cyberpunk',
-  'pastel',
-  'fantasy',
-];
+const THEMES = ['light', 'dark'];
 
 const createThemeOptions = (
   translateCb: (key: string) => string
@@ -56,4 +42,4 @@ const STATUS_NAV = [
   },
 ];
 
-export { STATUS_NAV, LANGUAGE_ITEMS, THEMES, LANGUAGE_OPTIONS, createThemeOptions };
+export { STATUS_NAV, LANGUAGE_ITEMS, THEMES, createThemeOptions };
