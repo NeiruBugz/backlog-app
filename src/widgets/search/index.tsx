@@ -42,11 +42,7 @@ const SearchInput: FC<SearchInputProps> = ({ onSearch }) => {
         value={query}
         onChange={onInputChange}
       />
-      <button
-        className="btn btn-primary"
-        onClick={onButtonPress}
-        disabled={query.length === 0}
-      >
+      <button className="btn btn-primary" onClick={onButtonPress} disabled={query.length === 0}>
         {t('home.search.button')}
       </button>
     </>

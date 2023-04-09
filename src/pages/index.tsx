@@ -2,7 +2,6 @@ import { lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router';
 import { useStore } from '@nanostores/react';
 
-import { Header } from '@widgets';
 import { nanoUser } from '@entities';
 
 const Landing = lazy(() => import('./landing/index'));
@@ -20,13 +19,6 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
 
   return children;
 };
-
-const RouteWithHeader = ({ children }: { children: JSX.Element }) => (
-  <>
-    <Header />
-    {children}
-  </>
-);
 
 const Routing = () => (
   <Routes>

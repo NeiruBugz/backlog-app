@@ -1,6 +1,4 @@
-import { useRef } from 'react';
 import { Translation } from 'react-i18next';
-import { useVirtualizer } from '@tanstack/react-virtual';
 import { GameCard } from '@entities';
 import { Divider, Text } from '@widgets';
 
@@ -42,12 +40,6 @@ const EmptyList: FC<{ text: string }> = ({ text }) => {
 };
 
 const List: FC<ListProps> = ({ listItems, dividerText }) => {
-  const parentRef = useRef<HTMLUListElement>(null);
-  const virtualizer = useVirtualizer({
-    count: listItems.length,
-    getScrollElement: () => parentRef?.current,
-    estimateSize: () => 300,
-  });
   if (listItems.length === 0 && dividerText) {
     return <EmptyList text={dividerText} />;
   }
@@ -61,23 +53,12 @@ const List: FC<ListProps> = ({ listItems, dividerText }) => {
           </Text>
         </Divider>
       ) : null}
-      <ul
-        ref={parentRef}
-        className="mt-6 flex flex-wrap gap-2"
-        style={{ height: '100%', width: '100%' }}
-      >
-        {virtualizer.getVirtualItems().map((virtualItem) => {
-          console.log(virtualItem);
-          return (
-            <li
-              key={virtualItem.key}
-              ref={virtualizer.measureElement}
-              data-index={virtualItem.index}
-            >
-              <GameCard {...listItems[virtualItem.index]} />
-            </li>
-          );
-        })}
+      <ul className="mt-6 flex flex-wrap gap-6 h-[90%] overflow-scroll">
+        {listItems.map((game) => (
+          <li className="w-56 h-56 sm:w-64 sm:h-64 md:w-96 md:h-96" key={game.id}>
+            <GameCard {...game} />
+          </li>
+        ))}
       </ul>
     </>
   );

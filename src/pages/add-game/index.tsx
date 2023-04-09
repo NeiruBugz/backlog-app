@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import { useStore } from '@nanostores/react';
 
 import { SuggestBox, Loader } from '@widgets';
-import { nanoUser,  resetPayload, search } from '@entities';
+import { nanoUser, resetPayload, search } from '@entities';
 import { addDocument } from '@shared';
 
 import type { ChangeEvent } from 'react';
@@ -88,11 +88,10 @@ const AddGame = (): JSX.Element => {
       review: '',
       rating: 0,
     };
-    addDocument({ ...gameData, user: uid }, 'games')
-      .then(() => {
-        setLoading(false);
-        navigate('/library');
-      });
+    addDocument({ ...gameData, user: uid }, 'games').then(() => {
+      setLoading(false);
+      navigate('/library');
+    });
   };
 
   const statuses = useMemo(() => STATUS_OPTIONS.map((item) => translateStatus(item, t)), [t]);
@@ -101,67 +100,71 @@ const AddGame = (): JSX.Element => {
 
   return (
     <main className="flex justify-center items-center">
-      {isLoading ? <Loader /> : <form onSubmit={handleSubmit(onFinish)} className="form-control w-full max-w-md">
-        <label htmlFor="title" className="label">
-          <span className="label-text text-lg">{t('add-game.labels.title')}</span>
-          <Controller
-            name="title"
-            control={control}
-            render={({ field }) => (
-              <input
-                {...field}
-                id="title"
-                placeholder={t('add-game.titlePlaceholder') ?? ''}
-                autoComplete="off"
-                value={inputValue}
-                onChange={onInputChange}
-                ref={inputRef}
-                className="input input-bordered w-full max-w-xs"
-              />
-            )}
-          />
-          {query ? (
-            <SuggestBox
-              query={query}
-              onItemClick={onSearchEntryClick}
-              width={width}
-              xPos={left}
-              yPos={top}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <form onSubmit={handleSubmit(onFinish)} className="form-control w-full max-w-md">
+          <label htmlFor="title" className="label">
+            <span className="label-text text-lg">{t('add-game.labels.title')}</span>
+            <Controller
+              name="title"
+              control={control}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  id="title"
+                  placeholder={t('add-game.titlePlaceholder') ?? ''}
+                  autoComplete="off"
+                  value={inputValue}
+                  onChange={onInputChange}
+                  ref={inputRef}
+                  className="input input-bordered w-full max-w-xs"
+                />
+              )}
             />
-          ) : null}
-        </label>
-        <label htmlFor="platform" className="label">
-          <span className="label-text text-lg">{t('add-game.labels.platform')}</span>
-          <select
-            id="platform"
-            className="select select-bordered"
-            {...register('platform', { required: true })}
-          >
-            {PLATFORM_OPTIONS.map((platform) => (
-              <option value={platform.value} key={platform.value}>
-                {platform.label}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label htmlFor="status" className="label">
-          <span className="label-text text-lg">{t('add-game.labels.status')}</span>
-          <select
-            id="status"
-            className="select select-bordered"
-            {...register('status', { required: true })}
-          >
-            {statuses.map((status) => (
-              <option value={status.value} key={status.value}>
-                {status.label}
-              </option>
-            ))}
-          </select>
-        </label>
-        <button type="submit" className="btn btn-primary">
-          {t('add-game.submitButton')}
-        </button>
-      </form>}
+            {query ? (
+              <SuggestBox
+                query={query}
+                onItemClick={onSearchEntryClick}
+                width={width}
+                xPos={left}
+                yPos={top}
+              />
+            ) : null}
+          </label>
+          <label htmlFor="platform" className="label">
+            <span className="label-text text-lg">{t('add-game.labels.platform')}</span>
+            <select
+              id="platform"
+              className="select select-bordered"
+              {...register('platform', { required: true })}
+            >
+              {PLATFORM_OPTIONS.map((platform) => (
+                <option value={platform.value} key={platform.value}>
+                  {platform.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label htmlFor="status" className="label">
+            <span className="label-text text-lg">{t('add-game.labels.status')}</span>
+            <select
+              id="status"
+              className="select select-bordered"
+              {...register('status', { required: true })}
+            >
+              {statuses.map((status) => (
+                <option value={status.value} key={status.value}>
+                  {status.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button type="submit" className="btn btn-primary">
+            {t('add-game.submitButton')}
+          </button>
+        </form>
+      )}
     </main>
   );
 };

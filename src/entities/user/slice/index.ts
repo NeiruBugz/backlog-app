@@ -19,9 +19,4 @@ const logout = function logout() {
   setUser(initialValue);
 };
 
-export {
-  user as nanoUser,
-  setUser,
-  logout as nanoLogout,
-};
-
+export { user as nanoUser, setUser, logout as nanoLogout };

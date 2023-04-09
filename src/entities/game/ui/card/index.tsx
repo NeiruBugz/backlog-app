@@ -24,7 +24,7 @@ const MENU_OPTIONS = [
   {
     label: 'Abandon',
     key: 'abandoned',
-  }
+  },
 ];
 
 const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
@@ -35,9 +35,7 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
     const { action } = event.currentTarget.dataset;
 
     if (action === 'submit') {
-      deleteGameDocument(id, 'games').then(() =>
-        nanoDelete(id)
-      );
+      deleteGameDocument(id, 'games').then(() => nanoDelete(id));
     }
 
     setShowAlert(false);
@@ -59,7 +57,7 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
 
   return (
     <>
-      <div className="card bg-base-100 shadow-xl image-full w-56 h-56 sm:w-64 sm:h-64 md:w-96 md:h-96">
+      <div className="card image-full w-56 h-56 sm:w-64 sm:h-64 md:w-96 md:h-96">
         {showDeleteAlert ? (
           <div className="h-full w-full z-50 absolute flex justify-center items-center p-3">
             <div className="alert shadow-lg flex flex-col w-full">
@@ -100,7 +98,7 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
         ) : null}
         <figure>
           <img
-            loading='lazy'
+            loading="lazy"
             src={img ? img : 'https://placehold.jp/1000x1000.png'}
             className="w-96 object-fill"
           />
@@ -143,8 +141,8 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
               </li>
             </ul>
           </div>
-          <div className="absolute left-4 bottom-6">
-            <h2 className="card-title mb-2">{title}</h2>
+          <div className="absolute left-0 bottom-0 h-1/3 w-full bg-gradient-to-r from-[#330000] to-transparent rounded-bl-[1rem] rounded-br-[1rem] pt-4 pl-6">
+            <h2 className="card-title mb-2 text-[1.2em] text-primary-content">{title}</h2>
             <Tag platform={platform} />
           </div>
         </div>

@@ -9,3 +9,4 @@ export * from './filters';
 export * from './typography';
 export * from './divider';
 export * from './loader';
+export * from './sidebar';

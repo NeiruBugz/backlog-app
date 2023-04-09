@@ -8,8 +8,8 @@ const User: FC<Omit<UserProps, 'uid'>> = ({ username, onLogout }) => {
 
   return (
     <>
-      <div className="dropdown dropdown-end">
-        <label tabIndex={0} className="btn btn-ghost m-1">
+      <div className="dropdown dropdown-start">
+        <label tabIndex={0} className="btn btn-ghost pl-0 pr-1">
           <div className="avatar">
             <div className="mask mask-hexagon w-10">
               <div className="avatar placeholder">
@@ -19,6 +19,7 @@ const User: FC<Omit<UserProps, 'uid'>> = ({ username, onLogout }) => {
               </div>
             </div>
           </div>
+          <span className="ml-2">{username}</span>
         </label>
         <ul
           tabIndex={0}

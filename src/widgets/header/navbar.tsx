@@ -6,12 +6,9 @@ import type { FC } from 'react';
 const Navbar: FC<{ authorized: boolean }> = ({ authorized }) => {
   const { t } = useTranslation();
   return (
-    <nav role='navbar'>
+    <nav role="navbar">
       <div>
-        <ul
-          tabIndex={0}
-          className="mt-3 py-2 w-52 bg-primary-content text-primary flex gap-3"
-        >
+        <ul tabIndex={0} className="mt-3 py-2 w-52 bg-primary-content text-primary flex gap-3">
           <li className="hover:bg-primary-focus hover:text-primary-content rounded-none">
             <Link to="/">{t('home.header.navigation.main')}</Link>
           </li>

@@ -20,8 +20,4 @@ const resetPayload = function resetPayload() {
   search.set(initialValue);
 };
 
-export {
-  search,
-  savePayload,
-  resetPayload,
-};
+export { search, savePayload, resetPayload };

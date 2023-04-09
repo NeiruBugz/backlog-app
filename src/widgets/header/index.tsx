@@ -30,9 +30,13 @@ const themes = [
   'fantasy',
 ];
 
-const createThemeOptions = (translateCb: (key: string) => string): { key: string; label: string }[] => {
+const createThemeOptions = (
+  translateCb: (key: string) => string
+): { key: string; label: string }[] => {
   const themesOptions: { key: string; label: string }[] = [];
-  themes.map((theme) => themesOptions.push({ key: theme, label: capitalize(translateCb(`themes.${theme}`)) }));
+  themes.map((theme) =>
+    themesOptions.push({ key: theme, label: capitalize(translateCb(`themes.${theme}`)) })
+  );
   return themesOptions;
 };
 
@@ -77,7 +81,11 @@ const Header = (): JSX.Element => {
           items={LanguageItems}
           onClick={onLanguageSelect}
         />
-        <DropdownWidget label={t('common.theme')} items={createThemeOptions(t)} onClick={onThemeChange} />
+        <DropdownWidget
+          label={t('common.theme')}
+          items={createThemeOptions(t)}
+          onClick={onThemeChange}
+        />
       </div>
     </header>
   );
