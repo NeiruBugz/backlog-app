@@ -57,7 +57,7 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
 
   return (
     <>
-      <div className="card image-full h-56 w-56 sm:h-64 sm:w-64 md:h-96 md:w-96">
+      <div className="md:h-68 md:w-68 card image-full h-56 w-56 sm:h-64 sm:w-64 xl:h-96 xl:w-96">
         {showDeleteAlert ? <Alert t={t} onClick={onAlertClick} /> : null}
         <figure>
           <img
@@ -104,8 +104,10 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
               </li>
             </ul>
           </div>
-          <div className="absolute bottom-0 left-0 h-1/3 w-full rounded-bl-[1rem] rounded-br-[1rem] bg-gradient-to-r from-[#2d2d2d] to-transparent pl-6 pt-4">
-            <h2 className="card-title mb-2 text-[1.2em] text-primary-content">{title}</h2>
+          <div className="h-/14 max-h-1/3 absolute bottom-0 left-0 w-full rounded-bl-[1rem] rounded-br-[1rem] bg-gradient-to-r from-[#2d2d2d] to-transparent py-2 pl-2 md:py-4 md:pl-4">
+            <h2 className="card-title mb-2 max-w-fit text-ellipsis text-[1.2em] text-primary-content">
+              {title}
+            </h2>
             <Tag platform={platform} />
           </div>
         </div>
