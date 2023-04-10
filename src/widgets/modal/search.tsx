@@ -51,7 +51,7 @@ const SearchModal = forwardRef<HTMLDivElement, unknown>((_, ref) => {
 
   return (
     <div className="w-1/2 h-1/2" ref={ref}>
-      <div className='flex'>
+      <div className="flex">
         <input
           type="search"
           className="input input-bordered input-primary w-full mr-2"

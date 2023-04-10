@@ -34,7 +34,11 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     return <Navigate to="/" replace />;
   }
 
-  return <RouteWithSidebar><CustomRoute>{children}</CustomRoute></RouteWithSidebar>;
+  return (
+    <RouteWithSidebar>
+      <CustomRoute>{children}</CustomRoute>
+    </RouteWithSidebar>
+  );
 };
 
 const RouteWithSidebar = ({ children }: { children: JSX.Element }) => {
@@ -78,8 +82,22 @@ const RouteWithSidebar = ({ children }: { children: JSX.Element }) => {
 
 const Routing = () => (
   <Routes>
-    <Route path="/" element={<CustomRoute><Landing /></CustomRoute>} />
-    <Route path="/auth" element={<CustomRoute><Auth /></CustomRoute>} />
+    <Route
+      path="/"
+      element={
+        <CustomRoute>
+          <Landing />
+        </CustomRoute>
+      }
+    />
+    <Route
+      path="/auth"
+      element={
+        <CustomRoute>
+          <Auth />
+        </CustomRoute>
+      }
+    />
     <Route
       path="/search"
       element={

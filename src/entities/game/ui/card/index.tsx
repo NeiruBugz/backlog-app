@@ -58,9 +58,7 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
   return (
     <>
       <div className="card image-full w-56 h-56 sm:w-64 sm:h-64 md:w-96 md:h-96">
-        {showDeleteAlert ? (
-          <Alert t={t} onClick={onAlertClick} />
-        ) : null}
+        {showDeleteAlert ? <Alert t={t} onClick={onAlertClick} /> : null}
         <figure>
           <img
             loading="lazy"

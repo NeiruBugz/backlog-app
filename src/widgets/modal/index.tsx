@@ -8,7 +8,7 @@ import { SearchModal } from './search';
 import type { ReactPortal } from 'react';
 import { useOutsideClick } from '@shared';
 
-const Modal = ({ onClose }: { onClose?: () => void }): ReactPortal | null => {
+const Modal = (): ReactPortal | null => {
   const { isVisible, id } = useStore(modal);
   const modalBodyRef = useRef<HTMLDivElement>(null);
 

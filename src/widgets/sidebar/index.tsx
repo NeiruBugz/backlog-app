@@ -122,7 +122,7 @@ const Sidebar: FC<SidebarProps> = ({ status, onFilter }) => {
           onClick={onSearchClick}
         >
           Search
-          <kbd className='kbd kbd-sm'>/</kbd>
+          <kbd className="kbd kbd-sm">/</kbd>
         </li>
       </ul>
     </aside>
