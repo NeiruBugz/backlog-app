@@ -13,9 +13,9 @@ const GameCard: FC<GameProps> = ({ title, platform, img }) => (
           className="w-96 object-fill"
         />
       </figure>
-      <div className="card-body flex flex-col">
-        <div className="h-/14 max-h-1/3 absolute bottom-0 left-0 w-full rounded-bl-[1rem] rounded-br-[1rem] bg-gradient-to-r from-[#2d2d2d] to-transparent py-2 pl-2 md:py-4 md:pl-4">
-          <h2 className="card-title mb-2 truncate text-[1.2em] text-primary-content">{title}</h2>
+      <div className="card-body">
+        <div className="h-/14 max-h-1/3 absolute bottom-0 left-0 w-full rounded-bl-[1rem] rounded-br-[1rem] bg-gradient-to-r from-[#2d2d2d] to-transparent py-2 pl-2 pr-2 md:py-4 md:pl-4">
+          <h2 className="mb-2 truncate text-[1.2em] font-bold text-primary-content">{title}</h2>
           <Tag platform={platform} />
         </div>
       </div>
