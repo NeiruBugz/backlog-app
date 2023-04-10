@@ -7,9 +7,11 @@ import { SearchModal } from './search';
 
 import type { ReactPortal } from 'react';
 import { useOutsideClick } from '@shared';
+import { GameInfo } from './game-info';
+import type { HowLongToBeatEntry } from 'howlongtobeat';
 
 const Modal = (): ReactPortal | null => {
-  const { isVisible, id } = useStore(modal);
+  const { isVisible, id, modalProps } = useStore(modal);
   const modalBodyRef = useRef<HTMLDivElement>(null);
 
   const onModalClose = useCallback(() => setModal({ id: null, isVisible: false }), []);
@@ -33,6 +35,8 @@ const Modal = (): ReactPortal | null => {
   const modalComponent = () => {
     if (id === 'search') {
       return <SearchModal ref={modalBodyRef} />;
+    } else if (id === 'gameInfo') {
+      return <GameInfo ref={modalBodyRef} {...(modalProps as HowLongToBeatEntry)} />;
     }
 
     return <div ref={modalBodyRef}>Modal</div>;
@@ -45,7 +49,7 @@ const Modal = (): ReactPortal | null => {
   return ReactDOM.createPortal(
     <div id="modalOverlay">
       <div
-        className="absolute left-0 top-0 z-50 flex h-[100vh] w-[100vw] items-center justify-center bg-slate-300/75"
+        className="rounded-box absolute left-0 top-0 z-50 flex h-[100vh] w-[100vw] items-center justify-center bg-slate-300/75"
         ref={modalBodyRef}
       >
         {modalComponent()}

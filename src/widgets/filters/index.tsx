@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { PLATFORM_OPTIONS } from 'pages/add-game/constants';
 
 import type { MouseEventHandler } from 'react';
+import { Tag } from 'widgets/tag';
 
 const Filters = ({
   platformFilter,
@@ -16,7 +17,7 @@ const Filters = ({
   const { t } = useTranslation();
 
   return (
-    <ul className="tabs mt-4 items-center">
+    <ul className="tabs my-6 items-center">
       <label className="text-lg text-secondary-content">{t('games-list.platformFilter')}: </label>
       <li
         key="all"
@@ -27,7 +28,7 @@ const Filters = ({
           'tab-active font-bold': platformFilter === 'all',
         })}
       >
-        {t('games-list.filters.all')}
+        <Tag>{t('games-list.filters.all')}</Tag>
       </li>
       {PLATFORM_OPTIONS.map((filterType) => (
         <li
@@ -39,7 +40,7 @@ const Filters = ({
             'tab-active font-bold': platformFilter === filterType.value,
           })}
         >
-          {filterType.label}
+          <Tag platform={filterType.label}>{filterType.label}</Tag>
         </li>
       ))}
     </ul>

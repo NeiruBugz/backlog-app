@@ -1,105 +1,10 @@
-import { useNavigate } from 'react-router';
-import { useTranslation } from 'react-i18next';
-import { useCallback, useRef } from 'react';
+import { useRef } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 
-import { savePayload } from '@entities';
-import { Text, Tag } from '@widgets';
+import { GameItem } from '@entities';
 
 import type { FC } from 'react';
 import type { HowLongToBeatEntry } from 'howlongtobeat';
-
-import classnames from 'classnames';
-import { setModal } from 'widgets/modal/modal';
-
-const SearchListItem: FC<{ item: HowLongToBeatEntry }> = ({ item }) => {
-  const { name, platforms, imageUrl, id, gameplayMain, gameplayMainExtra, gameplayCompletionist } =
-    item;
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-
-  const onAddClick = () => {
-    savePayload({ name, imageUrl });
-    setModal({ isVisible: false, id: null });
-    navigate('/add-game');
-  };
-
-  const Tags = (): JSX.Element => {
-    if (platforms.length === 0) {
-      return <></>;
-    }
-
-    return (
-      <div>
-        <Text heading level={5} className="text-xl font-bold">
-          {t('games-list.searchResults.playableOn')}
-        </Text>
-        <div className="flex flex-wrap gap-2">
-          {platforms.map((platform) => (
-            <Tag platform={platform} key={`${platform}--${id}`} />
-          ))}
-        </div>
-      </div>
-    );
-  };
-
-  const Completions = (): JSX.Element => {
-    const determinePluralityKey = useCallback((count: number): string => {
-      if (count === 1) {
-        return 'hours_one';
-      } else if (count > 4 || count === 0) {
-        return 'hours_many';
-      } else {
-        return 'hours_few';
-      }
-    }, []);
-
-    return (
-      <div>
-        <Text heading level={5} className="mb-1 mt-2 text-xl font-bold">
-          {t('games-list.searchResults.completion.completionHours')}
-        </Text>
-        <div className="flex flex-wrap gap-2">
-          <Tag>
-            {t('games-list.searchResults.completion.main')}:{' '}
-            {t(`games-list.searchResults.completion.${determinePluralityKey(gameplayMain)}`, {
-              count: gameplayMain,
-            })}
-          </Tag>
-          <Tag>
-            {t('games-list.searchResults.completion.mainExtra')}:{' '}
-            {t(`games-list.searchResults.completion.${determinePluralityKey(gameplayMainExtra)}`, {
-              count: gameplayMainExtra,
-            })}
-          </Tag>
-          <Tag>
-            {t('games-list.searchResults.completion.completionist')}:{' '}
-            {t(
-              `games-list.searchResults.completion.${determinePluralityKey(gameplayCompletionist)}`,
-              { count: gameplayCompletionist }
-            )}
-          </Tag>
-        </div>
-      </div>
-    );
-  };
-
-  return (
-    <div className={classnames('rounded-box my-4 flex bg-white p-4')}>
-      <img className="rounded-box mr-4 w-64 object-contain" src={imageUrl} alt={`${name} poster`} />
-      <div>
-        <Text heading level={4} className="mb-1 text-2xl font-bold">
-          {name}
-        </Text>
-        <Tags />
-        <Completions />
-        <button onClick={onAddClick} className="btn-primary btn mt-4">
-          {t('common.addGame')}
-        </button>
-      </div>
-    </div>
-  );
-};
 
 const SearchResultsList: FC<{ results: HowLongToBeatEntry[] }> = ({ results }) => {
   const parentRef = useRef<HTMLDivElement>(null);
@@ -121,7 +26,7 @@ const SearchResultsList: FC<{ results: HowLongToBeatEntry[] }> = ({ results }) =
       >
         {results.map((virtualItem, index) => (
           <li data-index={index} key={virtualItem.id} ref={virtualizer.measureElement}>
-            <SearchListItem item={virtualItem} />
+            <GameItem item={virtualItem} isAdd />
           </li>
         ))}
       </ul>

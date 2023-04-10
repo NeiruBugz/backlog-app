@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useStore } from '@nanostores/react';
 import { useEffect, useState } from 'react';
 
@@ -8,7 +8,7 @@ import { User, nanoLogout, user } from '@entities';
 import { firebaseAuth } from '@shared';
 import { useSignOut } from 'react-firebase-hooks/auth';
 import { useTranslation } from 'react-i18next';
-import { LANGUAGE_ITEMS, STATUS_NAV, createThemeOptions } from './utils';
+import { STATUS_NAV, createThemeOptions } from './utils';
 import { setModal } from 'widgets/modal/modal';
 
 interface SidebarProps {
@@ -18,15 +18,13 @@ interface SidebarProps {
 
 const Sidebar: FC<SidebarProps> = ({ status, onFilter }) => {
   const { t, i18n } = useTranslation();
+  const location = useLocation();
   const [signOut, error] = useSignOut(firebaseAuth);
   const [theme, setTheme] = useState<string>('light');
   const currentUser = useStore(user);
 
   useEffect(() => {
-    if ('navigator' in window) {
-      const lng = navigator.language.substring(0, 2);
-      i18n.changeLanguage(lng);
-    }
+    i18n.changeLanguage('en');
   }, [i18n]);
 
   useEffect(() => {
@@ -42,11 +40,11 @@ const Sidebar: FC<SidebarProps> = ({ status, onFilter }) => {
     setTheme(value);
   };
 
-  const onLanguageSelect: ChangeEventHandler<HTMLSelectElement> = ({
-    currentTarget: { value },
-  }) => {
-    i18n.changeLanguage(value);
-  };
+  // const onLanguageSelect: ChangeEventHandler<HTMLSelectElement> = ({
+  //   currentTarget: { value },
+  // }) => {
+  //   i18n.changeLanguage(value);
+  // };
 
   const onLogout = async () => {
     signOut().then((result) => {
@@ -69,14 +67,14 @@ const Sidebar: FC<SidebarProps> = ({ status, onFilter }) => {
       <div className="flex flex-col justify-end">
         <User {...currentUser} onLogout={onLogout} />
         <div>
-          <select onChange={onLanguageSelect} value={i18n.language} className="mr-1">
+          {/* <select className="select mr-1" onChange={onLanguageSelect} value={i18n.language}>
             {LANGUAGE_ITEMS.map((option) => (
               <option data-value={option.key} key={option.key} value={option.key}>
                 {option.label}
               </option>
             ))}
-          </select>
-          <select onChange={onThemeSelect} value={theme}>
+          </select> */}
+          <select className="select" onChange={onThemeSelect} value={theme}>
             {createThemeOptions(t).map((option) => (
               <option data-value={option.key} key={option.key} value={option.key}>
                 {option.label}
@@ -91,7 +89,7 @@ const Sidebar: FC<SidebarProps> = ({ status, onFilter }) => {
             Library
           </NavLink>
         </li>
-        <ul className="ml-2 mt-1">
+        <ul className={classnames('ml-2 mt-1', { hidden: location.pathname !== '/library' })}>
           {STATUS_NAV.map((nav) => (
             <li
               key={nav.key}

@@ -3,6 +3,7 @@ import { atom } from 'nanostores';
 interface ModalStore {
   id: string | null;
   isVisible: boolean;
+  modalProps?: unknown;
 }
 
 const initialValue: ModalStore = {

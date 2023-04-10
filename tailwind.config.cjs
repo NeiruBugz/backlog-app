@@ -7,7 +7,7 @@ module.exports = {
         nintendo: '#e60012',
         playstation: '#0070d1',
         xbox: '#107c10',
-        pc: '#1b2838',
+        pc: '#121212',
       },
     },
   },
