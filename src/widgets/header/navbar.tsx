@@ -6,43 +6,22 @@ import type { FC } from 'react';
 const Navbar: FC<{ authorized: boolean }> = ({ authorized }) => {
   const { t } = useTranslation();
   return (
-    <nav className="navbar flex items-center">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-primary-content text-primary"
-          >
-            <li className="hover:bg-primary-focus hover:text-primary-content rounded-none">
-              <Link to="/">{t('home.header.navigation.main')}</Link>
+    <nav role="navbar">
+      <div>
+        <ul tabIndex={0} className="mt-3 flex w-52 gap-3 bg-primary-content py-2 text-primary">
+          <li className="rounded-none hover:bg-primary-focus hover:text-primary-content">
+            <Link to="/">{t('home.header.navigation.main')}</Link>
+          </li>
+          {authorized ? (
+            <li className="rounded-none hover:bg-primary-focus hover:text-primary-content">
+              <Link to="/library">{t('home.header.navigation.games')}</Link>
             </li>
-            {authorized ? (
-              <li className="hover:bg-primary-focus hover:text-primary-content rounded-none">
-                <Link to="/list">{t('home.header.navigation.games')}</Link>
-              </li>
-            ) : (
-              <li className="hover:bg-primary-focus hover:text-primary-content rounded-none">
-                <Link to="/auth">{t('home.header.navigation.login')}</Link>
-              </li>
-            )}
-          </ul>
-        </div>
+          ) : (
+            <li className="rounded-none hover:bg-primary-focus hover:text-primary-content">
+              <Link to="/auth">{t('home.header.navigation.login')}</Link>
+            </li>
+          )}
+        </ul>
       </div>
     </nav>
   );

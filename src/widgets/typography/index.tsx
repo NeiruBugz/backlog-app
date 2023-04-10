@@ -3,7 +3,7 @@ import type { FC, ReactNode, HTMLAttributes } from 'react';
 
 type TypographyAttributes = HTMLHeadingElement | HTMLParagraphElement;
 
-interface TypographyProps extends HTMLAttributes<TypographyAttributes>{
+interface TypographyProps extends HTMLAttributes<TypographyAttributes> {
   children: ReactNode;
   heading?: boolean;
   level?: number;
@@ -19,7 +19,7 @@ const Text: FC<TypographyProps> = ({ children, heading, level, ...rest }) => {
       if (level && titleLevels.includes(level)) {
         el = `h${level}`;
       }
-    };
+    }
 
     return el;
   };

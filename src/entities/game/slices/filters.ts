@@ -1,7 +1,7 @@
 import { atom } from 'nanostores';
 
 const initialValue = {
-  status: 'all',
+  status: 'backlog',
   platform: 'all',
 };
 
@@ -15,8 +15,4 @@ const filterByPlatform = function filterByPlatform(filterCriteria: string) {
   filters.set({ ...filters.get(), platform: filterCriteria });
 };
 
-export {
-  filters as nanoFilters,
-  filterByStatus,
-  filterByPlatform,
-};
+export { filters as nanoFilters, filterByStatus, filterByPlatform };

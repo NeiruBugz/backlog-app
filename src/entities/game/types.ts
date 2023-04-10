@@ -11,8 +11,7 @@ export interface Game {
   createdAt?: number;
   review?: string;
   rating?: unknown;
-};
-
+}
 
 export interface UpdateGamePayload {
   id: string;
@@ -20,4 +19,4 @@ export interface UpdateGamePayload {
     key: EditableGameKeys;
     value: string;
   };
-};
+}

@@ -10,7 +10,8 @@
     "unit": "vitest",
     "e2e": "npx playwright test --config=playwright.config.ts",
     "lint": "eslint src",
-    "cleanup": "eslint --fix src && prettier --write src"
+    "cleanup": "eslint --fix src && prettier --write src",
+    "find-deadcode": "ts-prune | grep -v '(used in module)'"
   },
   "commitlint": {
     "extends": [
@@ -18,7 +19,6 @@
     ]
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.13",
     "@nanostores/react": "0.4.1",
     "@tanstack/react-virtual": "3.0.0-beta.49",
     "autoprefixer": "10.4.14",
@@ -63,8 +63,10 @@
     "howlongtobeat": "1.7.0",
     "husky": "^8.0.3",
     "jsdom": "21.1.1",
-    "prettier": "2.8.7",
+    "prettier": "^2.8.7",
+    "prettier-plugin-tailwindcss": "^0.2.7",
     "sass": "1.60.0",
+    "ts-prune": "0.10.3",
     "typescript": "5.0.3",
     "typescript-plugin-css-modules": "5.0.0",
     "vite": "4.2.1",

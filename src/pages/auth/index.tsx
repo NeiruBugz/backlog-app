@@ -26,16 +26,16 @@ const Auth = (): JSX.Element => {
             username: displayName,
             avatarUrl: photoURL ?? '',
           });
-          navigate('/list');
+          navigate('/library');
         }
       }
     });
   };
 
   return (
-    <main className="flex justify-center items-center">
+    <main className="flex items-center justify-center">
       <form className="form-control w-full max-w-2xl">
-        <button type="button" className="btn btn-accent my-3" onClick={onGoogleLogin}>
+        <button type="button" className="btn-accent btn my-3" onClick={onGoogleLogin}>
           {t('auth.googleSignIn')}
         </button>
       </form>

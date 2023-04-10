@@ -41,7 +41,7 @@ const SuggestBox: FC<SuggestBoxProps> = ({ query, onItemClick, width, xPos, yPos
     <>
       {list.length ? (
         <div
-          className="absolute z-0 w-80 left-1/3 top-3 bg-primary-content rounded-b-lg shadow-md"
+          className="absolute left-1/3 top-3 z-0 w-80 rounded-b-lg bg-primary-content shadow-md"
           ref={parentRef}
           style={{
             height: list.length * 80 > 400 ? 400 : list.length * 80,
@@ -63,7 +63,7 @@ const SuggestBox: FC<SuggestBoxProps> = ({ query, onItemClick, width, xPos, yPos
                 key={virtualItem.key}
                 ref={virtualizer.measureElement}
                 data-index={virtualItem.index}
-                className="absolute top-0 left-0 pl-3 flex gap-3 my-2 justify-start items-center cursor-pointer hover:bg-primary-focus"
+                className="absolute left-0 top-0 my-2 flex cursor-pointer items-center justify-start gap-3 pl-3 hover:bg-primary-focus"
                 style={{
                   width: '100%',
                   height: `${virtualItem.size}px`,
@@ -72,11 +72,11 @@ const SuggestBox: FC<SuggestBoxProps> = ({ query, onItemClick, width, xPos, yPos
                 onClick={() => onItemClick(list[index])}
               >
                 <img
-                  className="w-16 max-h-16 object-fill"
+                  className="max-h-16 w-16 object-fill"
                   src={list[index].imageUrl}
                   alt={list[index].name}
                 />
-                <span className="text-sm font-bold ml-4 text-primary hover:text-primary-content">
+                <span className="ml-4 text-sm font-bold text-primary hover:text-primary-content">
                   {list[index].name}
                 </span>
               </li>

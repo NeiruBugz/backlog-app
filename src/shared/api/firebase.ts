@@ -23,7 +23,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 const firebaseAuth = getAuth(firebaseApp);
 const firebaseStore = getFirestore(firebaseApp);
 
-const addGame = async (data: FirebaseAddGamePayload, collectionName: string) => 
+const addGame = async (data: FirebaseAddGamePayload, collectionName: string) =>
   await addDoc(collection(firebaseStore, collectionName), { ...data });
 
 const deleteGameDocument = async (id: string, collectionName: string) =>

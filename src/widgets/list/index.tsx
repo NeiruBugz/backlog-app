@@ -12,7 +12,7 @@ const ListsBody = ({
   games: Game[];
   filter: string;
   filteredGames: Game[];
-}) => { 
+}) => {
   const { t } = useTranslation();
   return (
     <>
@@ -27,11 +27,10 @@ const ListsBody = ({
           ))}
         </>
       ) : (
-        <List
-          listItems={filteredGames}
-        />
+        <List listItems={filteredGames} />
       )}
     </>
-  );};
+  );
+};
 
 export { ListsBody };

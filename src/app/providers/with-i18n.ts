@@ -5,6 +5,7 @@ import ru from '../../shared/i18n/ru.json';
 import en from '../../shared/i18n/en.json';
 
 i18n.use(initReactI18next).init({
+  lng: 'en',
   fallbackLng: 'en',
   resources: {
     en: { translation: { ...en } },

@@ -1,20 +1,11 @@
 import { useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { collection, query, where } from 'firebase/firestore';
 import { useStore } from '@nanostores/react';
 
 import { firebaseStore } from '@shared';
-import {
-  nanoGames,
-  nanoSet,
-  nanoFilters,
-  nanoUser,
-  filterByPlatform,
-  filterByStatus,
-} from '@entities';
-import { Filters, ListsBody, Text, Loader } from '@widgets';
+import { nanoGames, nanoSet, nanoFilters, user, filterByPlatform, filterByStatus } from '@entities';
+import { Filters, ListsBody, Loader } from '@widgets';
 
 import type { MouseEventHandler } from 'react';
 import type { DocumentData } from 'firebase/firestore';
@@ -38,8 +29,7 @@ const dateComparator = (first: Game, second: Game) => {
 };
 
 const GamesList = (): JSX.Element => {
-  const { t } = useTranslation();
-  const { uid } = useStore(nanoUser);
+  const { uid } = useStore(user);
   const { status, platform } = useStore(nanoFilters);
   const nanoList = useStore(nanoGames);
 
@@ -63,7 +53,7 @@ const GamesList = (): JSX.Element => {
     }
   }, [value, loading, error]);
 
-  const onFilter: MouseEventHandler<HTMLButtonElement> = (event) => {
+  const onFilter: MouseEventHandler<HTMLLIElement> = (event) => {
     const { field, value } = event.currentTarget.dataset;
 
     if (value) {
@@ -95,40 +85,19 @@ const GamesList = (): JSX.Element => {
 
   return (
     <>
-      {loading ? (
-        <div className="flex justify-center items-center">
-          <Loader />
-        </div>
-      ) : (
+      {nanoList.length !== 0 ? (
         <>
-          {nanoList.length === 0 ? (
-            <div className="mt-6 text-center">
-              <Text heading level={4} className="text-lg">
-                {t('games-list.motto')}{' '}
-                <Link to="/add-game" className="link link-accent">
-                  {t('games-list.mottoLink')}
-                </Link>
-              </Text>
-            </div>
-          ) : (
-            <>
-              <nav className="flex justify-between">
-                <Filters onFilter={onFilter} statusFilter={status} platformFilter={platform} />
-                <Link to="/add-game">
-                  <button type="button" className="btn btn-primary">
-                    {t('games-list.addButton')}
-                  </button>
-                </Link>
-              </nav>
-              <ListsBody games={filteredGames} filteredGames={filteredGames} filter={status} />
-            </>
-          )}
+          <header className="sticky">
+            <h3 className="text-[3rem] font-bold capitalize text-accent">{status}</h3>
+            <Filters platformFilter={platform} onFilter={onFilter} />
+          </header>
+          <ListsBody games={filteredGames} filter={status} filteredGames={filteredGames} />
         </>
+      ) : (
+        <Loader />
       )}
     </>
   );
 };
-
-// export { GamesList };
 
 export default GamesList;
