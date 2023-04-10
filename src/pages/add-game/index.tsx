@@ -22,13 +22,14 @@ const AddGame = (): JSX.Element => {
   const navigate = useNavigate();
   const { uid } = useStore(user);
   const { name, imageUrl } = useStore(search);
+  
   const { register, handleSubmit, control } = useForm<AddGameInputs>({
     defaultValues: {
       title: '',
     },
   });
 
-  const [inputValue, setInputValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>(name ?? '');
   const [query, setQuery] = useState<string>('');
   const [isLoading, setLoading] = useState<boolean>(false);
   const [entryValues, setEntryValues] = useState<Pick<HowLongToBeatEntry, 'imageUrl' | 'id'>>({
@@ -48,17 +49,13 @@ const AddGame = (): JSX.Element => {
       setInputValue(name);
       setEntryValues({ imageUrl, id: '' });
     }
-
-    return () => {
-      setInputValue('');
-      resetPayload();
-    };
   }, [name, imageUrl]);
 
   useLayoutEffect(() => {
     if (inputRef.current) {
       const { current } = inputRef;
       const { width, x, y, height } = current.getBoundingClientRect();
+      
       setSuggestBoxPosition({ width, left: x, top: y + height });
     }
   }, [inputRef]);
@@ -90,6 +87,7 @@ const AddGame = (): JSX.Element => {
     };
     addDocument({ ...gameData, user: uid }, 'games').then(() => {
       setLoading(false);
+      resetPayload();
       navigate('/library');
     });
   };

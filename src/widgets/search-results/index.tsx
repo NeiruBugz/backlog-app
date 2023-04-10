@@ -9,8 +9,8 @@ import { Text, Tag } from '@widgets';
 import type { FC } from 'react';
 import type { HowLongToBeatEntry } from 'howlongtobeat';
 
-import styles from './styles.module.scss';
 import classnames from 'classnames';
+import { setModal } from 'widgets/modal/modal';
 
 const SearchListItem: FC<{ item: HowLongToBeatEntry }> = ({ item }) => {
   const { name, platforms, imageUrl, id, gameplayMain, gameplayMainExtra, gameplayCompletionist } =
@@ -20,6 +20,7 @@ const SearchListItem: FC<{ item: HowLongToBeatEntry }> = ({ item }) => {
 
   const onAddClick = () => {
     savePayload({ name, imageUrl });
+    setModal({ isVisible: false, id: null });
     navigate('/add-game');
   };
 
@@ -29,11 +30,11 @@ const SearchListItem: FC<{ item: HowLongToBeatEntry }> = ({ item }) => {
     }
 
     return (
-      <div className={styles['ba-search-result__tags']}>
+      <div>
         <Text heading level={5} className="text-xl font-bold">
           {t('games-list.searchResults.playableOn')}
         </Text>
-        <div className={styles['ba-search-result__tags-wrapper']}>
+        <div className="flex flex-wrap gap-2">
           {platforms.map((platform) => (
             <Tag platform={platform} key={`${platform}--${id}`} />
           ))}
@@ -54,11 +55,11 @@ const SearchListItem: FC<{ item: HowLongToBeatEntry }> = ({ item }) => {
     }, []);
 
     return (
-      <div className={styles['ba-search-result__completions']}>
-        <Text heading level={5} className="text-xl font-bold mb-1">
+      <div>
+        <Text heading level={5} className="text-xl font-bold mb-1 mt-2">
           {t('games-list.searchResults.completion.completionHours')}
         </Text>
-        <div className={styles['ba-search-result__completions-wrapper']}>
+        <div className="flex flex-wrap gap-2">
           <Tag>
             {t('games-list.searchResults.completion.main')}:{' '}
             {t(`games-list.searchResults.completion.${determinePluralityKey(gameplayMain)}`, {
@@ -84,15 +85,15 @@ const SearchListItem: FC<{ item: HowLongToBeatEntry }> = ({ item }) => {
   };
 
   return (
-    <div className={classnames(styles['ba-search-result'], 'rounded-box bg-white')}>
-      <img className={styles['ba-search-result__image']} src={imageUrl} alt={`${name}'s image`} />
-      <Text heading level={4} className="font-bold text-2xl mb-1">
-        {name}
-      </Text>
-      <Tags />
-      <Completions />
+    <div className={classnames('rounded-box bg-white my-4 p-4 flex')}>
+      <img className="w-64 rounded-box object-contain mr-4" src={imageUrl} alt={`${name} poster`}/>
       <div>
-        <button onClick={onAddClick} className="btn btn-primary">
+        <Text heading level={4} className="font-bold text-2xl mb-1">
+          {name}
+        </Text>
+        <Tags />
+        <Completions />
+        <button onClick={onAddClick} className="btn btn-primary mt-4">
           {t('common.addGame')}
         </button>
       </div>
@@ -118,9 +119,9 @@ const SearchResultsList: FC<{ results: HowLongToBeatEntry[] }> = ({ results }) =
           listStyle: 'none',
         }}
       >
-        {virtualizer.getVirtualItems().map((virtualItem) => (
-          <li data-index={virtualItem.index} key={virtualItem.key} ref={virtualizer.measureElement}>
-            <SearchListItem item={results[virtualItem.index]} />
+        {results.map((virtualItem, index) => (
+          <li data-index={index} key={virtualItem.id} ref={virtualizer.measureElement}>
+            <SearchListItem item={virtualItem} />
           </li>
         ))}
       </ul>

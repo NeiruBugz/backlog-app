@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, forwardRef } from 'react';
+import { useCallback, useEffect, useState, forwardRef, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { ChangeEventHandler } from 'react';
@@ -10,6 +10,13 @@ const SearchModal = forwardRef<HTMLDivElement, unknown>((_, ref) => {
   const { t } = useTranslation();
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState<HowLongToBeatEntry[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   const onGameSearch = useCallback((value: string) => {
     if (!value.length) {
@@ -50,9 +57,10 @@ const SearchModal = forwardRef<HTMLDivElement, unknown>((_, ref) => {
   };
 
   return (
-    <div className="w-1/2 h-1/2" ref={ref}>
+    <div className="w-1/2 h-1/2 md:w-[90%] md:h-3/4" ref={ref}>
       <div className="flex">
         <input
+          ref={inputRef}
           type="search"
           className="input input-bordered input-primary w-full mr-2"
           placeholder={t('home.search.inputPlaceholder') || ''}
