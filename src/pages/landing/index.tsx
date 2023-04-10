@@ -1,4 +1,5 @@
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useEffect } from 'react';
+import { useSignInWithGoogle, useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 
@@ -11,6 +12,17 @@ const Landing = (): JSX.Element => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [signInWithGoogle] = useSignInWithGoogle(firebaseAuth);
+  const [user, loading] = useAuthState(firebaseAuth);
+
+  useEffect(() => {
+    if (user) {
+      const { uid, photoURL, displayName } = user;
+      if (displayName && uid) {
+        setUser({ authorized: true, uid: uid, username: displayName, avatarUrl: photoURL ?? '' });
+        navigate('/library');
+      }
+    }
+  }, [user, loading, navigate]);
 
   const onGoogleLogin: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
