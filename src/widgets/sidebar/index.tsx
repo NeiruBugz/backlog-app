@@ -61,8 +61,8 @@ const Sidebar: FC<SidebarProps> = ({ status, onFilter }) => {
   const onSearchClick = () => setModal({ id: 'search', isVisible: true });
 
   return (
-    <aside className="w-96 p-4 box-border">
-      <h4 className="text-[2.5rem] font-bold mb-4">
+    <aside className="box-border w-96 p-4">
+      <h4 className="mb-4 text-[2.5rem] font-bold">
         <span className="text-accent">Play</span>
         <span className="text-primary">Later</span>
       </h4>
@@ -86,7 +86,7 @@ const Sidebar: FC<SidebarProps> = ({ status, onFilter }) => {
         </div>
       </div>
       <ul className="mt-4">
-        <li className="font-medium py-2 text-[1.4rem] hover:text-primary">
+        <li className="py-2 text-[1.4rem] font-medium hover:text-primary">
           <NavLink className={({ isActive }) => (isActive ? 'underline' : '')} to="/library">
             Library
           </NavLink>
@@ -107,7 +107,7 @@ const Sidebar: FC<SidebarProps> = ({ status, onFilter }) => {
             </li>
           ))}
         </ul>
-        <li className="cursor-pointer py-2 font-medium text-[1.4rem] hover:text-primary">
+        <li className="cursor-pointer py-2 text-[1.4rem] font-medium hover:text-primary">
           <NavLink className={({ isActive }) => (isActive ? 'underline' : '')} to="/add-game">
             Add Game
           </NavLink>
@@ -118,7 +118,7 @@ const Sidebar: FC<SidebarProps> = ({ status, onFilter }) => {
           </NavLink>
         </li> */}
         <li
-          className="cursor-pointer py-2 font-medium text-[1.4rem] hover:text-primary flex items-center gap-2"
+          className="flex cursor-pointer items-center gap-2 py-2 text-[1.4rem] font-medium hover:text-primary"
           onClick={onSearchClick}
         >
           Search

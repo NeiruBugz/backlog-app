@@ -56,7 +56,7 @@ const SearchListItem: FC<{ item: HowLongToBeatEntry }> = ({ item }) => {
 
     return (
       <div>
-        <Text heading level={5} className="text-xl font-bold mb-1 mt-2">
+        <Text heading level={5} className="mb-1 mt-2 text-xl font-bold">
           {t('games-list.searchResults.completion.completionHours')}
         </Text>
         <div className="flex flex-wrap gap-2">
@@ -85,15 +85,15 @@ const SearchListItem: FC<{ item: HowLongToBeatEntry }> = ({ item }) => {
   };
 
   return (
-    <div className={classnames('rounded-box bg-white my-4 p-4 flex')}>
-      <img className="w-64 rounded-box object-contain mr-4" src={imageUrl} alt={`${name} poster`}/>
+    <div className={classnames('rounded-box my-4 flex bg-white p-4')}>
+      <img className="rounded-box mr-4 w-64 object-contain" src={imageUrl} alt={`${name} poster`} />
       <div>
-        <Text heading level={4} className="font-bold text-2xl mb-1">
+        <Text heading level={4} className="mb-1 text-2xl font-bold">
           {name}
         </Text>
         <Tags />
         <Completions />
-        <button onClick={onAddClick} className="btn btn-primary mt-4">
+        <button onClick={onAddClick} className="btn-primary btn mt-4">
           {t('common.addGame')}
         </button>
       </div>

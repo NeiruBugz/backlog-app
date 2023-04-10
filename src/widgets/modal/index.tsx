@@ -45,7 +45,7 @@ const Modal = (): ReactPortal | null => {
   return ReactDOM.createPortal(
     <div id="modalOverlay">
       <div
-        className="w-[100vw] h-[100vh] z-50 bg-slate-300/75 absolute top-0 left-0 flex items-center justify-center"
+        className="absolute left-0 top-0 z-50 flex h-[100vh] w-[100vw] items-center justify-center bg-slate-300/75"
         ref={modalBodyRef}
       >
         {modalComponent()}

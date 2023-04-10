@@ -57,17 +57,17 @@ const SearchModal = forwardRef<HTMLDivElement, unknown>((_, ref) => {
   };
 
   return (
-    <div className="w-1/2 h-1/2 md:w-[90%] md:h-3/4" ref={ref}>
+    <div className="h-1/2 w-1/2 md:h-3/4 md:w-[90%]" ref={ref}>
       <div className="flex">
         <input
           ref={inputRef}
           type="search"
-          className="input input-bordered input-primary w-full mr-2"
+          className="input-bordered input-primary input mr-2 w-full"
           placeholder={t('home.search.inputPlaceholder') || ''}
           value={query}
           onChange={onInputChange}
         />
-        <button className="btn btn-primary" onClick={onButtonPress} disabled={query.length === 0}>
+        <button className="btn-primary btn" onClick={onButtonPress} disabled={query.length === 0}>
           {t('home.search.button')}
         </button>
       </div>

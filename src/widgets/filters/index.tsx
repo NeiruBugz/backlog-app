@@ -16,7 +16,7 @@ const Filters = ({
   const { t } = useTranslation();
 
   return (
-    <ul className="tabs items-center mt-4">
+    <ul className="tabs mt-4 items-center">
       <label className="text-lg text-secondary-content">{t('games-list.platformFilter')}: </label>
       <li
         key="all"

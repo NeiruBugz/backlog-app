@@ -72,7 +72,7 @@ const Header = (): JSX.Element => {
   };
 
   return (
-    <header className="flex justify-between mb-6">
+    <header className="mb-6 flex justify-between">
       <Navbar authorized={currentUser.authorized} />
       <div className="flex">
         {currentUser.authorized ? <User {...currentUser} onLogout={onLogout} /> : null}

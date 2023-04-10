@@ -22,7 +22,7 @@ const AddGame = (): JSX.Element => {
   const navigate = useNavigate();
   const { uid } = useStore(user);
   const { name, imageUrl } = useStore(search);
-  
+
   const { register, handleSubmit, control } = useForm<AddGameInputs>({
     defaultValues: {
       title: '',
@@ -55,7 +55,7 @@ const AddGame = (): JSX.Element => {
     if (inputRef.current) {
       const { current } = inputRef;
       const { width, x, y, height } = current.getBoundingClientRect();
-      
+
       setSuggestBoxPosition({ width, left: x, top: y + height });
     }
   }, [inputRef]);
@@ -97,7 +97,7 @@ const AddGame = (): JSX.Element => {
   const { width, top, left } = suggestBoxPosition;
 
   return (
-    <main className="flex justify-center items-center">
+    <main className="flex items-center justify-center">
       {isLoading ? (
         <Loader />
       ) : (
@@ -118,7 +118,7 @@ const AddGame = (): JSX.Element => {
                   value={inputValue}
                   onChange={onInputChange}
                   ref={inputRef}
-                  className="input input-bordered w-full max-w-xs"
+                  className="input-bordered input w-full max-w-xs"
                 />
               )}
             />
@@ -138,7 +138,7 @@ const AddGame = (): JSX.Element => {
             </span>
             <select
               id="platform"
-              className="select select-bordered"
+              className="select-bordered select"
               {...register('platform', { required: true })}
             >
               {PLATFORM_OPTIONS.map((platform) => (
@@ -154,7 +154,7 @@ const AddGame = (): JSX.Element => {
             </span>
             <select
               id="status"
-              className="select select-bordered"
+              className="select-bordered select"
               {...register('status', { required: true })}
             >
               {statuses.map((status) => (
@@ -164,7 +164,7 @@ const AddGame = (): JSX.Element => {
               ))}
             </select>
           </label>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn-primary btn">
             {t('add-game.submitButton')}
           </button>
         </form>

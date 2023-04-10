@@ -71,9 +71,9 @@ const RouteWithSidebar = ({ children }: { children: JSX.Element }) => {
   };
 
   return (
-    <main className="flex w-full h-full">
+    <main className="flex h-full w-full">
       <Sidebar {...filters} onFilter={onFilter} />
-      <section className="container mx-auto w-full h-full p-4 bg-current relative">
+      <section className="container relative mx-auto h-full w-full bg-current p-4">
         {children}
       </section>
     </main>

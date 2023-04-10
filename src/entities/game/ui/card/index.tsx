@@ -57,7 +57,7 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
 
   return (
     <>
-      <div className="card image-full w-56 h-56 sm:w-64 sm:h-64 md:w-96 md:h-96">
+      <div className="card image-full h-56 w-56 sm:h-64 sm:w-64 md:h-96 md:w-96">
         {showDeleteAlert ? <Alert t={t} onClick={onAlertClick} /> : null}
         <figure>
           <img
@@ -67,7 +67,7 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
           />
         </figure>
         <div className="card-body flex flex-col">
-          <div className="dropdown dropdown-end absolute right-2 cursor-pointer rounded-box z-10">
+          <div className="dropdown-end dropdown rounded-box absolute right-2 z-10 cursor-pointer">
             <label tabIndex={0}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +83,7 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow w-52 bg-primary-content text-primary"
+              className="dropdown-content menu menu-compact mt-3 w-52 bg-primary-content p-2 text-primary shadow"
             >
               <Divider>{t('games-list.cardMenu.statuses')}</Divider>
               {MENU_OPTIONS.filter((option) => option.key !== status).map((option) => (
@@ -91,20 +91,20 @@ const GameCard: FC<GameProps> = ({ id, title, platform, img, status }) => {
                   key={option.key}
                   data-key={option.key}
                   onClick={onStatusChange}
-                  className="hover:bg-primary-focus hover:text-primary-content rounded-none bg-primary-content p-2"
+                  className="rounded-none bg-primary-content p-2 hover:bg-primary-focus hover:text-primary-content"
                 >
                   {t(`games-list.cardMenu.${option.key}`)}
                 </li>
               ))}
               <Divider>{t('games-list.cardMenu.actions')}</Divider>
               <li>
-                <button className="btn btn-warning" onClick={onDeleteClick}>
+                <button className="btn-warning btn" onClick={onDeleteClick}>
                   {t('games-list.cardMenu.delete')}
                 </button>
               </li>
             </ul>
           </div>
-          <div className="absolute left-0 bottom-0 h-1/3 w-full bg-gradient-to-r from-[#2d2d2d] to-transparent rounded-bl-[1rem] rounded-br-[1rem] pt-4 pl-6">
+          <div className="absolute bottom-0 left-0 h-1/3 w-full rounded-bl-[1rem] rounded-br-[1rem] bg-gradient-to-r from-[#2d2d2d] to-transparent pl-6 pt-4">
             <h2 className="card-title mb-2 text-[1.2em] text-primary-content">{title}</h2>
             <Tag platform={platform} />
           </div>

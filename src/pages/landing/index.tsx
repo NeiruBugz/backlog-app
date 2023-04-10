@@ -45,18 +45,18 @@ const Landing = (): JSX.Element => {
   };
 
   return (
-    <main className="w-full h-[100vh] flex flex-col justify-center items-center">
-      <h1 className="text-[3rem] font-bold text-center leading-[3rem]">
+    <main className="flex h-[100vh] w-full flex-col items-center justify-center">
+      <h1 className="text-center text-[3rem] font-bold leading-[3rem]">
         <span className="text-accent">Play</span>
         <span className="text-primary">Later</span> – Your Personal Gaming Queue
       </h1>
-      <div className="px-6 sm:px-0 max-w-sm">
+      <div className="max-w-sm px-6 sm:px-0">
         <button
-          className="text-white w-full  bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
+          className="dark:focus:ring-[#4285F4]/55 mb-2  mr-2 inline-flex w-full items-center justify-between rounded-lg bg-[#4285F4] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#4285F4]/90 focus:outline-none focus:ring-4 focus:ring-[#4285F4]/50"
           onClick={onGoogleLogin}
         >
           <svg
-            className="mr-2 -ml-1 w-4 h-4"
+            className="-ml-1 mr-2 h-4 w-4"
             aria-hidden="true"
             focusable="false"
             data-prefix="fab"

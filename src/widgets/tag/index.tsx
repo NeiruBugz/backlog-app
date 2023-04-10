@@ -18,7 +18,7 @@ const Tag = ({
     <span
       style={style}
       className={classNames(
-        'py-2 px-4 h-8 max-w-fit max-h-10 flex justify-center items-center text-secondary-content text-md rounded',
+        'text-md flex h-8 max-h-10 max-w-fit items-center justify-center rounded px-4 py-2 text-secondary-content',
         platformClassName
       )}
     >

@@ -53,9 +53,9 @@ const List: FC<ListProps> = ({ listItems, dividerText }) => {
           </Text>
         </Divider>
       ) : null}
-      <ul className="mt-6 flex flex-wrap gap-6 h-[90%] overflow-scroll">
+      <ul className="mt-6 flex h-[90%] flex-wrap gap-6 overflow-scroll">
         {listItems.map((game) => (
-          <li className="w-56 h-56 sm:w-64 sm:h-64 md:w-96 md:h-96" key={game.id}>
+          <li className="h-56 w-56 sm:h-64 sm:w-64 md:h-96 md:w-96" key={game.id}>
             <GameCard {...game} />
           </li>
         ))}

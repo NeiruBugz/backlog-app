@@ -7,14 +7,14 @@ const Alert = ({
   t: (translatableString?: string | string[]) => string;
   onClick: MouseEventHandler<HTMLButtonElement>;
 }) => (
-  <div className="h-full w-full z-50 absolute flex justify-center items-center p-3">
-    <div className="alert shadow-lg flex flex-col w-full">
+  <div className="absolute z-50 flex h-full w-full items-center justify-center p-3">
+    <div className="alert flex w-full flex-col shadow-lg">
       <div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
-          className="stroke-info flex-shrink-0 w-6 h-6"
+          className="h-6 w-6 flex-shrink-0 stroke-info"
         >
           <path
             strokeLinecap="round"
@@ -26,10 +26,10 @@ const Alert = ({
         <span>{t('games-list.cardMenu.deleteAlertText')}</span>
       </div>
       <div className="flex-none">
-        <button className="btn btn-sm btn-ghost" data-action="cancel" onClick={onClick}>
+        <button className="btn-ghost btn-sm btn" data-action="cancel" onClick={onClick}>
           {t('games-list.cardMenu.cancelDelete')}
         </button>
-        <button className="btn btn-sm btn-primary" data-action="submit" onClick={onClick}>
+        <button className="btn-primary btn-sm btn" data-action="submit" onClick={onClick}>
           {t('games-list.cardMenu.confirmDelete')}
         </button>
       </div>

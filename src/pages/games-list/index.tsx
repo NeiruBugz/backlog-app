@@ -88,7 +88,7 @@ const GamesList = (): JSX.Element => {
       {nanoList.length !== 0 ? (
         <>
           <header className="sticky">
-            <h3 className="font-bold text-[3rem] text-accent capitalize">{status}</h3>
+            <h3 className="text-[3rem] font-bold capitalize text-accent">{status}</h3>
             <Filters platformFilter={platform} onFilter={onFilter} />
           </header>
           <ListsBody games={filteredGames} filter={status} filteredGames={filteredGames} />

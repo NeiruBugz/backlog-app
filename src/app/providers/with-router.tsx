@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Loader } from '@widgets';
 
 const Fallback = () => (
-  <div className="w-screen h-screen flex justify-center items-center">
+  <div className="flex h-screen w-screen items-center justify-center">
     <Loader />
   </div>
 );

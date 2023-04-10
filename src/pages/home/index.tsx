@@ -34,9 +34,9 @@ const Home = (): JSX.Element => {
   };
 
   return (
-    <main className={'flex justify-center items-center'}>
+    <main className={'flex items-center justify-center'}>
       <>
-        <div className="relative flex justify-center items-center w-full h-full">
+        <div className="relative flex h-full w-full items-center justify-center">
           <SearchInput onSearch={onGameSearch} />
         </div>
         <SearchResultsList results={searchResults} />
